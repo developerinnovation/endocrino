@@ -1,0 +1,48 @@
+<header class="desktop">
+    <div class="box">
+        <div class="left">
+            {% if showHeaderAndFooter %}
+                <figure>
+                    <a href="/"><img src="{{ file_url(logo_general_url) }}"></a>
+                </figure>
+            {% endif %}
+            {# Get menu items #}
+            {% set items = simplify_menu('menu-header-general') %}
+            {# Iterate menu tree #}
+            <nav class="menu">
+                {% for menu_item in items.menu_tree %}
+                    <li class="navigation_item">
+                        <a href="{{ menu_item.url }}">{{ menu_item.text }}</a>
+                    </li>
+                {% endfor %}
+            </nav>
+        </div>
+        <div class="right">
+            <!--<form action="" class="search">
+                <input type="search" name="search" id="search" placeholder="Buscar">
+            </form>-->
+            {% if logged_in %}
+                <a href="/user" class="link sign-in">Mi perfil</a>
+                <a href="/user/logout" class="link sign-in">Cerrar sesión</a>
+            {% else %}
+                <a href="/user/login" class="link sign-in">Iniciar sesión</a>
+                <a href="/register/user" class="link sign-up">Registrarte</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="breadcrumb">
+
+    </div>
+</header>
+
+<header class="mobile">
+    <div class="left">
+        <figure>
+            <a href="/"><img src="{{ file_url(logo_mobile_url) }}"></a>
+        </figure>
+    </div>
+
+    <div class="right">
+        <button id="menu-live">menú</button>
+    </div>
+</header>

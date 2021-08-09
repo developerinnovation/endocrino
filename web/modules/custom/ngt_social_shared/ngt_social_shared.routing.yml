@@ -1,0 +1,11 @@
+social.social_shared_form:
+  path: '/admin/config/ngt/social/shared'
+  defaults:
+    _form: '\Drupal\ngt_social_shared\Plugin\Form\SocialSharedForm'
+    _title: 'Configuraciones para redes sociales'
+  requirements:
+    _permission: 'access administration pages'
+  option:
+    _admin_route: TRUE
+
+    

@@ -1,0 +1,7 @@
+progress.my_progress:
+  path: 'my/progress/courses/lessons'
+  defaults:
+      _controller: '\Drupal\ngt_progress\Controller\RenderProgressController::render_progress'
+      _title: ''
+  requirements:
+      _permission: 'render_progress'

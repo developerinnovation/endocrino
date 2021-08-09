@@ -1,0 +1,214 @@
+.page-user-login{
+    .box{
+        @media only screen and ($desktop){
+        justify-content: end !important;
+        }
+    }        
+    .user-login-form{
+
+        .main-form-login{
+            position: relative;
+            
+            @media only screen and ($desktop){
+                display: flex;
+                justify-content: space-between;
+                align-content: center;
+                max-width: 100%;
+                margin: 0 auto;
+                padding-top: 5%;
+                padding-bottom: 15%;
+                background-size: 100%;
+                &:before {
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    background: linear-gradient(90deg, #04194a, #1c3ae8);
+                    opacity: .9;
+                }
+            }
+
+            .image-logo__wrapper{
+                height: 170px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+
+                &:before {
+                    content:'';
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    background: linear-gradient(90deg, #04194a, #1c3ae8);
+                    opacity: .9;
+                    border-radius: 5px;
+                    @media only screen and ($desktop){
+                    content: none;
+                    }
+                }
+
+                
+                @media only screen and ($desktop){
+                    width: 50%;
+                    height: auto;
+                    // justify-content: flex-start;
+                }
+                figure{
+                    width: 155px;
+                    position: relative;
+                    @media only screen and ($desktop){
+                        width: 490px;
+                    }
+                }
+            }
+            .login-form__wrapper{
+                padding: 60px 40px;
+                background: #fff;
+
+                @media only screen and ($desktop){
+                    width: 40%;
+                    height: 600px;
+                    padding: 50px 70px;
+                    border-radius: 6px;
+                    margin-right: 10%; 
+                    position: relative;
+                    &:before{
+                    content: "";
+                    position: absolute;
+                    left: -30px;
+                    width: 0;
+                    top: 40%;
+                    height: 0;
+                    border-style: solid;
+                    border-width: 50px 60px 50px 0;
+                    border-color: transparent #fff transparent transparent;
+                    }
+                }
+                .form-actions{
+                    margin: 40px auto 50px;
+                    width: 140px;
+                    height: 40px;
+                    padding: 0;
+                    border: 0;
+                    line-height: 35px;
+                    border-radius: 20px;
+                    text-align: center;
+                    background: $aqua !important;
+                    color: #000839;
+                }
+                .login-form__help_actions{
+                    text-align: right;
+                     a{
+                        color:$turqui;
+                        font-weight: bold;
+                        border-bottom: 2px solid;
+                        padding-bottom: 2px;
+                     }
+                }
+                .login-form__top{
+                    padding-bottom: 10px;
+                    border-bottom: .5px solid #e4e3e3;
+                    margin-bottom: 25px;
+                    @media only screen and ($desktop){
+                        padding: 0 50px;
+                    }
+
+
+                    h3{
+                        font: {
+                            size: 20px;
+                        }
+                        text-align: center;
+                        text-transform: uppercase;
+                        letter-spacing: 0.05em;
+                        margin: 0 0 15px;
+                        @media only screen and ($desktop){
+                            font: {
+                                size: 28px;
+                            }
+                        }
+                    }
+                    .login-form__help_actions{
+                    }
+                    .message_login{
+                        font: {
+                            size: 15px;
+                        }
+                        color: #535353;
+                        letter-spacing: 1px;
+                        text-align: center;
+                        margin: 0 25px 30px;
+                        @media only screen and ($desktop){
+                            font: {
+                                size: 14px;
+                            }
+                        }
+                    }
+                    .input-form{
+                        label{
+                            display: none;
+                        }
+                        .description{
+                            display: none;
+                        }
+                        .js-form-item{
+                            margin: 0 0 20px;
+                            padding: 0;
+                            border: none;
+                            input{
+                                -webkit-appearance: none;
+                                display: block;
+                                width: 100%;
+                                height: 50px;
+                                padding: 0 10px 0 40px;
+                                border: 1px solid #B9B9B9;
+                                border-radius: 30px;
+                                @media only screen and ($desktop){
+                                    // width: 340px;
+                                    margin: 0 auto;
+                                }
+                            }
+                        }
+                    }
+                    .login-form__submit{
+                        .form-actions{
+                            input{
+                                -webkit-appearance: none;
+                                display: block;
+                                margin: 60px auto 30px;
+                                width: 140px;
+                                height: 40px;
+                                padding: 0;
+                                border: 0;
+                                border-radius: 20px;
+                            }
+                        }
+                    }
+                }
+
+                .login-form__bottom{
+                    text-align: center;
+                    margin-bottom: 40px;
+                    h4{
+                        font-size: 13px;
+                        font-weight: 200;
+                    }
+                    .login-form__help_actions{
+                        text-align: inherit;
+                    }
+                }
+            }
+        }
+    }
+}
+header .box>div.right .link{
+    display: none;
+}
+
+
+

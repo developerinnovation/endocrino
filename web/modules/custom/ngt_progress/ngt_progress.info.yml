@@ -1,0 +1,7 @@
+name: ngt_progress
+type: module
+description: Módulo para progresos de alumnos en cursos y lecciones
+core: 8.x
+package: NGT
+dependencies:
+  - ngt_general

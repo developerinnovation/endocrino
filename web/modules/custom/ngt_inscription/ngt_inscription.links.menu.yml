@@ -1,0 +1,6 @@
+inscription.inscription_form:
+  title: 'NGT Configuracion para botón de inscripción a cursos'
+  route_name: 'inscription.inscription_form'
+  description: 'Configuración para botones de reserva de cupo en cursos'
+  parent: system.admin_config_system
+  weight: 99

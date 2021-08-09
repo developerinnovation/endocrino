@@ -1,0 +1,4 @@
+services:
+  ngt_progress.method_general:
+    class: Drupal\ngt_progress\methodGeneralProgress
+    arguments: []

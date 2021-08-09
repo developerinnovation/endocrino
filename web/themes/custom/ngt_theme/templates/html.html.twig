@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% if ie_enabled_versions.ie8 %}
+  {{- attach_library('basic/ie8') }}
+{% endif %}
+{% if ie_enabled_versions.ie9 or ie_enabled_versions.ie8 %}
+  <!--[if lt IE 7]>     <html{{ html_attributes.addClass('no-js', 'lt-ie9', 'lt-ie8', 'lt-ie7') }}><![endif]-->
+  <!--[if IE 7]>        <html{{ html_attributes.removeClass('lt-ie7') }}><![endif]-->
+  <!--[if IE 8]>        <html{{ html_attributes.removeClass('lt-ie8') }}><![endif]-->
+  <!--[if gt IE 8]><!--><html{{ html_attributes.removeClass('lt-ie9') }}><!--<![endif]-->
+{% else -%}
+  <html{{ html_attributes }}>
+{% endif %}
+  <head>
+    <head-placeholder token="{{ placeholder_token }}">
+    <title>{{ head_title|safe_join(' | ') }}</title>
+    <css-placeholder token="{{ placeholder_token }}">
+    <js-placeholder token="{{ placeholder_token }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Asap:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" media="all" href="/{{ directory }}/asset/css/style.css?temp={{ " now "|date("m/d/Y/H/i/s ") }}">            
+    <!-- Script external -->
+    {{ script_external|raw }}       
+    <!-- End script external -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  {% set classes = [] %}
+  {% for role in user.roles %}
+    {% set classes = classes|merge(['role--' ~ role|clean_class]) %}
+  {% endfor %}
+
+  {% set sidebar_first = page.sidebar_first|render %}
+  {% set sidebar_second = page.sidebar_second|render %}
+  <body{{ attributes.addClass(classes,
+        not is_front ? 'with-subnav',
+        sidebar_first ? 'sidebar-first',
+        sidebar_second ? 'sidebar-second',
+        (sidebar_first and not sidebar_second) or (sidebar_second and not sidebar_first) ? 'one-sidebar',
+        (sidebar_first and sidebar_second) ? 'two-sidebars',
+        (not sidebar_first and not sidebar_second) ? 'no-sidebar'
+    ) }}
+    ng-cloak
+    >
+    <div id="skip">
+      <a href="#main-menu" class="visually-hidden focusable skip-link">
+        {{ 'Skip to main navigation'|t }}
+      </a>
+    </div>
+
+    <!-- ______________________ HEADER _______________________ -->
+        {% if is_front %} 
+          {% include '@ngt_theme/header-home.html.twig' %} 
+        {% else %} 
+          {% include '@ngt_theme/header.html.twig' %} 
+        {% endif %}
+    <!-- ____________________ END HEADER ____________________ -->
+
+
+
+    <!-- ______________________ MAIN _______________________ -->
+        {{ page_top }} {{ page }} {{ page_bottom }}
+    <!-- ___________________ END MAIN _______________________ -->
+
+
+    <!-- ______________________ FOOTER _______________________ -->
+          {% include '@ngt_theme/footer.html.twig' %}
+    <!-- __________________ END FOOTER _______________________ -->
+
+    <!-- ______________________ MODAL _______________________ -->
+      <div id="ngtModal" ng-if="showModal"  class="ngt-modal none" ng-click="close_message()" ng-cloak>
+        <div class="modal-content">
+          <span class="close" ng-click="close_message()">&times;</span>
+          <p>{[{ messageModal }]}</p>
+          <a ng-if="includeBtnModal" href="{[{ linkModal }]}"> {[{ textBtnModal }]} </a>
+        </div>
+      </div>
+    <!-- __________________ END MODAL _______________________ -->
+
+    <js-bottom-placeholder token="{{ placeholder_token }}">
+        {% if browser_sync.enabled %}
+        <script id="__bs_script__">
+        document.write("<script async src='http://{{ browser_sync.host }}:{{ browser_sync.port }}/browser-sync/browser-sync-client.js'><\/script>".replace("HOST", location.hostname));
+        </script>
+        {% endif %}
+
+  </body>
+</html>

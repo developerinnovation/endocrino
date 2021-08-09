@@ -1,0 +1,169 @@
+
+{% set directive_new = directive|replace({'-':'_'}) %}
+<div class="{{ class }}" {{ directive }} ng-cloak ng-init="uuid_{{ directive_new }} = '{{ uuid }}'">
+    <div class="main-form-register-user"  style="background-image:url({{ file_url(image_login_background_url) }}); background-repeat: no-repeat;">
+        <div class="image-logo__wrapper">
+            <figure> 
+                <img src="{{ file_url(image_logo_url) }}">
+            </figure>
+        </div>
+        <div class="register-user-form login-form__wrapper register-user">
+            <form>
+                <div class="register-user-form__top recovery">
+                    <h3 ng-if="step < 4">{{ config.title }}</h3>
+                    <h3 ng-show="step == 4">{{ config.title_picture }}</h3>
+
+                    <div ng-show="step == 6">
+                        <div class="inner-addon leftaddon" ng-style="(status_register == false) ? style : ''">
+                            <i ng-class="(status_register == true) ? 'icon ready' : 'icon failed'"></i>
+                        </div>
+                        <div class="mensaje">
+                            <h4>{[{ status_register_label }]}</h4>
+                        </div>
+                    </div>
+
+                    <ul class="nav-step">
+                        <li ng-class="(step == 1) ? 'active' : ''">step1</li>
+                        <li ng-class="(step == 2) ? 'active' : ''">step2</li>
+                        <li ng-class="(step == 3) ? 'active' : ''">step3</li>
+                        <li ng-class="(step == 4) ? 'active' : ''">step4</li>
+                        <li ng-class="(step == 5) ? 'active' : ''">step5</li>
+                        <li ng-class="(step == 6) ? 'active' : ''">step6</li>
+                    </ul>
+                    
+                    <div class="input-form">
+                        <p ng-if="step < 5" class="message_login">{[{ message }]}</p>
+                        
+                        <div class="cards" ng-show="step == 1">
+                            <div>
+                                <div class="inner-addon leftaddon">
+                                    <i class="icon user"></i>
+                                    <input class="input-name" type="text" ng-model="form.name" id="name" name="name" maxlength="100" placeholder="{{ config.name }}">
+                                </div>
+                                
+                                <div class="inner-addon leftaddon">
+                                    <i class="icon mail"></i>
+                                    <input class="input-mail" type="text" ng-model="form.email" id="email" name="email" maxlength="100" placeholder="{{ config.email }}">
+                                </div>
+                                
+                                <!--<div class="inner-addon leftaddon">
+                                    <i class="icon date"></i>
+                                    <input class="input-date" type="text" placeholder="Fecha de nacimiento" onfocus="(this.type='date')" onfocusout="(this.type='text')" ng-model="form.date" id="date" name="date" placeholder="{{ config.date }}">
+                                </div>-->
+                                
+                                <div class="inner-addon leftaddon">
+                                    <i class="icon profesion"></i>
+                                    <select class="select-profession"  name="profession" id="profession" ng-model="form.professionSelect">
+                                        <option value="" disabled>{{ config.profession }}</option>
+                                        <option value="{[{ value.tid }]}" ng-repeat="(key, value) in profession">{[{ value.name }]}</option>
+                                    </select>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="cards" ng-show="step == 2">
+                            <div>
+                                <div class="inner-addon leftaddon">
+                                    <i class="icon ubicacion"></i>
+                                    <select class="select-country place-select" name="country" id="country" ng-disabled="enableCountry" ng-model="form.countrySelect" ng-change="getMoreTerms('state')">
+                                        <option value="" selected disabled>{{ config.country }}</option>
+                                        <option value="{[{ value.tid }]}" ng-repeat="(key, value) in country">{[{ value.name }]}</option>
+                                    </select>
+                                </div>  
+
+                                <!--<div class="inner-addon leftaddon">
+                                    <i class="icon ubicacion"></i>
+                                    <select class="select-state place-select" name="state" id="state" ng-disabled="enableState" ng-model="form.stateSelect" ng-change="getMoreTerms('city')">
+                                        <option value="" selected disabled>{{ config.state }}</option>
+                                        <option value="{[{ value.tid }]}"  ng-repeat="(key, value) in state">{[{ value.name }]}</option>
+                                    </select>
+                                </div>  
+
+                                <div class="inner-addon leftaddon">
+                                    <i class="icon ubicacion"></i>
+                                    <select class="select-city place-select" name="city" id="city" ng-disabled="enableCity" ng-model="form.citySelect">
+                                        <option value="" selected disabled>{{ config.city }}</option>
+                                        <option value="{[{ value.tid }]}" ng-repeat="(key, value) in city">{[{ value.name }]}</option>
+                                    </select>
+                                </div>-->    
+
+                            </div>
+                        </div>
+
+                        <div class="cards" ng-show="step == 3">
+                            <div>
+                                <div class="inner-addon leftaddon">
+                                    <i class="icon pass"></i>
+                                    <input id="pass" class="input-password" type="password" name="password" id="password" maxlength="10" placeholder="{{ config.password }}"
+                                        ng-model="form.pass">
+                                </div>
+
+                                <div class="inner-addon leftaddon">
+                                    <ul>
+                                        <li class="criteriar-pass criteriar-{[{ key }]}"  ng-repeat="(key, value) in pass_criteriar">{[{ value }]}</li>
+                                    </ul>
+                                </div>
+
+                                <div class="inner-addon leftaddon">
+                                    <i class="icon pass"></i>
+                                    <input id="repeat-pass" class="input-password" type="password" name="repeatPassword" id="repeatPassword" maxlength="10" placeholder="{{ config.repeat_password }}"
+                                        ng-model="form.repeat_pass">
+                                </div>
+                               
+                                <div class="term-and-conditions">
+                                    <input ng-click="checkTermConditions()" type="radio" name="term-condition-check" id="term-condition-check">
+                                    <label for="term-condition-check">{{ terms_text|raw }}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cards" ng-show="step == 4">
+                            <div>
+                                <img id="previewImgLoadPic" class="icon camera" src="../../../modules/custom/ngt_login/asset/image/load-pic.png" width="72"; height="72" alt="" ng-click="imgLoadPic()" ng-model="form.pic">
+                                <p class="message_status_load_pic">{[{ messageStatusLoadPic }]}</p>
+                                <div class="none">
+                                    <input type="file" id="imgLoadPic" name="img" accept="image/*">
+                                </div>
+                                <button ng-click="omitLoadPic()">{[{ txtBtnOmit }]}</button>
+                            </div>
+                        </div>
+
+                        <div class="cards" ng-show="step == 5">
+                            <div>
+                                <img id="previewImgLoadPic" class="icon camera" src="../../../modules/custom/ngt_login/asset/image/loading.gif" width="72"; height="72" alt="">
+                                <h4>{[{ labelStatusRegister }]}</h4>
+                            </div>
+                        </div>
+
+                        <div class="cards" ng-show="step == 6">
+                            <div>
+                                <p class="message_status_register" ng-class="(status_register == true) ? 'icon check' : 'icon fall'" >{[{ messageStatusRegister }]}</p>
+                                <h4>{[{ labelStatusRegister }]}</h4>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="register-user-form__submit">
+                        <div class="action-next" ng-if="!userExist">
+                            <button 
+                                ng-click="actionNext()"
+                                ng-disabled="btnDisabled">{[{ txtBtnNext }]}</button>
+                        </div>
+                        <div class="action-return">
+                            <button 
+                                ng-if="step <= 5"
+                                ng-click="(step <= 3) ? actionCancell() : actionReturn()"
+                                ng-disabled="btnDisabled">{[{ txtBtnReturn }]}</button>
+                        </div>
+                        <div class="action-return" ng-if="userExist">
+                            <button 
+                                ng-click="gotoPasswordRecovery()">{[{ txtBtnReturn }]}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

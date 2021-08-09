@@ -1,0 +1,180 @@
+
+{% set directive_new = directive|replace({'-':'_'}) %}
+
+{% set nombre %}
+    {{ drupal_field('field_nombre', 'user', user.id) }}
+{% endset %}
+
+{% set apellidos %}
+    {{ drupal_field('field_apellidos', 'user', user.id) }}
+{% endset %}
+
+<article{{ attributes }} data-ilar="">
+   
+        <div class="izq menu-live">
+            
+            <div class="top">
+                <div class="picture">
+                    <figure>  
+                    {{ drupal_field('user_picture', 'user', user.id) }}
+                    </figure>
+                </div>
+                <div class="info">
+                    <div class="text">
+                        <h3 class="title">{{ nombre|striptags|raw}} {{ apellidos|striptags|raw}}</h3>
+                        <div class="member_for">
+                            {{ content.member_for }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="menu">
+                <div>
+                    {# Get menu items #}
+                    {% set items = simplify_menu('menu-perfil-usuario') %}
+                    {# Iterate menu tree #}
+                    <nav class="navigation__items">
+                        {% for menu_item in items.menu_tree %}
+                        <li class="navigation__item">
+                            <a href="{{ menu_item.url }}">{{ menu_item.text }} <i class="row"></i></a>
+                        </li>
+                        {% endfor %}
+                    </nav>
+                </div>
+            </div>
+
+
+            <div class="menu-informative">
+                <div>
+                    {# Get menu items #}
+                    {% set items = simplify_menu('menu-informativo') %}
+                    {# Iterate menu tree #}
+                    <nav class="navigation__items">
+                        {% for menu_item in items.menu_tree %}
+                            <li class="navigation__item">
+                                <a href="{{ menu_item.url }}">{{ menu_item.text }}</a>
+                            </li>
+                        {% endfor %}
+                    </nav>
+                </div>
+            </div>
+
+            <div class="buttom">
+                <div>
+                    <a href="/user/logout">Cerrar sesión</a>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="der">
+            <div class="left">
+                <div class="{{ class }}" {{ directive }} ng-cloak ng-init="uuid_{{ directive_new }} = '{{ uuid }}'">
+                    <div class="edit-user-form login-form__wrapper edit-user">
+                        <form autocomplete="off">
+                            <div class="edit-user-form__top recovery">
+                                <div class="input-form">
+                                    <div class="cards">
+                                        <div>
+                                            <div class="inner-addon leftaddon label">
+                                                <label class="pre-title" for="input-name">Cambiar Nombre(s) y Apellidos.</label>
+                                                <div class="box-margin">
+                                                    <i class="icon user"></i>
+                                                    <input autocomplete="off" class="name" type="text" ng-model="form.name" id="name" name="name" maxlength="100" placeholder="{{ config.name }}">
+                                                </div>
+                                            </div>
+                                    
+                                            <div class="inner-addon leftaddon label">
+                                                <label class="pre-title" for="email">Cambiar Email.</label>
+                                                <div class="box-margin">
+                                                    <i class="icon mail"></i>
+                                                    <input autocomplete="off" class="input-mail" type="text" ng-model="form.email" id="email" name="email" maxlength="100" placeholder="{{ config.email }}">
+                                                </div>
+                                            </div>
+                                    
+                                            <div class="inner-addon leftaddon label">
+                                                <label class="pre-title" for="profession">Cambiar Profesión.</label>
+                                                <div class="box-margin">
+                                                    <i class="icon profesion"></i>
+                                                    <select class="select-profession"  name="profession" id="profession" ng-model="form.professionSelect">
+                                                        <option value="" disabled>{{ config.profession }}</option>
+                                                        <option value="{[{ value.tid }]}" ng-repeat="(key, value) in profession">{[{ value.name }]}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="inner-addon leftaddon label">
+                                                <label class="pre-title" for="country">Cambiar Ubicación.</label>
+                                                <div class="box-margin">
+                                                    <i class="icon ubicacion"></i>
+                                                    <select class="select-country place-select" name="country" id="country" ng-disabled="enableCountry" ng-model="form.countrySelect" ng-change="getMoreTerms('state')">
+                                                        <option value="" selected disabled>{{ config.country }}</option>
+                                                        <option value="{[{ value.tid }]}" ng-repeat="(key, value) in country">{[{ value.name }]}</option>
+                                                    </select>
+                                                </div>
+                                            </div>  
+
+                                            <div class="inner-addon leftaddon label">
+                                                <label class="pre-title" for="change-pass">¿Desea cambiar su contraseña?</label>
+                                                <div class="box-margin">
+                                                    <i class="icon pass"></i>
+                                                    <select class="select-country place-select" name="change-pass" id="change-pass"  ng-model="form.changePassword" ng-change="getChangePassword('state')">
+                                                        <option selected value="no">No</option>
+                                                        <option value="yes">Si</option>
+                                                    </select>
+                                                </div>
+                                            </div> 
+
+                                            <div class="inner-addon leftaddon" ng-show="form.changePassword == 'yes'">
+                                                <i class="icon pass"></i>
+                                                <input autocomplete="off" id="pass" class="input-password" type="password" name="password" id="password" maxlength="10" placeholder="{{ config.password }}"
+                                                    ng-model="form.pass">
+                                            </div>
+
+                                            <div class="inner-addon leftaddon" ng-show="form.changePassword == 'yes'">
+                                                <ul>
+                                                    <li class="criteriar-pass criteriar-{[{ key }]}"  ng-repeat="(key, value) in pass_criteriar">{[{ value }]}</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="inner-addon leftaddon" ng-show="form.changePassword == 'yes'">
+                                                <i class="icon pass"></i>
+                                                <input autocomplete="off" id="repeat-pass" class="input-password" type="password" name="repeatPassword" id="repeatPassword" maxlength="10" placeholder="{{ config.repeat_password }}"
+                                                    ng-model="form.repeat_pass">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="edit-user-form__submit">
+                                    <div class="action-next">
+                                        <button 
+                                            ng-click="actionNext()"
+                                            ng-disabled="btnDisabled">{{ 'Guardar' }}</button>
+                                    </div>
+                                    <div class="action-return">
+                                        <button 
+                                            ng-click="actionCancell()"
+                                            ng-disabled="btnDisabled">{[{ txtBtnReturn }]}</button>
+                                    </div>
+                                </div>
+
+                                <div class="edit-user-form__deleted_account">
+                                    <div class="action-next">
+                                        <button 
+                                            ng-click="deleteAccount()"
+                                            ng-disabled="btnDisabled">Quiero eliminar mi cuenta</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</article>
+

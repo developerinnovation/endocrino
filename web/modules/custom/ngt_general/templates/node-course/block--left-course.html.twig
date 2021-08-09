@@ -1,0 +1,12 @@
+<div class="course-action">
+    <nav>
+        <li ng-click="tab = 'contentPresentation'" ng-class="(tab == 'contentPresentation') ? 'active' : 'no-active'">Presentación</li>
+        <li ng-click="tab = 'contentMain'" ng-class="(tab == 'contentMain') ? 'active' : 'no-active'">Contenidos</li>
+        <li ng-click="tab = 'contentCommunity'" ng-class="(tab == 'contentCommunity') ? 'active' : 'no-active'">Foro de intercambio</li>
+    </nav>
+</div>
+<div class="action">
+    {{ drupal_block('ngt_inscription_inscription_button', {'node' : data, 'uid' : user.id }) }}
+    <!--<button class="save">guardar</button>-->
+</div>
+{{ drupal_block('ngt_social_shared') }}

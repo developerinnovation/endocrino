@@ -1,0 +1,13 @@
+services:
+  ngt_inscription.inscription_button:
+    class: Drupal\ngt_inscription\Plugin\Config\Block\InscriptionButtonBlockClass
+    arguments: []
+  ngt_inscription.inscription_rest:
+    class: Drupal\ngt_inscription\Services\Rest\InscriptionRestLogic
+    arguments: []
+  ngt_inscription.uninscription_rest:
+    class: Drupal\ngt_inscription\Services\Rest\UnInscriptionRestLogic
+    arguments: []
+  ngt_inscription.method_general:
+    class: Drupal\ngt_inscription\methodGeneralInscription
+    arguments: []

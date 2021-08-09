@@ -1,0 +1,136 @@
+{% set directive_new = directive|replace({'-':'_'}) %}
+<div class="{{ class }}" {{ directive }} ng-cloak ng-init="uuid_{{ directive_new }} = '{{ uuid }}'">
+    <div class="main-content">
+        <div class="top">
+            <!-- <h1 class="title module">Commodo lígula eget dolor aenean dis parturient montes</h1> -->
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+        </div>
+        <div class="presentation evaluation" ng-if="tabs == 'presentation'">
+            <h2>Evaluación Final</h2>
+            <div class="description">
+                {{ data.body|raw }}
+            </div>
+            <div class="detail">
+                <div class="time">
+                    <i>minute</i>
+                    <span>{{ data.minute }} minutos</span>
+                </div>
+                <div class="questions">
+                    <i>question</i>
+                    <span>{{ data.count_question }} preguntas</span>
+                </div>
+                <div class="average">
+                    <i>average</i>
+                    <span>{{ data.average }}% puntaje de aprobación</span>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="start-evaluation" ng-click="changeTabs('evaluation')" ng-disabled="isDisabledStart">Empezar</button>
+                <button class="return" ng-click="returnPrevPage()">Volver</button>
+            </div>
+        </div>
+
+        <div class="navigation question" ng-show="tabs == 'evaluation'">
+            <h2>Evaluación final</h2>
+            <div class="nav">
+                <ul>
+                    {% for i in range(0, data.count_question) %}
+                        <li id="question_{{ i + 1 }}" >Pregunta {{ i + 1 }}</li>
+                    {% endfor %}
+                 </ul>
+                <span>Pregunta {[{ evaluationNav }]} de {[{ maxNavValue }]}</span>
+            </div>
+            <!--<div class="clock">
+                <span class="time">Tiempo restante:</span>
+                <span>01:10:20</span>
+            </div>-->
+        </div>
+
+
+        <div class="form-question" ng-show="tabs == 'evaluation'">
+
+            <form action="">
+                {% for key, question in data.questions %}
+                    <div id="question-{{ key + 1 }}" class="questions {{ question.type }}" ng-show="evaluationNav == '{{ key + 1 }}' && !result">
+                        
+                        <h3>Pregunta {{ key + 1  }}</h3>
+                        <p class="description">Tipo de pregunta: {{ question.typeDetail  }}</p>
+                        <p class="description">{{ question.title }}</p>
+                        <div class="response">
+                            <fieldset>
+
+                                {% if question.type == 'correctOption' %}
+                                    
+                                    {% for i, possibleAnswers in question.possibleAnswers %} 
+                                        <div>
+                                            <input type="radio" name="response_{{ key + 1 }}" id="response_{{ key + 1 }}_{{ i + 1 }}"  ng-click="checkAnswer({{ key }}, {{ i + 1 }}, '{{ question.type }}')">
+                                            <label for="response_{{ key + 1 }}_{{ i + 1 }}">{{ possibleAnswers.value }}</label>
+                                        </div>
+                                    {% endfor %}
+
+                                {% elseif question.type == 'multiple' %}
+
+                                    {% for i, possibleAnswers in question.possibleAnswers %} 
+                                        <div>
+                                            <input type="radio" name="response_{{ key + 1 }}_{{ i + 1 }}" id="response_{{ key + 1 }}_{{ i + 1 }}" ng-click="checkAnswer({{ key }}, {{ i + 1 }}, '{{ question.type }}')">
+                                            <label for="response_{{ key + 1 }}_{{ i + 1 }}">{{ possibleAnswers.value }}</label>
+                                        </div>
+                                    {% endfor %}
+
+                                {% elseif question.type == 'bool' %}
+                                    {% for i, possibleAnswers in question.possibleAnswers %} 
+                                        {% set typeBool = possibleAnswers.value|lower %}
+                                        <div>
+                                            <button id="response_{{ key + 1 }}_{{ i + 1 }}" 
+                                                ng-click="checkAnswer({{ key }}, '{{ typeBool|lower }}', '{{ question.type }}'); changeClassBool({{ key }}, '{{ possibleAnswers.value }}', 'response_{{ key + 1 }}_{{ i + 1 }}', 'response_{{ key + 1 }}')" 
+                                                class="{% if typeBool == 'verdadero' %}{{ 'true' }}{% else %}{{ 'false' }}{% endif %} bool response_{{ key + 1 }}">{{ possibleAnswers.value }}</button>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                              
+                                
+                            </fieldset>
+                        </div>
+                    </div>
+                
+                {% endfor %}
+
+                <div id="question-last" class="questions result" ng-show="result">
+                        
+                    <h3>Puntaje</h3>
+                    <p class="description">{[{ messageGeneral }]}</p>
+                    
+                    <div class="response">
+                        <fieldset>
+                        
+                            <div class="inner-addon leftaddon result-evaluation">
+                                <i ng-class="(status_evaluation == true) ? 'icon ready' : 'icon failed'"></i>
+                                <span ng-class="(status_evaluation == true) ? 'ready' : 'failed'">{[{ averageFinal }]}%</span>
+                            </div>
+
+                            <h4>{[{ titleMessageFinal }]}</h4>
+                            <p class="description message bold" ng-show="showMessageFinalResul">{[{ messageFinalResul }]}</p>
+                            
+                        </fieldset>
+                    </div>
+                </div>
+                
+            </form>
+
+            <div class="action evaluation" ng-show="!result">
+                <button class="return" ng-click="changeEvaluationNav('prev')" ng-disabled="minNavValue == evaluationNav">Anterior</button>
+                <button class="next" ng-click="changeEvaluationNav('next')" ng-show="maxNavValue != evaluationNav" ng-disabled="isDisabledNext">Siguiente</button>
+                <button class="send" ng-click="sendAnswers()" ng-show="maxNavValue == evaluationNav" ng-disabled="isDisabledSendAnswers">Enviar respuestas</button>
+            </div>
+
+            <div class="action evaluation result final" ng-show="result">
+                <button class="return" ng-click="returnToCourseLink()" >{[{ returnToCourse }]}</button>
+                <button class="next" ng-click="actionAfterResult()">{[{ textBtnFinal }]}</button>
+            </div>
+        
+        </div>
+
+
+
+    </div>
+</div>

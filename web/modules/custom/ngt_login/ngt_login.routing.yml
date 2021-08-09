@@ -1,0 +1,35 @@
+login.login_form:
+  path: '/admin/config/ngt/login'
+  defaults:
+    _form: '\Drupal\ngt_login\Plugin\Form\LoginForm'
+    _title: 'Configuración login y reestablecer contraseña'
+  requirements:
+    _permission: 'access administration pages'
+  option:
+    _admin_route: TRUE
+
+login.recovery_pass:
+  path: 'recovery/pass'
+  defaults:
+    _controller: '\Drupal\ngt_login\Controller\LoginController::RecoveryPass'
+    _title: 'Recuperar contraseña'
+  requirements:
+    _access: 'TRUE'
+    _role: 'anonymous'
+
+ngt_login.register_user:
+  path: 'register/user'
+  defaults:
+    _controller: '\Drupal\ngt_login\Controller\LoginController::RegisterUser'
+    _title: 'Registro de usuario'
+  requirements:
+    _access: 'TRUE'
+    _role: 'anonymous'
+
+ngt_login.edit_user:
+  path: 'user/update'
+  defaults:
+    _controller: '\Drupal\ngt_login\Controller\LoginController::EditUser'
+    _title: 'Edición de usuario'
+  requirements:
+    _permission: 'update_user'

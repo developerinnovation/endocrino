@@ -1,0 +1,71 @@
+
+{% set directive_new = directive|replace({'-':'_'}) %}
+<div class="{{ class }}" {{ directive }} ng-cloak ng-init="uuid_{{ directive_new }} = '{{ uuid }}'">
+    <div class="main-content" id="lesson-{{ data[0].nid }}">
+        <div class="course-action">
+            <select name="courseAction" id="courseAction" ng-model="myTabsType" ng-options="item.name for item in tabsType"></select>
+        </div>
+        <figure class="content-video" ng-show="tab != 'contentCommunity'">
+            <picture class="cover-video {% if data[0].video is not null %} {{ 'play' }} {% endif %} active">
+                <source srcset="{{ data[0].foto_portada.uri | image_style('360x196') }}" 
+                    media="(max-width: 767px)" 
+                    alt="{{ data[0].foto_portada.alt }}" 
+                    title="{{ data[0].foto_portada.title }}">
+                <img srcset="{{ data[0].foto_portada.uri | image_style('604x476') }}" 
+                    alt="{{ data[0].foto_portada.alt }}" 
+                    title="{{ data[0].foto_portada.title }}">
+            </picture>
+            <video id="presentation" preload="auto" src="{{ data[0].video }}" controls>
+                Tu navegador no implementa el elemento <code>video</code>.
+            </video>
+        </figure>
+
+        <div class="content-tab presentation" ng-show="tab == 'contentMain'">
+            <h2>Resumen</h2>
+            <div class="description">
+                {{ data[0].body|raw }}
+            </div>
+            <h3>Recursos</h3>
+            {% if data[0].recursos is not null %}
+                <div class="list recurses">
+                    <ul>
+                        {% for key, recurso in data[0].recursos %}
+                            <li>
+                                <div class="left">
+                                    <i class="icon download"></i>
+                                </div>
+                                <div class="right">
+                                    <h4>{{ recurso.title }}</h4>
+                                    <span class="format">{{ recurso.extension }}</span>
+                                    <p>{{ recurso.description }}</p>
+                                </div>
+                                <div class="download">
+                                    <a download href="{{ recurso.url }}">Descargar</a>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="content-tab community" ng-show="tab == 'contentCommunity'">
+        <di class="block-comments">
+                {{ content.comment }}
+        </div>
+    </div>
+
+    <div class="nav-leccion desktop" ng-show="tab != 'contentCommunity'">
+        <div class="preview">
+            <a {% if data[0].prevLesson is not null %} href="{{ data[0].prevLesson }}" {% else %} class="inactive" {% endif %}><i class="icon row"></i>Volver</a>
+        </div>
+        
+        <div class="next">
+            <a {% if data[0].nextLesson is not null %} href="{{ data[0].nextLesson }}" {% else %} class="inactive" {% endif %}><i class="icon row"></i>Siguiente lección</a>
+        </div>
+    </div>
+    <div class="mobile">
+        {{ drupal_block('ngt_general_node_lesson_modules', { 'node' : data[0].nid }) }}
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="info">
+    <h1 class="title">{{ data[0].title }}</h1>
+    <p class="summary">{{ data[0].resumen }}</p>
+</div>
+<div class="details">
+    <picture class="author">
+        <figure>
+            {% for key, item in data[0].expertos %}
+                <img src="{{ item.picture_uri }}" alt="{{ item.name_author }}">
+            {% endfor %}
+        </figure>
+           
+        <figcaption>
+            {% for key, item in data[0].expertos %}
+                <a href="{{ item.uri }}" class="link">{{ item.name_author }}</a>
+            {% endfor %}
+        </figcaption>
+    </picture>
+    <div class="box-elements">
+        <time class="date">Inicio: {{ data[0].fecha_inicio }}</time>
+        <time class="item hour">{{ data[0].horas }} horas</time>
+        <span class="item module"> {{ data[0].cnt_moulos }} Módulos</span>
+        <span class="item students">{{ data[0].cnt_alumnos }} Alumnos</span>
+        <span class="item language">Español</span>
+        <div class="rating">
+            {{ drupal_field('field_calificacion', 'node',  data[0].nid) }}
+        </div>
+    </div>
+    <div class="action">
+        {{ drupal_block('ngt_inscription_inscription_button', {'node' : data[0].nid, 'uid' : user.id }) }}
+        <!--<button class="save">guardar</button>-->
+    </div>
+</div>

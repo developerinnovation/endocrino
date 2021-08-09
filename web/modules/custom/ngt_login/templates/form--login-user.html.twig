@@ -1,0 +1,41 @@
+<div class="main-form-login" style="background-image:url({{ file_url(form['#image_login_background_url']) }}); background-repeat: no-repeat;">
+    <div class="image-logo__wrapper">
+        <figure> 
+            <img src="{{ file_url(form['#image_logo_url']) }}">
+        </figure>
+    </div>
+    <div class="login-form login-form__wrapper">
+        <form{{ attributes }}>
+            <div class="login-form__top">
+                <h3>{{ form['#titleLogin'] }}</h3>
+                <p class="message_login"> {{ form['#message'] }} </p>
+                <div id="error_messages">{{ form.error_msgs }}</div>
+                <div class="input-form">
+                    <div class="inner-addon leftaddon">
+                        <i class="icon mail"></i>
+                        {{ form.name }} {# input user name #}
+                    </div>
+                    <div class="inner-addon leftaddon">
+                        <i class="icon pass"></i>
+                        {{ form.pass }} {# input pass #}
+                    </div>
+                </div>
+                <div class="login-form__help_actions forgot-password">
+                    <a href="/recovery/pass" class="forgot-password">{{ form['#forgot_password'] }}</a>
+                </div>
+                {{ form.form_build_id }} {# required #}
+                {{ form.form_token }} {# required #}
+                {{ form.form_id }} {# required #}
+                <div class="login-form__submit">
+                    {{ form.actions }} {# required #}
+                </div>
+            </div>
+            <div class="login-form__bottom">
+                <h4 class="register">{{ form['#new_user_message'] }}</h4>
+                <div class="login-form__help_actions register">
+                    <a href="/register/user" class="register">{{ form['#new_user_text'] }}</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

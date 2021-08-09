@@ -1,0 +1,15 @@
+<div class="slider">
+    {% for content in contents %}
+        <div class="item-sd">
+            <figure>  
+                <img src="{{ content.foto_portada.uri_604x476 }}" alt="{{ content.foto_portada.alt }}" title="{{ content.foto_portada.title }}">
+            </figure>
+            <div class="text">
+                <img class="logo-general desktop" src="{{ file_url(logo_general_url) }}">
+                <h2>{{ content.title }}</h2>
+                <p>{{ content.body|striptags|raw }}</p>
+                <a class="action" href="{{ content.enlace.uri }}">{{ content.enlace.text }}</a>
+            </div>
+        </div>
+    {% endfor %}    
+</div>

@@ -1,0 +1,4 @@
+'render_progress':
+  title: 'Ver progreso'
+  description: 'permite ver el progreso de los alumnos'
+  restrict access: true

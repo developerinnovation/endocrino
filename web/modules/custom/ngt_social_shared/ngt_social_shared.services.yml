@@ -1,0 +1,4 @@
+services:
+  ngt_social_shared.shared:
+    class: Drupal\ngt_social_shared\Plugin\Config\Block\SocialSharedBlockClass
+    arguments: []

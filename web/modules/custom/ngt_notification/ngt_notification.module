@@ -1,0 +1,102 @@
+<?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+const DINAMIC_TEMPLATES = [
+    'buy_atp_packages_lines'
+];
+
+/**
+ * ngt_notification_help
+ *
+ * @param  mixed $route_name
+ * @param  mixed $route_match
+ * @return void
+ */
+function ngt_notification_help($route_name, RouteMatchInterface $route_match) {
+    switch ($route_name) {
+        // Main module help for the ngt_notification module.
+        case 'help.page.ngt_notification':
+            $output = '';
+            $output .= '<h3>' . t('About') . '</h3>';
+            $output .= '<p>' . t('Customización para envio de notificaciones via email') . '</p>';
+        return $output;
+
+    default:
+    }
+}
+
+
+/**
+ * ngt_notification_mail
+ *
+ * @param  mixed $key
+ * @param  mixed $message
+ * @param  mixed $params
+ * @return void
+ */
+function send_notification_mail($key, &$message, $params){
+
+    if (isset($params['uid'])){
+        $params['uid'] = \Drupal::currentUser()->id();
+    }
+
+    $tokens = $params['tokens'];
+    $token_service = \Drupal::token();
+    $params['body'] = $token_service->replace($params['body'],$tokens);
+    $message['headers']['Content-type'] = 'tesxt/html; charset=UTF-8; format=flowed; delsp=yes';
+    $message['uid'] = $params['uid'];
+
+    switch ($key) {
+      default:
+          $utf = utf8_encode($params['subject']);
+          $preferences = [
+            "input-charset" => "UTF-8",
+            "output-charset" => "UTF-8",
+            "line-length" => 500,
+            "line-break-chars" => "\n",
+          ];
+          $preferences["scheme"] = "Q";
+          $message['subject'] = iconv_mime_encode("", $params['subject'], $preferences);
+      
+          if (in_array($params['id'], DINAMICS_TEMPLATES) !== FALSE) {
+            $message['body'][] = html_entity_decode($params['body']);
+          }
+          else {
+            $message['body'][] = $params['body'];
+          }
+          
+          // Add attachment when available.
+          if (isset($params['tokens']['attachments'])) {
+            $message['params']['attachments'][] = $params['tokens']['attachments'];
+          }
+        break;
+    }
+
+    
+}
+
+/**
+ * ngt_notification_tokens
+ *
+ * @param  mixed $type
+ * @param  mixed $tokens
+ * @param  mixed $data
+ * @param  mixed $options
+ * @return void
+ */
+function ngt_notification_tokens($type, $tokens, array $data = [], array $options = []) {
+    \Drupal::logger('ngt_notification')->notice('hook tokens');
+    $replacements = [];
+    if ($type == 'ngt_notification') {
+      // Loop through the available tokens.
+      foreach ($tokens as $name => $original) {
+        // Find our custom tokens by name.
+        if (array_key_exists($name, $data)) {
+          $replacements[$original] = $data[$name];
+        }
+      }
+    }
+    return $replacements;
+}
+

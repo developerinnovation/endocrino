@@ -1,0 +1,4 @@
+'show_course_section':
+  title: 'Ver sección de cursos'
+  description: 'permite ver la sección de cursos'
+  restrict access: false

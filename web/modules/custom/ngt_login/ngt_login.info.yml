@@ -1,0 +1,7 @@
+name: ngt_login
+type: module
+description: Módulo para customizaación de login
+core: 8.x
+package: NGT
+dependencies:
+  - ngt_general

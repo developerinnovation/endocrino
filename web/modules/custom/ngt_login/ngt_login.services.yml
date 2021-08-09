@@ -1,0 +1,28 @@
+services:
+  ngt_login.recovery_pass:
+    class: Drupal\ngt_login\Plugin\Config\Block\RecoveryPassBlockClass
+    arguments: []
+  ngt_login.register_user:
+    class: Drupal\ngt_login\Plugin\Config\Block\RegisterUserBlockClass
+    arguments: []
+  ngt_login.methodGeneralLogin:
+    class: Drupal\ngt_login\methodGeneralLogin
+    arguments: []
+  ngt_login.get_code_recovery_pass:
+    class: Drupal\ngt_login\Services\Rest\GetCodeRecoveryPassRestLogic
+    arguments: []
+  ngt_login.verify_code_recovery_pass:
+    class: Drupal\ngt_login\Services\Rest\VerifyCodeRecoveryPassRestLogic
+    arguments: []
+  ngt_login.set_new_pass:
+    class: Drupal\ngt_login\Services\Rest\SetNewPassRestLogic
+    arguments: []
+  ngt_login.set_new_user:
+    class: Drupal\ngt_login\Services\Rest\SetNewUserRestLogic
+    arguments: []
+  ngt_login.set_edit_user:
+    class: Drupal\ngt_login\Services\Rest\SetEditUserRestLogic
+    arguments: []
+  ngt_login.edit_user:
+    class: Drupal\ngt_login\Plugin\Config\Block\EditUserBlockClass
+    arguments: []

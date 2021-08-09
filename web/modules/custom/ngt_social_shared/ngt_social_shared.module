@@ -1,0 +1,247 @@
+<?php 
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\user\UserInterface;
+use Drupal\file\Entity\File;
+
+/**
+ * ngt_social_shared_help
+ *
+ * @param  mixed $route_name
+ * @param  mixed $route_match
+ * @return void
+ */
+function ngt_social_shared_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+      // Main module help for the ngt_social_shared module.
+      case 'help.page.ngt_social_shared':
+          $output = '';
+          $output .= t('<h3>' . 'About') . '</h3>';
+          $output .= t('<p>' . 'Customización para compartir en redes sociales') . '</p>';
+      return $output;
+
+  default:
+  }
+}
+
+
+/**
+ * Implements hook_preprocess().
+ * 
+ * Prepares variables for meta tags into the html.html.twig template.
+ * 
+ */
+function ngt_social_shared_preprocess_html(&$variables){
+  if (\Drupal::moduleHandler()->moduleExists('ngt_social_shared') ) {
+    
+    $config = \Drupal::config('ngt_social_shared.settings');  
+    $routeName = \Drupal::routeMatch()->getRouteName();
+  
+    $site = \Drupal::config('system.site')->get('name');
+   
+    $url = \Drupal::request()->getSchemeAndHttpHost(). \Drupal::request()->getRequestUri();  
+  
+    if($config != NULL){
+     
+      $creator = $config->get('ngt_social_shared_config')['twitter_via'];
+      $image_general_fid = reset($config->get('ngt_social_shared_active')['image']);
+     
+      if($image_general_fid != NULL){
+        $imageStorage = \Drupal::service('ngt_general.methodGeneral')->load_image($image_general_fid);
+        $image = file_create_url($imageStorage);
+      }else{
+        $image = '';
+      }
+    
+      switch ($routeName) {
+    
+        case 'entity.node.canonical':
+            $node = \Drupal::request()->attributes->get('node');
+            if($node->hasField('field_foto_portada')){
+              $image_node = \Drupal::service('ngt_general.methodGeneral')->load_image($node->get('field_foto_portada')->getValue()[0]['target_id']);
+              $image = file_create_url($image_node);
+            }else{
+              $image = '';
+            }
+            
+
+            $title = $node->get('title')->getValue()[0]['value'];
+            
+            if($node){
+              if($node->get('type')->getValue()[0]['target_id'] == 'leccion'){
+                $resumen = strip_tags($node->get('body')->getValue()[0]['value']);
+                $description = isset($resumen) ? $resumen : '';
+                
+              }else{
+                if($node->hasField('field_resumen')){
+                  $description = isset($node->get('field_resumen')->getValue()[0]['value']) ? $node->get('field_resumen')->getValue()[0]['value'] : '';
+                }else{
+                  $description = '';
+                }
+                
+              }
+            }else{
+              $title = $config->get('ngt_social_shared_config')['twitter_text'];
+              $description = $config->get('ngt_social_shared_config')['description'];
+            }
+            
+          break;
+    
+        case 'entity.taxonomy_term.canonical':
+            $tid = \Drupal::routeMatch()->getRawParameter('taxonomy_term');
+            if($tid != NULL) {
+              $term = \Drupal\taxonomy\Entity\Term::load($tid);
+              $title = $term->get('name')->value;
+              $description = $site . ' - ' . $title;
+            }else{
+              $title = $config->get('ngt_social_shared_config')['twitter_text'];
+              $description = $config->get('ngt_social_shared_config')['description'];
+            }
+            
+          break;
+          
+        default:
+            $title = $config->get('ngt_social_shared_config')['twitter_text'];
+            $description = $config->get('ngt_social_shared_config')['description'];
+          break;
+      }
+    
+      
+      //facebook
+    
+      $urlFacebook = [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'name' => 'og:url',
+          'content' => $url,
+          'property' => 'og:url',
+        ],
+      ];
+    
+      $typeFacebook = [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'name' => 'og:type',
+          'content' => 'website',
+          'property' => 'og:type',
+        ],
+      ];
+    
+      $titleFacebook = [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'name' => 'og:title',
+          'content' => $title,
+          'property' => 'og:title',
+        ],
+      ];
+      $descriptionFacebook = [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'name' => 'og:description',
+          'content' => $description,
+          'property' => 'og:description',
+        ],
+      ];
+    
+      $imageFacebook = [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'name' => 'og:image',
+          'content' => $image,
+          'property' => 'og:image',
+        ],
+      ];
+    
+    
+      $variables['page']['#attached']['html_head'][] = [$urlFacebook, 'og:url'];
+      $variables['page']['#attached']['html_head'][] = [$typeFacebook, 'og:type'];
+      $variables['page']['#attached']['html_head'][] = [$titleFacebook, 'og:title'];
+      $variables['page']['#attached']['html_head'][] = [$descriptionFacebook, 'og:description'];
+      $variables['page']['#attached']['html_head'][] = [$imageFacebook, 'og:image'];
+    
+      //twitter
+    
+      $cardTwitter = [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'name' => 'twitter:card',
+          'content' => 'summary_large_image',
+        ],
+      ];
+    
+      $siteTwitter = [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'name' => 'twitter:site',
+          'content' => '@' . $site,
+        ],
+      ];
+    
+      $creatorTwitter = [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'name' => 'twitter:creator',
+          'content' => $creator,
+        ],
+      ];
+      $titleTwitter = [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'name' => 'twitter:title',
+          'content' => $title,
+        ],
+      ];
+    
+      $descriptionTwitter = [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'name' => 'twitter:description',
+          'content' => $description,
+        ],
+      ];
+    
+      $imageTwitter = [
+        '#tag' => 'meta',
+        '#attributes' => [
+          'name' => 'twitter:image',
+          'content' => $image,
+        ],
+      ];
+    
+      $variables['page']['#attached']['html_head'][] = [$cardTwitter, 'twitter:card'];
+      $variables['page']['#attached']['html_head'][] = [$siteTwitter, 'twitter:site'];
+      $variables['page']['#attached']['html_head'][] = [$creatorTwitter, 'twitter:creator'];
+      $variables['page']['#attached']['html_head'][] = [$titleTwitter, 'twitter:title'];
+      $variables['page']['#attached']['html_head'][] = [$descriptionTwitter, 'twitter:description'];
+      $variables['page']['#attached']['html_head'][] = [$imageTwitter, 'twitter:image'];
+    
+    }
+  
+  }
+ 
+
+}
+
+
+
+/**
+ * Implements hook_theme()
+ */
+function ngt_social_shared_theme() {
+
+  return [
+    'social_shared_button' => [
+      'template' => 'block--social-shared-button',
+      'variables' => [
+        'url' => NULL,
+        'via' => NULL,
+        'url_facebook' => NULL,
+        'url_twitter' => NULL,
+        'active_facebook' => NULL,
+        'active_twitter' => NULL,
+      ],
+    ],
+  ];
+}

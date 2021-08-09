@@ -1,0 +1,6 @@
+notification.notification_settings_form:
+  title: 'NGT Notification'
+  route_name: 'notification.notification_settings_form'
+  description: 'Configure messages to send'
+  parent: system.admin_config_system
+  weight: 99

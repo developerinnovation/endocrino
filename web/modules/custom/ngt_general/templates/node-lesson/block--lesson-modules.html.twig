@@ -1,0 +1,22 @@
+<div class="module">
+    <h3>Contenido del curso</h3>
+    <ul>
+        {% if data is not empty %}
+            {% for key, module in data %}
+                <li>
+                    <i class="icon module {{ module.class }}">{{ module.moduleId }}</i>
+                    <a href="{{ module.urlCourse }}#module{{ module.numModule }}">{{ module.titleModule }}</a>
+                </li>
+            {% endfor %}
+            <li>
+                <i class="icon evaluate">evaluación</i>
+                <a href="#">Evaluación final</a>
+            </li>
+        {% else %}
+            <li>
+                <i class="icon module">N/A</i>
+                <a href="#">No hay módulos</a>
+            </li>
+        {% endif %}
+    </ul>
+</div>

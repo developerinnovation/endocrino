@@ -1,0 +1,73 @@
+services:
+  ngt_general.course_main:
+    class: Drupal\ngt_general\Plugin\Config\Block\CourseMainBlockClass
+    arguments: []
+  ngt_general.course_category:
+    class: Drupal\ngt_general\Plugin\Config\Block\CourseCategoryBlockClass
+    arguments: []
+  ngt_general.content_dest:
+    class: Drupal\ngt_general\Plugin\Config\Block\ContentDestBlockClass
+    arguments: []
+  ngt_general.course_category_logic:
+    class: Drupal\ngt_general\Services\Rest\CourseCategoryRestLogic
+    arguments: []
+  ngt_general.benefit_home:
+    class: Drupal\ngt_general\Plugin\Config\Block\BenefitHomeBlockClass
+    arguments: []
+  ngt_general.benefit_config:
+    class: Drupal\ngt_general\Plugin\Config\Form\BenefitConfigFormClass
+    arguments: []
+  ngt_general.general_config:
+    class: Drupal\ngt_general\Plugin\Config\Form\GeneralConfigFormClass
+    arguments: []
+  ngt_general.category_config:
+    class: Drupal\ngt_general\Plugin\Config\Form\CategoryConfigFormClass
+    arguments: []
+
+  ngt_general.node_top_course:
+    class: Drupal\ngt_general\Plugin\Config\Block\NodeTopCourseBlockClass
+    arguments: []
+  ngt_general.node_left_course:
+    class: Drupal\ngt_general\Plugin\Config\Block\NodeLeftCourseBlockClass
+    arguments: []
+  ngt_general.node_right_course:
+    class: Drupal\ngt_general\Plugin\Config\Block\NodeRightCourseBlockClass
+    arguments: []
+
+  ngt_general.node_top_lesson:
+    class: Drupal\ngt_general\Plugin\Config\Block\NodeTopLessonBlockClass
+    arguments: []
+  ngt_general.node_left_lesson:
+    class: Drupal\ngt_general\Plugin\Config\Block\NodeLeftLessonBlockClass
+    arguments: []
+  ngt_general.node_right_lesson:
+    class: Drupal\ngt_general\Plugin\Config\Block\NodeRightLessonBlockClass
+    arguments: []
+  ngt_general.node_lesson_modules:
+    class: Drupal\ngt_general\Plugin\Config\Block\NodeLessonModulesBlockClass
+    arguments: []
+
+  ngt_general.node_more_course:
+    class: Drupal\ngt_general\Plugin\Config\Block\NodeMoreCourseBlockClass
+    arguments: []
+  ngt_general.cardBlockBase:
+    class: Drupal\ngt_general\CardBlockBase
+    arguments: []
+  ngt_general.methodGeneral:
+    class: Drupal\ngt_general\methodGeneral
+    arguments: []
+  ngt_general.load_term_parent_id_logic:
+    class: Drupal\ngt_general\Services\Rest\LoadTermByParentIdRestLogic
+    arguments: []
+  ngt_general.expert_home:
+    class: Drupal\ngt_general\Plugin\Config\Block\ExpertHomeBlockClass
+    arguments: []
+  ngt_general.slider_course:
+    class: Drupal\ngt_general\Plugin\Config\Block\SliderMainCourseBlockClass
+    arguments: []
+  ngt_general.course_section:
+    class: Drupal\ngt_general\Plugin\Config\Block\CourseSectionBlockClass
+    arguments: []
+  ngt_general.course_category_section:
+    class: Drupal\ngt_general\Plugin\Config\Block\CourseCategorySectionBlockClass
+    arguments: []

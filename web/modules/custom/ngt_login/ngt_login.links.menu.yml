@@ -1,0 +1,6 @@
+login.login_form:
+  title: 'NGT Configuracion de login'
+  route_name: 'login.login_form'
+  description: 'Configuración para login y recuperar contraseña'
+  parent: system.admin_config_system
+  weight: 99

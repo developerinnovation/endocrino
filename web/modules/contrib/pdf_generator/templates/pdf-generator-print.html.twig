@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <style type="text/css">@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap');
+      body{font-family: 'Roboto', sans-serif;color: #fff;}
+      .back{
+        background-image: url({{ content.background }});
+        background-repeat: no-repeat;
+        margin: 0 auto;
+        width: 800px;
+        background-size: cover;
+        height: 547px;
+        text-align: center;
+        padding: 30px;
+      }
+      header{
+        padding: 70px;
+        padding-bottom: 0;
+      }
+      header .Text{
+        color: #fff;
+        font-size: 22px;
+        padding: 70px;
+        padding-bottom: 40px;
+      }
+      .logo-Panlar img{
+        width: 250px;
+        margin: 0 auto;
+      }
+      .container{
+        color: #ffff
+      }
+      .container .nombre{
+        font-size: 50px;
+        font-weight: 100;
+        border-bottom: 2px solid;
+        width: 80%;
+        margin: 0 auto;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+      }
+      .container .date{
+        font-size: larger;
+        font-weight: 100;
+        letter-spacing: 1px;
+      }
+      footer {
+        display: flex;
+        width: 70%;
+        margin: 0 auto;
+        margin-top: 10px;
+      }
+      footer img{
+        width: 200px;
+        height: auto;
+      }
+    </style>
+    <title>{{ title }}</title>
+  </head>
+  <body class="pdf">
+    <div class="content">
+      <div class="back">
+        <header>
+          <div class="logo-Panlar">
+            <img alt="Logo Panlar" src="{{ content.logo }}" />
+          </div>
+
+          <div class="Text">{{ content.message }} <strong>{{ content.type_approved }}</strong></div>
+        </header>
+
+        <div class="container">
+          <h2 class="nombre">{{ content.name_user }}</h2>
+          <strong class="date">{{ content.date }}</strong>
+        </div>
+
+        <div class="container">
+          <strong class="date">Certificado número: {{ content.token }}</strong>
+        </div>
+
+        <footer>
+          <div>
+            <img alt="presidente" with src="{{ content.signature_president }}" />
+          </div>
+          <!--<div>
+                <img src="{{ content.signture_coordinator_1 }}" alt="coordinador">
+              </div>
+
+              <div>
+                <img src="{{ content.signture_coordinator_2 }}" alt="coordinador">
+              </div>-->
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,97 @@
+
+{% if course[0] is not null %}
+    <div class="item-news course-main course-section">
+        <div class="picture">
+            <figure>
+                <picture>
+                    <source srcset="{{ course[0].foto_portada.uri | image_style('313x156') }}" 
+                        media="(max-width: 767px)" 
+                        alt="{{ course[0].foto_portada.alt }}" 
+                        title="{{ course[0].foto_portada.title }}">
+                    <img srcset="{{ course[0].foto_portada.uri | image_style('604x476') }}" 
+                        alt="{{ course[0].foto_portada.alt }}" 
+                        title="{{ course[0].foto_portada.title }}">
+                </picture>
+            </figure>
+        </div>
+        <div class="text">
+            <h3 class="title desktop">{{ course[0].title }}</h3>
+            <div class="author multiple">
+                <figure>
+                    {% for key, item in course[0].expertos %}
+                        <img src="{{ item.picture_uri }}" alt="{{ item.name_author }}">
+                    {% endfor %}
+                </figure>
+            </div>
+            <div class="info">
+                <div class="name author">
+                    {% for key, item in course[0].expertos %}
+                        <a href="{{ item.uri }}" class="link author">{{ item.name_author }}</a>
+                    {% endfor %}
+                </div>
+                <time class="hour">{{ course[0].horas }} horas</time>
+                <time class="date">Inicio: {{ course[0].fecha_inicio }}</time>
+                <div class="rating">
+                    {{ drupal_field('field_calificacion', 'node', course[0].nid) }}
+                </div>
+            </div>
+            <div class="action">
+                <button class="show-course">
+                    <a href="{{ course[0].url }}">Ver curso</a>
+                </button>
+                <button class="save">guardar</button>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<div class="item-news course-main course category course-section more-course">
+    {% for key, more_course in more_courses %}
+        <div class="item-news course-category home">
+            <div class="picture">
+                <figure>
+                    <picture>
+                        <source srcset="{{ more_course.foto_portada.uri_313x156 }}" 
+                            media="(max-width: 767px)" 
+                            alt="{{ more_course.foto_portada.alt }}" 
+                            title="{{ more_course.foto_portada.title }}">
+                        <img src="{{ more_course.foto_portada.uri_374x226 }}" 
+                            alt="{{ more_course.foto_portada.alt }}" 
+                            title="{{ more_course.foto_portada.title }}">
+                    </picture>
+                </figure>
+            </div>
+            <div class="text">
+                <h3 class="title">{{ more_course.title }}</h3>
+                <div class="author multiple">
+                    {% for picture in more_course.expertos %}
+                        <figure>
+                            <img src="{{ picture.picture_uri }}" alt="{{ picture.name_author }}" ng-repeat="picture in more_course.expertos">
+                        </figure>
+                    {% endfor %}
+                </div>
+                <div class="info">
+                    <div class="name author">
+                        <ul>
+                            {% for autor in more_course.expertos %}
+                                <li>
+                                    <a href="{{ autor.uri }}" class="link author">{{ autor.name_author }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <time class="hour">{{ more_course.horas }} horas</time>
+                    <div class="rating">
+                        {{ drupal_field('field_calificacion', 'node', more_course.nid) }}
+                    </div>
+                </div>
+                <div class="action">
+                    <button class="show-course">
+                        <a href="{{ more_course.url }}">Ver curso</a>
+                    </button>
+                    <button class="save">guardar</button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

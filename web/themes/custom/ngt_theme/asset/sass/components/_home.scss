@@ -1,0 +1,580 @@
+body{
+    header{
+        .logo-general{
+            display: none;
+        }
+        .fras.description-header{
+            text-align: center;
+            background: #f7f7f7;
+            margin: 0px;
+            
+            padding: 9px;
+            color: #293a80;
+            font-size: 14px;
+        }
+        .box{
+            @media only screen and ($desktop){
+            justify-content: flex-end;
+            position: relative;
+            }
+        .elements{
+            .left{
+                .menu{
+                    nav{
+                        display: flex;
+                        li{
+                            list-style: none;
+                            margin-right: 15px;
+                            a{
+                               color: #fff; 
+                               text-transform: uppercase;
+                               font-family: "Montserrat",sans-serif;
+                            }
+                            
+
+                        }
+                    }
+                }
+            }
+
+            .right{
+                .search{
+                    input{
+                        border: 0;
+                        border-radius: 30px;
+                        padding: 10px 20px;
+                        margin-left: 5px;
+                        background: $turqui;
+                        color: #fff;
+                        margin-right: 40px;
+                    }
+                }
+                .login{
+                    .link-sign-in{
+                      margin-right: 20px;
+                      font-family: "Montserrat",sans-serif; 
+                    }
+                    
+                }
+            }
+        }
+
+        }
+    }
+    .dialog-off-canvas-main-canvas{
+        @media only screen and ($desktop){
+        margin-top: -70px;
+        }
+    }
+}
+
+#main{
+    &.page-front,{
+        .save{
+            background-position: -152px -1px;
+        }
+        >.top{
+            .destacado{
+                .slider{
+                    .item-sd{
+                        position: relative;
+                        figure{
+                            height: calc(100vh - 40px);
+                            @media only screen and ($desktop){
+                                height: 100vh;
+                                min-height: 600px;
+                            }
+                            &:before {
+                                content: "";
+                                position: absolute;
+                                width: 100%;
+                                height: 100%;
+                                top: 0;
+                                left: 0;
+                                background: linear-gradient(90deg, #04194a, #1c3ae8);
+                                opacity: .9;
+                                border-radius: 5px;
+                            }
+                            img{
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+                        }
+                        .text{
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            padding: 30px;
+                            background: rgba(0, 0, 0, 0.2);
+                            display: flex;
+                            justify-content: center;
+                            flex-direction: column;
+                            @media only screen and ($desktop){
+                                padding: 40px;
+                            }
+                            img.logo-general {
+                                top: 28%;
+                                width: 90%;
+                                margin: 0 0 30px;
+                                @media only screen and ($desktop){
+                                    width: 28%;
+                                }
+                            }
+                            h2{
+                                font: {
+                                    size: 23px;
+                                }
+                                color: #fff;
+                                text-align: left;
+                                // text-transform: uppercase;
+                                margin: 0 0 30px;
+                                @media only screen and ($desktop){
+                                font-size: 38px;
+                                width: 50%;
+                                }
+                            }
+                            p{
+                                font: {
+                                    size: 17px;
+                                }
+                                line-height: 1.3em;
+                                color: #fff;
+                                letter-spacing: 0.5px;
+                                text-align: left;
+                                width: 100%;
+                                margin: 0 0 30px;
+                                font-weight: 100;
+                                @media only screen and ($desktop){
+                                font-size: 21px;
+                                width: 50%;
+                                }
+                            }
+                            .action{
+                                display: block;
+                                margin: 25px 0;
+                                width: fit-content;
+                                padding: 0 25px;
+                                border: 0;
+                                border-radius: 30px;
+                                background: $aqua;
+                                font: {
+                                    family: "Montserrat",sans-serif; 
+                                    size: 14px;
+                                    weight: 500;
+                                }
+                                line-height: 45px;
+                                color: #000839;
+                            }
+                        }
+                    }
+                    .owl-dots{
+                        position: absolute;
+                        right: 0;
+                        bottom: 60px;
+                        left: 0;
+                        margin: auto;
+                        width: 60px;
+                        display: flex;
+                        justify-content: space-between;
+                        .owl-dot{
+                            width: 8px;
+                            height: 8px;
+                            border-radius: 4px;
+                            background: $aqua;
+                            -webkit-transition: all 0.15s linear;
+                            transition: all 0.15s linear;
+                            &.active{
+                                width: 30px;
+                            }
+                        }
+                    }
+                }
+            }
+            .benefits{
+                margin: 0 0 60px;
+                padding: 60px 30px;
+                -webkit-box-shadow: $sombra;
+                box-shadow: $sombra;
+                @media only screen and ($desktop){
+                    padding: 80px 40px;
+                }
+                .list{
+                    width: 230px;
+                    padding: 0;
+                    margin: 0 auto;
+                    list-style: none;
+                    @media only screen and ($tablet){
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-evenly;
+                    }
+                    li{
+                        font: {
+                            size: 18px !important;
+                            weight: 100;
+                        }
+                        letter-spacing: 1px;
+                        line-height: 1.3em;
+                        color: #535353;
+                        position: relative;
+                        padding: 0 0 0 60px;
+                        margin: 0 0 40px;
+                        @media only screen and ($desktop){
+                            font: {
+                                size: 25px;
+                            }
+                            width: 30%;
+                            padding: 0 0 0 110px;
+                            margin: 0;
+                        }
+                        &:before{
+                            content: '';
+                            display: block;
+                            width: 44px;
+                            height: 44px;
+                            border: 2px solid $cyan;
+                            border-radius: 50%;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            @media only screen and ($desktop){
+                                -webkit-transform: scale(2);
+                                transform: scale(2);
+                                transform-origin: top left;
+                                width: 26px;
+                                height: 26px;
+                            }
+                        }
+                        &:after{
+                            content: '';
+                            display: block;
+                            @media only screen and ($desktop){
+                                width: 7px;
+                                height: 15px;
+                            }
+                            width: 10px;
+                            height: 19px;
+                            border: {
+                                width: 0 2px 2px 0;
+                                style: solid;
+                                color: $cyan;
+                            }
+                            position: absolute;
+                            top: 10px;
+                            left: 18px;
+                            -webkit-transform: rotate(45deg);
+                            transform: rotate(45deg);
+                            @media only screen and ($desktop){
+                                -webkit-transform: rotate(45deg) scale(2);
+                                transform: rotate(45deg) scale(2);
+                                transform-origin: top left;
+                                top: 6px;
+                                left: 36px;
+                            }
+                        }
+                        &:last-child{
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+        >.center, .bottom{
+            padding: 0 24px;
+        }
+        >.center{
+            .course{
+                h3{
+                    font: {
+                        size: 21px;
+                    }
+                    text-align: center;
+                    text-transform: uppercase;
+                    letter-spacing: 0.06em;
+                    color: $turqui;
+                    margin: 0 0 20px;
+                }
+                p{
+                    font: {
+                        size: 15px;
+                    }
+                    color: #535353;
+                    text-align: center;
+                    margin: 0 0 30px;
+                }
+            }
+            .item-news{
+                @media only screen and ($desktop){
+                max-width: 1000px;
+                display: flex;
+                align-items: center;
+                }
+                &.course-main{
+                    .text{
+                        @media only screen and ($desktop){
+                            padding: 40px;
+                        }
+                    }
+                }
+                .picture{
+                    @media only screen and ($desktop){
+                        width: 50%;
+                    }
+                }
+                .text{
+                    @media only screen and ($desktop){
+                        width: 50%;
+                    }
+                    .title{
+                        @media only screen and ($desktop){
+                            margin-bottom: 20px;
+                        }
+                    }
+                    .author{
+                        @media only screen and ($desktop){
+                            margin-bottom: 5px;
+                        }
+                    }
+                    .info{
+                        .name{
+                            @media only screen and ($desktop){
+                            margin-bottom: 20px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        >.bottom{
+            .select{
+                margin: 0 0 40px;
+                .mobile{
+                    @media only screen and ($desktop){
+                        display: none;
+                    }
+                    select{
+                        // -webkit-appearance: none;
+                        font: {
+                            family: 'Asap', sans-serif;
+                            size: 15px;
+                            weight: 700;
+                        }
+                        padding-bottom: 3px;
+                        &::after{
+                            content: "";
+                            display: inline-block;
+                            width: 0;
+                            height: 0;
+                            margin-left: .255em;
+                            vertical-align: .255em;
+                            border-top: .3em solid;
+                            border-right: .3em solid transparent;
+                            border-bottom: 0;
+                            border-left: .3em solid transparent;
+                        }
+                        background-color: #fff;
+                        line-height: 30px;
+                        color: $turqui;
+                        display: block;
+                        border: 0;
+                        border-bottom: 3px solid $turqui;
+                        border-radius: 0;
+                        margin: 0 auto;
+                        outline: none;
+                    }
+                }
+                .desktop{
+                    display: none;
+                    @media only screen and ($desktop){
+                        display: block;
+                        padding: 30px 0 0;
+                    }
+
+                    nav{
+                        display: flex;
+                        justify-content: center;
+                        list-style: none;
+
+                        li{
+                                padding: 0 10px;
+                                cursor: pointer;
+                                font-family: "Montserrat",sans-serif;
+                                color: #535353;
+
+                            &.active{
+                                color: $turqui;
+                                border-bottom: 3px solid $turqui;
+                                padding-bottom: 5px;
+                                display: inline-block;
+                                a{
+                                    color: $turqui;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .course{
+                @media only screen and ($desktop){
+                position: relative;
+                padding-bottom: 30px;
+                max-width: 1180px;
+                margin: 0 auto 40px;
+                }
+                .course-category{
+                    @media only screen and ($desktop){
+                        margin-right: 15px;
+                        width: 23.7%;
+                        display: inline-grid;
+                    }
+                    .picture{
+                        img{
+                            @media only screen and ($desktop){
+                                width: 280px;
+                                height: 170px;
+                            }
+                        }
+                    }
+                }
+                .load_more{
+                    button{
+                        @media only screen and ($desktop){
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        margin: 0 auto;
+                        }
+
+                        -webkit-appearance: none;
+                        display: block;
+                        margin: 0 auto 40px;
+                        width: 150px;
+                        height: 38px;
+                        padding: 0;
+                        border: 0;
+                        border-radius: 20px;
+                        background: $aqua;
+                        font: {
+                            size: 13px;
+                        }
+                        color: #000839;
+                    }
+                }
+            }
+
+            #box-slider-profiles{
+                max-width: 1000px;
+                text-align: center;
+                margin:0 auto;
+                padding-bottom: 100px;
+                .slider-expert{
+                    .item-main{
+                        .owl-stage-outer{
+                            .owl-stage{display: flex;}
+                        }
+                    }
+                }
+
+                h4{
+                    font-size: 21px;
+                    text-align: center;
+                    text-transform: uppercase;
+                    letter-spacing: .06em;
+                    color:$turqui;
+                    margin: 100px 0 20px;
+                }
+                p{
+                    color: #747474;
+
+                }
+                button{
+                        border: 0;
+                        background: #ffa438;
+                        font-size: 15px;
+                        color: #fff;
+                        -webkit-appearance: none;
+                        border-radius: 15px;
+                        margin-bottom: 100px;
+                        padding: 10px 25px;
+                    
+                    a{
+                        color: #000839;
+                        height: 28px;
+                        padding: 0;
+                        line-height: 0px;
+                        
+                    }
+                }
+                
+                .slider-expert{
+                    .owl-stage{
+                        padding-left: 40px;
+                        @media only screen and ($desktop){
+                            padding-left: inherit;
+                        }
+                        .owl-item{
+                            margin: auto 8px;
+                            @media only screen and ($desktop){
+                                margin: auto 0px;
+                            }
+                        }
+                        @media only screen and ($desktop){
+                            display: -webkit-inline-box;
+                        }
+                        
+                    }
+                    .item-main{
+                        overflow: hidden;
+                        padding-left: 5px;
+                        padding-right: 5px;
+                        max-width: 1000px;
+
+                        .item-sd{
+                            border-radius: 6px;
+                            -webkit-box-shadow: 0 3px 6px rgb(0 0 0 / 16%);
+                            box-shadow: 0 3px 6px rgb(0 0 0 / 16%);
+                            margin: 100px auto 0;
+                            margin-bottom: 20px;
+
+                            @media only screen and ($desktop){
+                            width: 80%;
+                             height: 370px;
+                            }
+
+                            .text{
+                                padding: 25px;
+                                h2{
+                                    color: $turqui;
+                                    font-weight: 600;
+                                    font-size: 21px;
+                                }
+                                p{
+                                    color: #747474;
+                                    font-weight: bold;
+                                    line-height: 24px;
+                                }
+                            }
+
+                            img{
+                                width: 120px;
+                                height: 120px;
+                                border: 7px solid $turqui;
+                                border-radius: 50%;
+                                object-fit: cover;
+                                margin: 0 auto;
+                                margin-top: -50px;
+                                display: initial;
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+}
+

@@ -1,0 +1,46 @@
+<?php 
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\user\UserInterface;
+use Drupal\file\Entity\File;
+
+/**
+ * ngt_progress_help
+ *
+ * @param  mixed $route_name
+ * @param  mixed $route_match
+ * @return void
+ */
+function ngt_progress_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+      // Main module help for the ngt_progress module.
+      case 'help.page.ngt_progress':
+          $output = '';
+          $output .= t('<h3>' . 'About') . '</h3>';
+          $output .= t('<p>' . 'Customización para evento de progreso en cursos o lecciones') . '</p>';
+      return $output;
+
+  default:
+  }
+}
+
+/**
+ * Implements hook_theme()
+ */
+function ngt_progress_theme() {
+  return [
+    'render_progress' => [
+      'variables' => [
+        'dataAngular' => NULL,
+        'directive'  => NULL,
+        'uuid' => NULL,
+        'config' => NULL,
+        'class' => NULL,
+        'plugin_id' => NULL,
+        'data' => NULL,
+      ],
+      'template' => 'block--render-progress',
+    ],
+  ];
+}

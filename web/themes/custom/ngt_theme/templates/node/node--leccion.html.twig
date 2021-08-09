@@ -1,0 +1,13 @@
+<div class="body main node-leccion">
+    <section class="top">
+        {{ drupal_block('ngt_general_node_top_lesson', {'node' : node.id }) }}                     
+    </section>
+
+    <section class="left">
+        {{ drupal_block('ngt_general_node_left_lesson', {'node' : node.id }) }}
+    </section>
+
+    <section class="right">
+        {{ drupal_block('ngt_general_node_right_lesson', {'node' : node.id, 'content' : content }) }}
+    </section>
+</div>

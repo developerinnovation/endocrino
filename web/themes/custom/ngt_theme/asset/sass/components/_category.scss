@@ -1,0 +1,294 @@
+.page-courses-category-all, .section-courses{
+    header{
+        figure{
+            position: relative;
+            top:3px;
+            margin:0px;
+        }
+        .box{
+            justify-content: center;
+            width: 100%;
+            >div{
+                justify-content: space-between;
+            }
+        }
+    }
+}
+
+#main{
+    &.page-course{
+        >.top{
+            .destacado{
+                .slider{
+                    .item-sd{
+                        position: relative;
+                        figure{
+                            height: calc(100vh - 40px);
+                            @media only screen and ($desktop){
+                                height: 100vh;
+                                min-height: 600px;
+                            }
+                            &:before {
+                                content: "";
+                                position: absolute;
+                                width: 100%;
+                                height: 100%;
+                                top: 0;
+                                left: 0;
+                                background: linear-gradient(90deg, #04194a, #1c3ae8);
+                                opacity: .9;
+                                border-radius: 5px;
+                            }
+                            img{
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+                        }
+                        .text{
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            padding: 30px;
+                            background: rgba(0, 0, 0, 0.2);
+                            display: flex;
+                            justify-content: center;
+                            flex-direction: column;
+                            @media only screen and ($desktop){
+                                padding: 40px;
+                            }
+                            h2{
+                                font: {
+                                    size: 23px;
+                                }
+                                color: #fff;
+                                text-align: center;
+                                // text-transform: uppercase;
+                                margin: 0 0 30px;
+                                @media only screen and ($desktop){
+                                font-size: 38px;
+                                }
+                            }
+                            p{
+                                font: {
+                                    size: 17px;
+                                }
+                                line-height: 1.3em;
+                                color: #fff;
+                                letter-spacing: 0.5px;
+                                text-align: center;
+                                width: 100%;
+                                margin: 0 auto 60px;
+                                font-weight: 100;
+                                @media only screen and ($desktop){
+                                font-size: 21px;
+                                width: 50%;
+                                }
+                            }
+                            .action{
+                                display: block;
+                                margin: 0 auto;
+                                padding: 0 25px;
+                                border: 0;
+                                border-radius: 30px;
+                                background: $aqua;
+                                font: {
+                                    family: "Montserrat",sans-serif; 
+                                    size: 14px;
+                                    weight: 500;
+                                }
+                                line-height: 45px;
+                                color: #000839;
+                            }
+                        }
+                    }
+                    .owl-dots{
+                        position: absolute;
+                        right: 0;
+                        bottom: 60px;
+                        left: 0;
+                        margin: auto;
+                        width: 60px;
+                        display: flex;
+                        justify-content: space-between;
+                        .owl-dot{
+                            width: 8px;
+                            height: 8px;
+                            border-radius: 4px;
+                            background: $aqua;
+                            -webkit-transition: all 0.15s linear;
+                            transition: all 0.15s linear;
+                            &.active{
+                                width: 30px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .medio{
+            @media only screen and ($desktop){
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            
+            .scroll{
+                position: fixed;
+                top: 60px;
+                z-index: -1;
+            }
+            .left{
+                padding-top: 60px;
+                width: 20%;
+                .category{
+                        padding: 0px 30px;
+                        -webkit-box-shadow: 0 3px 6px rgb(0 0 0 / 16%);
+                        box-shadow: 0 3px 6px rgb(0 0 0 / 16%);
+                        @media only screen and ($desktop){
+                           box-shadow: none; 
+                        }
+
+                        
+                    .desktop{
+                        display: none;
+                        @media only screen and ($desktop){
+                            display: block;
+                        }
+                        nav{
+                            margin: 0 0 30px 0 !important;
+                            border-top: 1px solid #ccc;
+                            padding-top: 30px;
+                            width: initial;
+                            list-style: none;
+                            li{
+                                margin-bottom: 12px;
+                                cursor: pointer;
+
+                                a{
+                                    font-family: "Montserrat",sans-serif;
+                                    color: #535353;
+                                }
+                                &.active{
+                                    color: #0a2152;
+                                    border-bottom: 3px solid #0a2152;
+                                    padding-bottom: 5px;
+                                    display: inline-block;
+                                    a{
+                                        color: $turqui;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .sub-title{
+                        display: none;
+                        @media only screen and ($desktop){
+                            display: block;
+                            text-transform: uppercase;
+                            font-weight: 500;
+                            letter-spacing: 2px;
+                            color: #535353;
+                        }
+                    }
+                    .mobile{
+                        @media only screen and ($desktop){
+                            display: none;
+                        }
+                        select{
+                            font-family: "Asap",sans-serif;
+                            font-size: 15px;
+                            font-weight: 700;
+                            padding-bottom: 3px;
+                            background-color: #fff;
+                            line-height: 30px;
+                            color: $turqui;
+                            display: block;
+                            border: 0;
+                            border-bottom: 3px solid $turqui;
+                            border-radius: 0;
+                            margin: 0 auto;
+                            outline: none;
+                        }
+                    }
+                }
+            }
+
+            .right{
+                padding: 0 24px;
+                @media only screen and ($desktop){
+                    width: 72%;
+                    padding-top: 60px;
+                }
+                
+
+                .course-section:first-child{
+
+                    @media only screen and ($desktop){
+                        display: flex;
+                        }
+                    
+
+                    .picture{
+                        @media only screen and ($desktop){
+                            width: 50%;
+                        }
+                    }
+                    .text{
+                        @media only screen and ($desktop){
+                            width: 50%;
+                        }
+                    }
+
+                }
+
+                .course-category{
+                    @media only screen and ($desktop){
+                        margin-right: 15px;
+                        width: 31.7%;
+                        display: inline-grid;
+                    }
+                    
+                }
+                .course-category:nth-child(3n){
+                    @media only screen and ($desktop){
+                       margin-right: 0px; 
+                    }
+                    
+
+                }
+
+                .more-course{
+                    box-shadow: none;
+                }
+
+                .item-news{
+                    overflow: inherit;
+
+                    .text{
+                        .action{
+                            .save{
+                                height: 34px;
+                                padding: 0;
+                                border-radius: 20px;
+                                width: 34px;
+                                font-size: 0;
+                                background-image: url(../img/sprite-icon-generales.svg);
+                                background-size: 240px;
+                                background-position: -149px 2px;
+                                background-repeat: no-repeat;
+                                background-color: transparent;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+}

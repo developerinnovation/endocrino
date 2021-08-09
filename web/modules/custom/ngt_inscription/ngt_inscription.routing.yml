@@ -1,0 +1,18 @@
+inscription.inscription_form:
+  path: '/admin/config/ngt/inscription/button'
+  defaults:
+    _form: '\Drupal\ngt_inscription\Plugin\Form\InscriptionForm'
+    _title: 'Configuraciones para botón de reservar cupo en cursos'
+  requirements:
+    _permission: 'access administration pages'
+  option:
+    _admin_route: TRUE
+inscription.render_my_courses:
+  path: 'my/courses'
+  defaults:
+      _controller: '\Drupal\ngt_inscription\Controller\RenderMyCoursesController::render_my_courses'
+      _title: ''
+  requirements:
+      _permission: 'render_my_courses'
+
+    

@@ -1,0 +1,35 @@
+<div class="info">
+    <h1 class="title course">{{ data[0].courseTitle }}</h1>
+    <p class="summary">{{ data[0].courseResume }}</p>
+</div>
+<div class="details">
+    <picture class="author">
+        <figure>
+            {% for key, item in data[0].expertos %}
+                <img width="98" height="98" src="{{ item.picture_uri }}" alt="{{ item.name_author }}">
+            {% endfor %}
+        </figure>
+           
+        <figcaption>
+            {% for key, item in data[0].expertos %}
+                <a href="{{ item.uri }}" class="link">{{ item.name_author }}</a>
+            {% endfor %}
+        </figcaption>
+    </picture>
+    <div class="action shared">
+        <button class="icon shared">Compartir</button>
+    </div>
+</div>
+<div class="title leccion">
+    <h3 class="name-module">{{ data[0].module }}</h3>
+    <h2 class="name-leccion">{{ data[0].title }}</h2>
+</div>
+<div class="nav-leccion">
+    <div class="preview">
+        <a {% if data[0].prevLesson is not null %} href="{{ data[0].prevLesson }}" {% else %} class="inactive" {% endif %}><i class="icon row"></i>Volver</a>
+    </div>
+    
+    <div class="next">
+        <a {% if data[0].nextLesson is not null %} href="{{ data[0].nextLesson }}" {% else %} class="inactive" {% endif %}><i class="icon row"></i>Siguiente lección</a>
+    </div>
+</div>

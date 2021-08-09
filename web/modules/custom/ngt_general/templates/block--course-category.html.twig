@@ -1,0 +1,82 @@
+{% set directive_new = directive|replace({'-':'_'}) %}
+
+<div class="{{ class }}" {{ directive }} ng-cloak ng-init="uuid_{{ directive_new }} = '{{ uuid }}'">
+    <div class="caterory select">
+        <div class="desktop">
+            <nav>
+                <li class="active">{{ 'Últimos cursos' | t }} </li>
+                {% for key, category in main_category %}   
+                    {% if category == 1 %}
+                        {% set item = key|split('_') %}
+                            {% set text %} {{ drupal_field('name', 'taxonomy_term', item[1]) }} {% endset %}
+                            <li ng-click="loadCourseCategory('{{ item[1] }}','0','4')">{{ text|striptags|trim|capitalize }}</li>
+                    {% endif %} 
+                {% endfor %}
+            </nav>
+        </div>
+        <div class="mobile">
+            <select name="select">
+                <option value="value1" ng-selected="selectedCategory">{{ 'Últimos cursos' | t }} </option> 
+                {% for key, category in main_category %}   
+                    {% if category == 1 %}
+                        {% set item = key|split('_') %}
+                            {% set text %} {{ drupal_field('name', 'taxonomy_term', item[1]) }} {% endset %}
+                            <option value="{{ item[1] }}">{{ text|striptags|trim|capitalize }}</option>
+                    {% endif %} 
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="course category" ng-init="loadCourseCategory('all','0','4')">
+        <div class="item-news course-category home" ng-repeat="course in CourseCategory">
+            <div class="picture">
+                <figure>
+                    <picture>
+                        <source srcset="{[{ course.foto_portada.uri_313x156 }]}" 
+                            media="(max-width: 767px)" 
+                            alt="{[{ course.foto_portada.alt }]}" 
+                            title="{[{ course.foto_portada.title }]}">
+                        <img src="{[{ course.foto_portada.uri_374x226 }]}" 
+                            alt="{[{ course.foto_portada.alt }]}" 
+                            title="{[{ course.foto_portada.title }]}">
+                    </picture>
+                </figure>
+            </div>
+            <div class="text">
+                <h3 class="title">{[{ course.title }]}</h3>
+                <div class="author multiple">
+                    <figure>
+                        <img src="{[{ picture.picture_uri }]}" alt="{[{ picture.name_author }]}" ng-repeat="picture in course.expertos">
+                    </figure>
+                </div>
+                <div class="info">
+                    <div class="name author">
+                        <ul>
+                            <li ng-repeat="autor in course.expertos">
+                                <a href="{[{ autor.uri }]}" class="link author">{[{ autor.name_author }]}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <time class="hour">{[{ course.horas }]} horas</time>
+                    <time class="date">Inicio: {[{ course.fecha_inicio }]}</time>
+                    <div class="rating">
+                    
+                    </div>
+                </div>
+                <div class="action">
+                    <button class="show-course">
+                        <a href="{[{ course.url }]}">Ver curso</a>
+                    </button>
+                    <button class="save">guardar</button>
+                </div>
+            </div>
+        </div>
+        <div class="buttom load_more" ng-show="showMore">
+            <button ng-click="loadMoreCourse()">Ver más cursos</button>
+        </div>
+        <div class="icon-load" ng-show="showLoading">
+            <img src="../../../modules/custom/ngt_general/asset/image/loading.gif" alt="">
+        </div>
+    </div>
+</div>

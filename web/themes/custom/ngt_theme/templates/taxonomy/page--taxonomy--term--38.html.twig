@@ -1,0 +1,21 @@
+<div class="main" {{ attributes }}>
+    <div class="picture title">
+        <div class="item-sd">
+            <figure>
+                {{ drupal_field('field_fondo', 'taxonomy_term', 38, {type: 'image', settings: {image_style: '604x476'}}) }}
+            </figure>
+            <div class="text">
+                <h2>
+                    <a href="{{ path('entity.taxonomy_term.canonical', {'taxonomy_term': '38'}) }}">
+                        {{ drupal_field('name', 'taxonomy_term', '38') }}
+                    </a>
+                </h2>
+            </div>
+        </div>    
+    </div>
+    <div class="box-content">
+        <div class="box">
+            <div class="contenido">{{ drupal_view('contenidos', 'block_1', '38') }}</div>
+        </div>
+    </div>
+</div>

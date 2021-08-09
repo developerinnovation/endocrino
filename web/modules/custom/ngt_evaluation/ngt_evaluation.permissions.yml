@@ -1,0 +1,4 @@
+'render_certificate':
+  title: 'Ver certificado'
+  description: 'permite generar certificados'
+  restrict access: true

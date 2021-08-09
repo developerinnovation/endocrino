@@ -1,0 +1,4 @@
+'render_my_courses':
+  title: 'Ver mis cursos'
+  description: 'permite ver los a los alumnos los cursos en los que está inscrito'
+  restrict access: true

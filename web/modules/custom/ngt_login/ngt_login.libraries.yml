@@ -1,0 +1,38 @@
+login-form:
+  version: 1.x
+  js:
+    js/directive/login_form.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - ngt_general/angular.ngt
+
+recovery-pass:
+  version: 1.x
+  js:
+    js/directive/recovery_pass.js: {}
+    js/jquery.mask.min.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - ngt_general/angular.ngt
+
+register-user:
+  version: 1.x
+  js:
+    js/directive/register_user.js: {}
+    js/jquery.mask.min.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - ngt_general/angular.ngt
+
+edit-user:
+  version: 1.x
+  js:
+    js/directive/edit_user.js: {}
+    js/jquery.mask.min.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupalSettings
+    - ngt_general/angular.ngt

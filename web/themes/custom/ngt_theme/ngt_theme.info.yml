@@ -1,0 +1,21 @@
+name: NGT Theme
+type: theme
+description: 'Tema NGT E-Learning'
+version: '1.01'
+core: 8.x
+base theme: bootstrap_barrio
+libraries:
+  - core/normalize
+  - ngt_theme/global-styling
+  - ngt_theme/ngt
+
+regions:
+  header: Header
+  help: Help
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+  highlighted: Highlighted
+  content: Content
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  footer: Footer

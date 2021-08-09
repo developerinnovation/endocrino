@@ -1,0 +1,53 @@
+{% set nombre %}
+    {{ drupal_field('field_nombre', 'user', user.id) }}
+{% endset %}
+
+{% set apellidos %}
+    {{ drupal_field('field_apellidos', 'user', user.id) }}
+{% endset %}
+
+<article{{ attributes }} data-ilar="">
+
+    <div class="der">
+
+        <div class="left">
+            <div class="picture">
+                <figure>  
+                {{ drupal_field('user_picture', 'user', user.id) }}
+                </figure>
+            </div>
+            <div class="text">
+                <h3 class="title">{{ nombre|striptags|raw}} {{ apellidos|striptags|raw}}</h3>
+            </div>
+            <div class="member_for">
+                    {{ content.member_for }}
+            </div>
+            <div class="location">       
+                <h3><i class="location">ubicacion</i>{{ drupal_field('field_ubicacion_geografica', 'user', user.id) }}</h3>  
+            </div>
+            <div class="action">
+                <a href="/user/edit" class="edit-user">Editar mis datos</a>
+            </div>
+        </div>
+
+
+        <div class="rigth scroller">
+            <div class="name title">
+                <h3>Cursos y lecciones vistos</h3>  
+            </div>
+            {% if data != NULL %}
+                <div class="scroll">
+                    {% for item in data %}
+                        <div class="name item">
+                            <span><a href="#">{{ drupal_field('title', 'node', item.node_id) }}</a></span>
+                            <h3>{% if item.type == 'curso' %} {{ 'Curso' }} {% else %} {{ 'Lección' }} {% endif %}</h3>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+  </div>
+
+
+</article>

@@ -1,0 +1,4 @@
+services:
+  ngt.send:
+    class: Drupal\ngt_notification\SendNotification
+    arguments: []

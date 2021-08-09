@@ -1,0 +1,44 @@
+<div class="other-course">
+    <h3>Otros cursos</h3>
+    <div class="more">
+    {% for course in data %}
+        <div class="item-news">
+            <div class="picture">
+                <figure>
+                    <picture>
+                        <source srcset="{{ course.foto_portada.uri | image_style('235x156') }}" 
+                            media="(max-width: 767px)" 
+                            alt="{{ course.foto_portada.alt }}" 
+                            title="{{ course.foto_portada.title }}">
+                        <img srcset="{{ course.foto_portada.uri | image_style('349x210') }}" 
+                            alt="{{ course.foto_portada.alt }}" 
+                            title="{{ course.foto_portada.title }}">
+                    </picture>
+                </figure>
+            </div>
+            <div class="text">
+                <h3 class="title desktop">{{ course.title }}</h3>
+                <div class="author multiple">
+                    <figure>
+                        <img src="{{ course.autor[0].picture_uri }}" alt="{{ course.autor[0].name_author }}">
+                    </figure>
+                </div>
+                <div class="info">
+                    <div class="name author">
+                        <a href="{{ course.autor[0].uri }}" class="link author">{{ course.autor[0].name_author }}</a>
+                    </div>
+                    <time class="hour">{{ course.horas }} horas</time>
+                    <time class="date">Inicio: {{ course.fecha_inicio }}</time>
+                    <div class="rating">
+                        {{ drupal_field('field_calificacion', 'node', course.nid) }}
+                    </div>
+                </div>
+                <div class="action">
+                    <button class="show-course">ver curso</button>
+                    <button class="save">guardar</button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}   
+    </div>
+</div>

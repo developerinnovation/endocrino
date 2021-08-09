@@ -1,0 +1,30 @@
+{% if data.expert.active_block %}
+    <div id="box-slider-profiles">    
+        <h4 class="label-expert">{{ data.expert.txt_title }}</h4>
+        <p class="details-expert">{{ data.expert.txt_subtitle }}</p>
+        <div class="slider-expert">
+            <div class="item-main">
+                {% for item in data.user_list %}
+                    <div class="item-sd">
+                        <figure>  
+                            <img src="{{ item.picture }}" alt="{{ item.name }}" title="{{ item.name }}" width="200" height="200">
+                        </figure>
+                        <div class="text">
+                            <h2>{{ item.name }}</h2>
+                            <p>{{ item.profile|striptags|raw }}</p>
+                        </div>
+                    </div>
+                {% endfor %}    
+            </div>
+        </div>
+        
+        
+        {% if data.expert.active_link %}
+            <button class="perfil">
+                <a href="{{ data.expert.profiles_url }}">{{ data.expert.txt_profile }}</a>
+            </button>
+        {% endif %}
+                
+        
+    </div>
+{% endif %}

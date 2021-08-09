@@ -1,0 +1,18 @@
+global-styling:
+  version: '1.0'
+  js:
+    ./asset/js/global.js: {}
+
+ngt:
+  version: '1.0'
+  css:
+    theme:
+      ./asset/external/jquery-ui.min.css: {}
+      ./asset/js/owl-carousel/assets/owl.carousel.min.css: {}
+      ./asset/js/owl-carousel/assets/owl.theme.default.min.css: {}
+  js:
+    ./asset/external/jquery-ui.min.js: {}
+    ./asset/js/owl-carousel/owl.carousel.min.js: {}
+    ./asset/js/ngt.js: {}
+  dependencies:
+    - core/jquery

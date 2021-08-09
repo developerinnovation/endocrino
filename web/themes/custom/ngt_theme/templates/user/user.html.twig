@@ -1,0 +1,115 @@
+{% set nombre %}
+    {{ drupal_field('field_nombre', 'user', user.id) }}
+{% endset %}
+
+{% set apellidos %}
+    {{ drupal_field('field_apellidos', 'user', user.id) }}
+{% endset %}
+
+<article{{ attributes }} data-ilar="">
+  <div class="izq menu-live">
+    
+    <div class="top">
+      <div class="picture">
+        <figure>  
+          {{ drupal_field('user_picture', 'user', user.id) }}
+        </figure>
+      </div>
+      <div class="info">
+        <div class="text">
+            <h3 class="title">{{ nombre|striptags|raw}} {{ apellidos|striptags|raw}}</h3>
+            <div class="member_for">
+              {{ content.member_for }}
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="menu">
+      <div>
+        {# Get menu items #}
+        {% set items = simplify_menu('menu-perfil-usuario') %}
+        {# Iterate menu tree #}
+        <nav class="navigation__items">
+            {% for menu_item in items.menu_tree %}
+              <li class="navigation__item">
+                <a href="{{ menu_item.url }}">{{ menu_item.text }} <i class="row"></i></a>
+              </li>
+            {% endfor %}
+        </nav>
+      </div>
+    </div>
+
+
+    <div class="menu-informative">
+      <div>
+        {# Get menu items #}
+        {% set items = simplify_menu('menu-informativo') %}
+        {# Iterate menu tree #}
+        <nav class="navigation__items">
+          {% for menu_item in items.menu_tree %}
+            <li class="navigation__item">
+              <a href="{{ menu_item.url }}">{{ menu_item.text }}</a>
+            </li>
+          {% endfor %}
+        </nav>
+      </div>
+    </div>
+
+    <div class="buttom">
+      <div>
+        <a href="/user/logout">Cerrar sesión</a>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="der">
+
+    <div class="left">
+      <div class="picture">
+        <figure>  
+          {{ drupal_field('user_picture', 'user', user.id) }}
+        </figure>
+      </div>
+      <div class="text">
+          <h3 class="title">{{ nombre|striptags|raw}} {{ apellidos|striptags|raw}}</h3>
+      </div>
+      <div class="member_for">
+              {{ content.member_for }}
+      </div>
+      <div class="location">       
+          <h3><i class="location">ubicacion</i>{{ drupal_field('field_ubicacion_geografica', 'user', user.id) }}</h3>  
+      </div>
+      <div class="action">
+        <a href="/user/edit" class="edit-user">Editar mis datos</a>
+      </div>
+    </div>
+
+
+    <div class="rigth">
+      <div class="name">
+        <span>Nombre de usuario y correo electrónico</span>
+        <h3>{{ user.mail.value }}</h3>
+      </div>
+
+      <div class="name">
+        <span>Fecha de nacimiento</span>
+        <h3>{{ drupal_field('field_fecha_nacimiento', 'user', user.id) }}</h3>  
+      </div>
+
+      <div class="name">
+        <span>Profesión</span>
+        <h3>{{ drupal_field('field_profesion', 'user', user.id) }}</h3>
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+
+</article>

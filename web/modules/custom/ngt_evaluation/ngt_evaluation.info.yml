@@ -1,0 +1,7 @@
+name: ngt_evaluation
+type: module
+description: Módulo para realizar evaluaciones de cursos o módulos
+core: 8.x
+package: NGT
+dependencies:
+  - ngt_general

@@ -1,0 +1,19 @@
+<div class="body main node-page-basic">
+    <section class="top">
+        <figure>
+            <img src="{{ file_url(node.field_foto_portada.entity.uri.value) }}">
+        </figure>
+        <h1 {{ attributes }}>
+            {{ node.title.value }}
+        </h1>        
+    </section>
+
+    <section class="content article">
+        <div class="summary">
+            <p>{{ node.body.summary }}</p>
+        </div>
+        <div class="article__body">
+            {{ node.body.value|raw }}
+        </div>
+    </section>
+</div>

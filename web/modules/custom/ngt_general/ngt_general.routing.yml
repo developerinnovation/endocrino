@@ -1,0 +1,52 @@
+ngt.settings:
+  path: '/admin/config/ngt/settings'
+  defaults:
+    _title: 'Configuraciones NGT'
+  requirements:
+    _permission: 'access NGT settings'
+  options:
+    _admin_route: TRUE
+ngt.admin_general_form:  
+  path: '/admin/config/ngt/adminsettings/general'  
+  defaults:  
+    _form: '\Drupal\ngt_general\Plugin\Form\GeneralConfigForm'  
+    _title: 'Configuración general de la plataforma'  
+  requirements:  
+    _permission: 'access administration pages'  
+  options:  
+    _admin_route: TRUE  
+ngt.admin_benefit_form:  
+  path: '/admin/config/ngt/adminsettings/beneficios'  
+  defaults:  
+    _form: '\Drupal\ngt_general\Plugin\Form\BenefitConfigForm'  
+    _title: 'Asignación de beneficios'  
+  requirements:  
+    _permission: 'access administration pages'  
+  options:  
+    _admin_route: TRUE  
+ngt.admin_category_form:  
+  path: '/admin/config/ngt/adminsettings/categorias'  
+  defaults:  
+    _form: '\Drupal\ngt_general\Plugin\Form\CategoryConfigForm'  
+    _title: 'Configuración de categorías principales en Home'  
+    _ title_arguments : 'Seleccione máximo cuatro categorías a destacar'
+  requirements:  
+    _permission: 'access administration pages'  
+  options:  
+    _admin_route: TRUE 
+ngt.admin_user_expert_form:  
+  path: '/admin/config/ngt/adminsettings/general/expertos'  
+  defaults:  
+    _form: '\Drupal\ngt_general\Plugin\Form\UserExpertConfigForm'  
+    _title: 'Configuración expertos de la plataforma'  
+  requirements:  
+    _permission: 'access administration pages'  
+  options:  
+    _admin_route: TRUE  
+ngt.section_course:
+  path: 'courses/category/{tid}'
+  defaults:
+      _controller: '\Drupal\ngt_general\Controller\GeneralController::section_course'
+      _title: ''
+  requirements:
+      _permission: 'show_course_section'

@@ -1,0 +1,65 @@
+.rating{
+    margin: 0 0 15px;
+    .field--name-field-calificacion{
+        display: flex;
+        .fivestar-widget{
+            margin: 0 10px 0 0;
+            .star{
+                margin: 0 2px 0 0;
+                height: 16px;
+                background: transparent;
+                a{
+                    display: block;
+                    width: 18px;
+                    height: 16px;
+                    background: {
+                        image: url(../img/sprite-icon-generales.svg);
+                        size: 240px;
+                        position: -126px -37px;
+                        repeat: no-repeat;
+                        color: #fff;
+                    }
+                }
+                &.on{
+                    a{
+                        background: {
+                            position: -126px -7px;
+                        }
+                    }
+                }
+            }
+        }
+        .description{
+            .fivestar-summary{
+                line-height: 16px;
+                height: 16px;
+                .average-rating{
+                    font: {
+                        size: 0;
+                    }
+                    span{
+                        font: {
+                            size: 13px;
+                        }
+                        color: #747474;
+                    }
+                }
+                .total-votes{
+                    font: {
+                        size: 13px;
+                    }
+                    color: #747474;
+                }
+            }
+        }
+    }
+
+    .fivestar-basic{
+        fieldset{
+            border: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+    }
+}

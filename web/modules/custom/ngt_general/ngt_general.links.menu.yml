@@ -1,0 +1,27 @@
+ngt.admin_general_form:
+  title: 'NGT Configuracion general'
+  route_name: 'ngt.admin_general_form'
+  description: 'Configuración general de la plataforma'
+  parent: system.admin_config_system
+  weight: 99
+
+ngt.admin_benefit_form:
+  title: 'NGT Configuración de beneficios'
+  route_name: 'ngt.admin_benefit_form'
+  description: 'Configuración de beneficios mostrados en home'
+  parent: system.admin_config_system
+  weight: 99
+
+ngt.admin_category_form:
+  title: 'NGT Configuración de Categorías'
+  route_name: 'ngt.admin_category_form'
+  description: 'Configuración de categorías mostradas en home'
+  parent: system.admin_config_system
+  weight: 99
+
+ngt.admin_user_expert_form:
+  title: 'NGT Configuracion general de expertos'
+  route_name: 'ngt.admin_user_expert_form'
+  description: 'Configuración general de expertos de la plataforma'
+  parent: system.admin_config_system
+  weight: 99

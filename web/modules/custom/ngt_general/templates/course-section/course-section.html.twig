@@ -1,0 +1,48 @@
+<!-- ______________________ MAIN _______________________ -->
+<div id="main" class="page-course">
+    <div class="top">
+        <div class="destacado">
+            {{ drupal_block('ngt_general_slider_course') }}
+        </div>
+    </div>
+
+    <div class="medio">
+        <div class="left">
+            <div class="category">
+                <h3 class="sub-title">{{ 'Categorías' | t }}</h3>
+                <div class="desktop">
+                    <nav>
+                        <li class="{% if category_id == 'all' %} {{ 'active'}} {% endif %}">
+                            <a href="/courses/category/all">{{ 'Últimos cursos' | t }} </a>
+                        </li>
+                        {% for key, category in main_category %}   
+                            {% if category == 1 %}
+                                {% set item = key|split('_') %}
+                                    {% set text %} {{ drupal_field('name', 'taxonomy_term', item[1]) }} {% endset %}
+                                    <li class="{% if category_id == item[1] %}{{ 'active'}}{% endif %}">
+                                        <a href="/courses/category/{{ item[1] }}">{{ text|striptags|trim|capitalize }}</a>
+                                    </li>
+                            {% endif %} 
+                        {% endfor %}
+                    </nav>
+                </div>
+                <div class="mobile">
+                    <select name="select" id="select-category">
+                        <option value="all" data-url="/courses/category/all">{{ 'Últimos cursos' | t }} </option> 
+                        {% for key, category in main_category %}   
+                            {% if category == 1 %}
+                                {% set item = key|split('_') %}
+                                    {% set text %} {{ drupal_field('name', 'taxonomy_term', item[1]) }} {% endset %}
+                                    <option value="{{ item[1] }}" data-url="/courses/category/{{ item[1] }}" {% if category_id == item[1] %}{{ 'selected'}}{% endif %}>{{ text|striptags|trim|capitalize }}</option>
+                            {% endif %} 
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            {{ drupal_block('ngt_general_course_category_section', {'category' : category_id }) }}
+        </div>
+    </div>
+</div>
+<!-- /#main -->

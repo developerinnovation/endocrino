@@ -1,0 +1,150 @@
+.item-news{
+    margin: 0 auto 40px;
+    border-radius: 6px;
+    -webkit-box-shadow: $sombra;
+    box-shadow: $sombra;
+    overflow: hidden;
+    .text{
+        position: relative;
+        padding: 40px 20px 20px;
+        @media only screen and ($desktop){
+            padding: 20px;
+        }
+        >.author{
+            @media only screen and ($desktop){
+            position: initial;
+            }
+            position: absolute;
+            top: -34px;
+            left: 20px;
+            figure{
+                display: flex;
+                img{
+                    width: 68px;
+                    height: 68px;
+                    border: 3px solid #fff;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+            }
+            &.multiple{
+                top: -24px;
+                figure{
+                    img{
+                        width: 48px;
+                        height: 48px;
+                        margin: 0 -10px 0 0;
+                        &:first-child{
+                            z-index: 3;
+                        }
+                        &:nth-child(2){
+                            z-index: 2;
+                        }
+                        &:nth-child(3){
+                            z-index: 1;
+                        }
+                    }
+                }
+            }
+        }
+        .title{
+            font: {
+                size: 16px;
+            }
+            color: #535353;
+            @media only screen and ($desktop){
+               min-height: 40px; 
+               font-size: 21px;
+            }
+            
+        }
+        .info{
+            .name{
+                margin: 0 0 10px;
+                display: flex;
+                flex-wrap: wrap;
+                a{
+                    font: {
+                        size: 13px;
+                    }
+                    color: #747474;
+                    white-space: nowrap;
+                    margin: 0 5px 0 0;
+                }
+                ul{
+                    display: flex;
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                    flex-wrap: wrap;
+                }
+            }
+            time {
+                display: block;
+                margin: 0 0 10px;
+                font: {
+                    size: 13px;
+                }
+                color: #747474;
+                &.hour{
+                    &:before{
+                        content: '';
+                        display: inline-block;
+                        vertical-align: text-top;
+                        margin: 0 4px 0 0;
+                        width: 16px;
+                        height: 16px;
+                        background-image: url(../img/sprite-icon-generales.svg);
+                        background-size: 240px;
+                        background-position: -7px -7px;
+                        background-repeat: no-repeat;
+                        background-color: transparent;
+                    }
+                }
+                &.date{
+                    font: {
+                        weight: 500;
+                    }
+                    color: #747474;
+                }
+            }
+        }
+        .action{
+            display: flex;
+            button{
+                -webkit-appearance: none;
+                height: 28px;
+                padding: 0;
+                line-height: 0px;
+                border-radius: 15px;
+                &.show-course{
+                    margin: 0 15px 0 0;
+                    width: 120px;
+                    border: 0;
+                    background: $aqua;
+                    font: {
+                        size: 15px;
+                    }
+                    color: #fff;
+                    a{
+                        color: #000839;
+                    }
+                }
+                &.save{
+                    width: 28px;
+                    border: 1px solid $cyan;
+                    font: {
+                        size: 0;
+                    }
+                    background{
+                        image: url(../img/sprite-icon-generales.svg);
+                        size: 240px;
+                        position: -152px -1px;
+                        repeat: no-repeat;
+                        color: transparent;
+                    }
+                }
+            }
+        }
+    }
+}

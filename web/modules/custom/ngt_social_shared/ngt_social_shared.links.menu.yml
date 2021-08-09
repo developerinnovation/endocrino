@@ -1,0 +1,6 @@
+social.social_shared_form:
+  title: 'NGT Configuracion de redes sociales'
+  route_name: 'social.social_shared_form'
+  description: 'Configuración para botones de compartir en redes sociales'
+  parent: system.admin_config_system
+  weight: 99

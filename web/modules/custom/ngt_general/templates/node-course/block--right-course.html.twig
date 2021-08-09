@@ -1,0 +1,94 @@
+{% set directive_new = directive|replace({'-':'_'}) %}
+<div class="{{ class }}" {{ directive }} ng-cloak ng-init="uuid_{{ directive_new }} = '{{ uuid }}'">
+    <div class="main-content">
+        <div class="course-action">
+            <select name="courseAction" id="courseAction" ng-model="myTabsType" ng-options="item.name for item in tabsType"></select>
+        </div>
+        <figure class="content-video" ng-show="tab != 'contentCommunity'">
+            <picture class="cover-video active">
+                <source srcset="{{ data[0].foto_portada.uri | image_style('360x196') }}" 
+                    media="(max-width: 767px)" 
+                    alt="{{ data[0].foto_portada.alt }}" 
+                    title="{{ data[0].foto_portada.title }}">
+                <img srcset="{{ data[0].foto_portada.uri | image_style('604x476') }}" 
+                    alt="{{ data[0].foto_portada.alt }}" 
+                    title="{{ data[0].foto_portada.title }}">
+            </picture>
+            <video id="presentation" src="{{ data[0].video }}" controls preload="auto">
+                Tu navegador no implementa el elemento <code>video</code>.
+            </video>
+        </figure>
+        
+        <div class="content-tab presentation" ng-show="tab == 'contentPresentation'">
+            <h2>Presentación</h2>
+            <div class="description">
+                {{ data[0].body|raw }}
+            </div>
+            <h3>Expertos</h3>
+            <div class="list">
+                {% for key, item in data[0].expertos %}
+                    <div class="author">
+                        <figure>
+                            <img src="{{ item.picture_uri }}" alt="{{ item.name_author }}">
+                        </figure>
+                        <div class="info">
+                            <a href="{{ item.uri }}" class="name">{{ item.name_author }}</a>
+                            <p class="profile">{{ item.profile }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="content-tab content" ng-show="tab == 'contentMain'">
+            <div class="list">
+                {% if data[0].modules is not null %}
+                    {% for key, module in data[0].modules %}
+                        <div class="module">
+                            <span class="label">{{ module.moduleId }}</span>
+                            <h3 class="title-module" id="module{{ module.numModule }}"> {{ module.titleModule }}</h3>
+                            {% if module.lessons is not null %}
+                                <ul>
+                                    {% for key, lesson in module.lessons %}
+                                        <li class="item class">
+                                            <i class="no-login icon play"></i>
+                                            <a href="{% if data[0].showUrl %}{{ lesson.url }}{% else %}{{ '#' }}{% endif %}" 
+                                                class="link" 
+                                                {% if not data[0].showUrl %} ng-click="showMessage()" {% endif %}
+                                                data-id-module="{{ module.nidModule }}" 
+                                                data-num-module="{{ module.numModule }}" 
+                                                data-id-lesson="{{ lesson.nid }}">
+                                                    <h4>{{ lesson.title }}</h4>
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                            {% if module.quiz is not null %}
+                                <div class="evaluation">
+                                    <ul>
+                                        <li class="item class">
+                                            <i class="no-login icon evaluation"></i>
+                                            <a href="{{ module.quiz[0].url }}" class="link">
+                                                <h4>Realizar evaluación</h4>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                
+            </div>
+        </div>
+
+        <div class="content-tab content" ng-show="tab == 'contentCommunity'">
+            <di class="block-comments">
+                {{ content.comment }}
+            </div>
+        </div>
+    </div>
+    {# {{ drupal_block('ngt_general_node_more_course', {'node' : node.id }) }} #}
+</div>

@@ -1,0 +1,4 @@
+'update_user':
+  title: 'Actualizar mi usuario'
+  description: 'permite a los usuarios editar su información personal'
+  restrict access: true

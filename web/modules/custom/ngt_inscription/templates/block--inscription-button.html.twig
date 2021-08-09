@@ -1,0 +1,4 @@
+{% set directive_new = directive|replace({'-':'_'}) %}
+<div class="{{ class }}" {{ directive }} ng-cloak ng-init="uuid_{{ directive_new }} = '{{ uuid }}'">
+    <button ng-disabled="disableBtn" ng-class="(disableBtn) ? 'disabled' : 'active'" ng-click="action(typeAction)" class="show-course" >{[{ textBtn }]}</button>
+</div>

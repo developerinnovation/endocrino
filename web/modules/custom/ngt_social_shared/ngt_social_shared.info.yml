@@ -1,0 +1,7 @@
+name: ngt_social_shared
+type: module
+description: Módulo para customización de acciones, meta tags y botones de compartir en redes sociales
+core: 8.x
+package: NGT
+dependencies:
+  - ngt_general

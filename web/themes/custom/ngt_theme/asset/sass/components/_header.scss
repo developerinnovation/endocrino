@@ -1,0 +1,144 @@
+header.mobile{
+    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    background: #ffffff !important;
+    box-shadow: 0 3px 6px rgba(0,0,0,.16);
+    @media only screen and ($desktop){
+        display: none;
+    }
+    .left{
+        figure{
+            width: 50%;
+            img{
+            }
+        }
+    }
+    .right{
+        color: white;
+
+        #menu-live{
+            content: "";
+            display: block;
+            margin: 5px auto;
+            width: 40px;
+            height: 30px;
+            background-image: url(../img/sprite-icon-varios.svg);
+            background-size: 520px;
+            font-size: 0;
+            background-repeat: no-repeat;
+            background-position: -130px -22px;
+            &.active{
+                background-position: -130px -60px !important;
+            }
+        }
+    }    
+}
+
+header{
+    .box{
+        display: none;
+        @media only screen and ($desktop){
+            display: block;
+        }
+
+    }
+    figure{
+        top: 20%;
+        width: 60%;
+        z-index: 2;
+        position: absolute;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+        @media only screen and ($desktop){
+        top: 25%;
+        width: 20%;
+        }
+    }
+    .box{
+        @media only screen and ($desktop){
+            display: flex;
+            justify-content: end;
+            padding: 10px;
+            width: 80%;
+            margin: 0 auto;
+            position: fixed;
+            left: 0;
+            right: 0;
+            z-index: 2;
+        }
+        .elements{
+            .right{
+                display: flex;
+                align-items: center;
+                .login{
+                    display: flex;
+                    align-items: center;
+                    a.link-sign-in{
+                        color: $aqua;
+                    }
+                    a.link-sign-up{
+                        display: block;
+                        margin: 0 auto;
+                        padding: 0 25px;
+                        border: 0;
+                        border-radius: 30px;
+                        background: $aqua;
+                        font-family: "Montserrat",sans-serif; 
+                        font-size: 14px;
+                        font-weight: 500;
+                        line-height: 45px;
+                        color: #000839;
+                    }
+                }
+            }
+
+        }
+        >div{
+            display: flex;
+            align-items: center;
+            &.left{
+                figure{
+                    img{
+                        height: 50px;
+                    }
+                }
+                .menu{
+                    display: flex;
+                    li{
+                        list-style: none;
+                        padding: 10px 24px;
+                        a{
+                            font: {
+                                family: 'Asap', sans-serif;
+                            }
+                            color: #fff;
+                            // text-transform: uppercase;
+                        }
+                    }
+                }
+            }
+            &.right{
+                display: flex;
+                .search{
+                    input{
+                        border: 0;
+                        border-radius: 30px;
+                        padding: 10px 20px;
+                        margin-left: 5px;
+                    }
+                }
+                .link{
+                    font: {
+                        family: 'Asap', sans-serif;
+                        weight: 600;
+                    }
+                    margin: 0 24px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,13 @@
+<div class="body main node-course">
+    <section class="top">
+        {{ drupal_block('ngt_general_node_top_course', {'node' : node.id }) }}                     
+    </section>
+
+    <section class="left">
+        {{ drupal_block('ngt_general_node_left_course', {'node' : node.id }) }} 
+    </section>
+
+    <section class="right">
+        {{ drupal_block('ngt_general_node_right_course', {'node' : node.id, 'content' : content }) }}
+    </section>
+</div>

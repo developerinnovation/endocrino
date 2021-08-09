@@ -1,0 +1,270 @@
+<?php
+
+/**
+ * @file
+ * Contains ngt_general.module..
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormState;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\file\Entity\File;
+
+/**
+ * Implements hook_help().
+ */
+function ngt_general_help($route_name, RouteMatchInterface $route_match) {
+    switch ($route_name) {
+        // Main module help for the ngt module.
+        case 'help.page.ngt_general':
+            $output = '';
+            $output .= '<h3>' . t('About') . '</h3>';
+            $output .= '<p>' . t('ngt general') . '</p>';
+        return $output;
+
+    default:
+    }
+}
+
+
+
+/**
+ * Implements hook_preprocess().
+ * 
+ * Prepares variables for the html.html.twig template.
+ * Inlcuye la directiva de angular la etiqueta html
+ * 
+ */
+function ngt_general_preprocess_html(&$variables){
+  $variables['html_attributes']['data-ng-app'] = 'ngtApp';
+
+  $routeName = \Drupal::routeMatch()->getRouteName();
+  $showHeaderAndFooter = true;
+  $menuActiveUser = 'no-active';
+  $menuActiveNode = 'no-active';
+
+  // ocultando elementos del header y footer donde no aplican
+  if($routeName == 'user.login' || $routeName == 'login.recovery_pass' || $routeName == 'ngt_login.register_user'){
+    $showHeaderAndFooter = false;
+    $menuActiveUser = 'active';
+  }
+
+  if($routeName == 'entity.node.canonical'){
+    $menuActiveNode = 'active';
+  }
+
+  //adición angular en page no customizadas
+  
+  switch ($routeName) {
+    case 'entity.node.canonical':
+    case 'comment.reply':
+    case 'entity.user.canonical':
+    case 'progress.my_progress':
+    case 'inscription.render_my_courses':
+    case 'ngt.section_course':
+
+        // $variables['#attached']['library'][] = 'ngt_general/angular.ngt';
+  }
+
+  $variables['#attached']['library'][] = 'ngt_general/angular.ngt';
+
+  $variables['showHeaderAndFooter'] = $showHeaderAndFooter;
+  $variables['route_name'] = \Drupal::routeMatch()->getRouteName();
+  $variables['menuActiveUser'] = $menuActiveUser;
+  $variables['menuActiveSearch'] = 'no-active'; // pendiente ajustar cuando se genere el buscador
+  $variables['menuActiveNode'] = $menuActiveNode;
+
+
+  // global variables
+  $config = \Drupal::config('ngt_general.settings');  
+  
+  $logo_general_fid = reset($config->get('general_settings')['img_logo']);
+  $logo_general_file = File::load($logo_general_fid);
+  $logo_general_url = isset($logo_general_file) ? $logo_general_file->getFileUri() : '';
+
+  $logo_mobile_fid = reset($config->get('general_settings')['img_logo_mobile']);
+  $logo_mobile_file = File::load($logo_mobile_fid);
+  $logo_mobile_url = isset($logo_mobile_file) ? $logo_mobile_file->getFileUri() : '';
+
+  $logo_second_fid = reset($config->get('general_settings')['img_logo_second']);
+  $logo_second_file = File::load($logo_second_fid);
+  $logo_second_url = isset($logo_second_file) ? $logo_second_file->getFileUri() : '';
+
+  $logo_design_fid = reset($config->get('general_settings')['img_logo_design_by']);
+  $logo_design_file = File::load($logo_design_fid);
+  $logo_design_url = isset($logo_design_file) ? $logo_design_file->getFileUri() : '';
+
+  $activate_img_logo_second = $config->get('general_settings')['activate_img_logo_second'];
+
+  $script_external = $config->get('script_settings')['external'];
+  $general_txt_footer  = $config->get('other_settings')['txt_footer'];
+
+  $active_home_txt_header  = $config->get('home_text_header')['active_message'];
+  $home_txt_header  = $config->get('home_text_header')['txt'];
+
+
+  $variables['logo_general_url'] = $logo_general_url;
+  $variables['logo_mobile_url'] = $logo_mobile_url;
+  $variables['logo_second_url'] = $logo_second_url;
+  $variables['logo_design_url'] = $logo_design_url;
+  $variables['activate_img_logo_second'] = $activate_img_logo_second;
+  $variables['script_external'] = $script_external;
+  $variables['general_txt_footer'] = $general_txt_footer;
+  $variables['active_home_txt_header'] = $active_home_txt_header;
+  $variables['home_txt_header'] = $home_txt_header;
+
+}
+
+/**
+ * Implements hook_theme().
+ */
+function ngt_general_theme() {
+  return [
+    'course_main' => [
+      'variables' => [
+        'course' => NULL,
+        'txt_curso' => NULL,
+      ],
+      'template' => 'block--course-main',
+    ],
+    'course_category' => [
+      'variables' => [
+        'main_category' => NULL,
+        'directive'  => NULL,
+        'uuid' => NULL,
+        'config' => NULL,
+        'class' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'block--course-category',
+    ],
+    'course_content_dest' => [
+      'variables' => [
+        'contents' => NULL,
+        'logo_general_url' => NULL,
+        'logo_mobile_url' => NULL,
+      ],
+      'template' => 'block--contenido-destacado',
+    ],
+    'benefit_home' => [
+      'variables' => [
+        'benefit_1' => NULL,
+        'benefit_2' => NULL,
+        'benefit_3' => NULL,
+      ],
+      'template' => 'block--benefit-home',
+    ],
+    // node course
+    'node_top_course' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'node-course/block--top-course',
+    ],
+    'node_left_course' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'node-course/block--left-course',
+    ],
+    'node_right_course' => [
+      'variables' => [
+        'data' => NULL,
+        'dataAngular' => NULL,
+        'directive'  => NULL,
+        'uuid' => NULL,
+        'config' => NULL,
+        'class' => NULL,
+        'plugin_id' => NULL,
+        'content' => NULL,
+      ],
+      'template' => 'node-course/block--right-course',
+    ],
+    'node_more_course' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'node-course/block--more-course',
+    ],
+    // node lesson
+    'node_top_lesson' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'node-lesson/block--top-lesson',
+    ],
+    'node_left_lesson' => [
+      'variables' => [
+        'data' => NULL,
+        'dataAngular' => NULL,
+        'directive'  => NULL,
+        'uuid' => NULL,
+        'config' => NULL,
+        'class' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'node-lesson/block--left-lesson',
+    ],
+    'node_right_lesson' => [
+      'variables' => [
+        'data' => NULL,
+        'dataAngular' => NULL,
+        'directive'  => NULL,
+        'uuid' => NULL,
+        'config' => NULL,
+        'class' => NULL,
+        'plugin_id' => NULL,
+        'content' => NULL,
+      ],
+      'template' => 'node-lesson/block--right-lesson',
+    ],
+    'node_lesson_modules' => [
+      'variables' => [
+        'data' => NULL,
+        'dataAngular' => NULL,
+        'directive'  => NULL,
+        'uuid' => NULL,
+        'config' => NULL,
+        'class' => NULL,
+        'plugin_id' => NULL,
+      ],
+      'template' => 'node-lesson/block--lesson-modules',
+    ],
+    'expert_home' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'block--expert-home',
+    ],
+    'course_section' => [
+      'variables' => [
+        'data' => NULL,
+        'main_category' => NULL,
+        'category_id' => NULL,
+        'dataAngular' => NULL,
+        'directive'  => NULL,
+        'uuid' => NULL,
+        'config' => NULL,
+        'class' => NULL,
+        'plugin_id' => NULL,
+        'content' => NULL,
+      ],
+      'template' => 'course-section/course-section',
+    ],
+    'course_slider_main_category_section' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'course-section/block--slider-course-main',
+    ],
+    'course_category_section' => [
+      'variables' => [
+        'data' => NULL,
+        'course' => NULL,
+        'more_courses' => NULL,
+      ],
+      'template' => 'course-section/block--list-course-category',
+    ],
+  ];
+}
+

@@ -1,0 +1,24 @@
+evaluation.evaluation_form:
+  path: '/admin/config/ngt/evaluation/module'
+  defaults:
+    _form: '\Drupal\ngt_evaluation\Plugin\Form\EvaluationForm'
+    _title: 'Configuraciones para las evaluaciones'
+  requirements:
+    _permission: 'access administration pages'
+  option:
+    _admin_route: TRUE
+evaluation.render_certificate:
+  path: 'render/certificate/{courserId}/{evaluationId}/{moduleId}/{userId}/{tokenId}/{logId}'
+  defaults:
+      _controller: '\Drupal\ngt_evaluation\Controller\CertificateRenderController::render_certificate'
+      _title: ''
+  requirements:
+      _permission: 'render_certificate'
+evaluation.create_pdf_certificate:
+  path: 'render/pdf/certificate/{courserId}/{evaluationId}/{moduleId}/{userId}/{tokenId}/{logId}'
+  defaults:
+    _controller: '\Drupal\ngt_evaluation\Controller\PdfGtController::generatePdf'
+    _title: 'Generar pdf'
+  requirements:
+    _permission: 'access content'
+  methods: ['GET']
