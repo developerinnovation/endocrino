@@ -170,7 +170,7 @@ class GeneralConfigForm extends ConfigFormBase {
             '#title' => t('Texto footer'),  
             '#description' => t('Texto a mostrar en footer'),  
             '#default_value' => isset($config->get('other_settings')['txt_footer']) ? $config->get('other_settings')['txt_footer'] : 'Aenean commodo ligula eget dolor, aenean massa, cum sociis natoque penatibus et magnis dis parturient montes, nascetur',  
-            '#required' => true
+            '#required' => false
         ]; 
 
 

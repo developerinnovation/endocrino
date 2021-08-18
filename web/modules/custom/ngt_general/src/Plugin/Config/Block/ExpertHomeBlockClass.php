@@ -52,13 +52,16 @@ class ExpertHomeBlockClass {
 
         foreach ($user_list as $uid) {
             if($uid != NULL) {
-                $user =   User::load($uid); 
-                $list = [
-                    'picture' => \Drupal::service('ngt_general.methodGeneral')->load_image($user->get('user_picture')->getValue()[0]['target_id'],'200x200'),
-                    'name' => ucfirst($user->get('field_nombre')->getValue()[0]['value'])." ".ucfirst($user->get('field_apellidos')->getValue()[0]['value']),
-                    'profile' => $user->get('field_perfil')->getValue()[0]['value'],
-                ];
-                array_push($data['user_list'], $list);
+                $user =  User::load($uid); 
+                if ($user){
+                    $list = [
+                        'picture' => \Drupal::service('ngt_general.methodGeneral')->load_image($user->get('user_picture')->getValue()[0]['target_id'],'200x200'),
+                        'name' => ucfirst($user->get('field_nombre')->getValue()[0]['value'])." ".ucfirst($user->get('field_apellidos')->getValue()[0]['value']),
+                        'profile' => $user->get('field_perfil')->getValue()[0]['value'],
+                    ];
+                    array_push($data['user_list'], $list);
+                }
+                
             }
         }
 

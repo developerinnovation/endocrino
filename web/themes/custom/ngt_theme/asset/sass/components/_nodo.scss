@@ -1656,7 +1656,7 @@
                 .picture{
                     figure{
                         img{
-                            border: 4px solid #3E54D3;
+                            border: 4px solid $amarillo_general;
                             border-radius: 100%;
                             margin-right: 0;
                             width: 78px;
@@ -1708,7 +1708,7 @@
                             display: block;
                             border-radius: 5px;
                             &:hover{
-                                background-color: $turqui;
+                                background-color: $amarillo_general;
                                 color: white;
                                 transition: 0.4s;
                             }
@@ -1778,7 +1778,7 @@
                 .picture{
                     figure{
                         img{
-                            border: 4px solid #3E54D3;
+                            border: 4px solid $amarillo_general;
                             border-radius: 100%;
                             margin-right: 0;
                             width: 100px;
@@ -1788,7 +1788,7 @@
                             @media only screen and ($desktop){
                                 width: 200px;
                                 height: 200px;
-                                border: 8px solid #3E54D3;
+                                border: 8px solid $amarillo_general;
                             }
                         }
                     }
