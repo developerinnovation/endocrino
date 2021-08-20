@@ -5,7 +5,7 @@
             <select name="courseAction" id="courseAction" ng-model="myTabsType" ng-options="item.name for item in tabsType"></select>
         </div>
         <figure class="content-video" ng-show="tab != 'contentCommunity'">
-            <picture class="cover-video active">
+        <picture class="cover-video {% if data[0].video is not null %} {{ 'play' }} {% endif %} active">
                 <source srcset="{{ data[0].foto_portada.uri | image_style('360x196') }}" 
                     media="(max-width: 767px)" 
                     alt="{{ data[0].foto_portada.alt }}" 

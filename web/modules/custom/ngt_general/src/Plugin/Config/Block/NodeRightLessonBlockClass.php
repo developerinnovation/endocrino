@@ -90,8 +90,8 @@ class NodeRightLessonBlockClass {
             $resource = isset($node->get('field_recursos')->getValue()[0]['target_id']) ? \Drupal::service('ngt_general.methodGeneral')->load_resource($node->get('field_recursos')->getValue()) : null;
             $video = isset($node->get('field_url_video')->getValue()[0]) ? $node->get('field_url_video')->getValue()[0]['uri'] : '';
             $video = explode('/', $video);
-            $video = end($video);
-            $video = 'https://www.youtube.com/embed/' . $video;
+            $video = is_array($video) ? end($video) : null;
+            $video = $vide != null ? 'https://www.youtube.com/embed/' . $video : null;
             $lesson = [
                 'nid' => $nid,
                 'body' => isset($node->get('body')->getValue()[0]['value']) ? $node->get('body')->getValue()[0]['value'] : '',

@@ -112,8 +112,8 @@ class NodeRightCourseBlockClass {
             $modules = isset($node->field_modulo->getValue()[0]['target_id']) ? \Drupal::service('ngt_general.methodGeneral')->load_module_course($node->field_modulo->getValue()): NULL;
             $video = isset($node->get('field_url_video')->getValue()[0]) ? $node->get('field_url_video')->getValue()[0]['uri'] : '';
             $video = explode('/', $video);
-            $video = end($video);
-            $video = 'https://www.youtube.com/embed/' . $video;
+            $video = is_array($video) ? end($video) : null;
+            $video = $vide != null ? 'https://www.youtube.com/embed/' . $video : null;
             $course = [
                 'nid' => $node->get('nid')->getValue()[0]['value'],
                 'body' => isset($node->get('body')->getValue()[0]['value']) ? $node->get('body')->getValue()[0]['value'] : '',
