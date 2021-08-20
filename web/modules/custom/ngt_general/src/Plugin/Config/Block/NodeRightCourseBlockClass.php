@@ -110,6 +110,10 @@ class NodeRightCourseBlockClass {
             $date = new DrupalDateTime($node->get('field_fecha_de_inicio')->getValue()[0]['value']);
             $formatted_date = \Drupal::service('date.formatter')->format($date->getTimestamp(), 'custom', 'M d, Y');
             $modules = isset($node->field_modulo->getValue()[0]['target_id']) ? \Drupal::service('ngt_general.methodGeneral')->load_module_course($node->field_modulo->getValue()): NULL;
+            $video = isset($node->get('field_url_video')->getValue()[0]) ? $node->get('field_url_video')->getValue()[0]['uri'] : '';
+            $video = explode('/', $video);
+            $video = end($video);
+            $video = 'https://www.youtube.com/embed/' . $video;
             $course = [
                 'nid' => $node->get('nid')->getValue()[0]['value'],
                 'body' => isset($node->get('body')->getValue()[0]['value']) ? $node->get('body')->getValue()[0]['value'] : '',
@@ -127,7 +131,7 @@ class NodeRightCourseBlockClass {
                     'width' => $node->get('field_foto_portada')->getValue()[0]['width'],
                     'height' => $node->get('field_foto_portada')->getValue()[0]['height'],
                 ],
-                'video' => isset($node->get('field_url_video')->getValue()[0]) ? $node->get('field_url_video')->getValue()[0]['uri'] : '',
+                'video' => $video,
                 'modules' => $modules,
                 'showUrl' => $showUrl,
             ];

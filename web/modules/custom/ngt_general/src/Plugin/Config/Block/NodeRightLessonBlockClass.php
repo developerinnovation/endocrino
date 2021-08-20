@@ -88,6 +88,10 @@ class NodeRightLessonBlockClass {
             $courseId = \Drupal::service('ngt_general.methodGeneral')->get_module_by_lesson($nid);
             $navLesson = \Drupal::service('ngt_general.methodGeneral')->get_last_prev_lesson($courseId, $nid);
             $resource = isset($node->get('field_recursos')->getValue()[0]['target_id']) ? \Drupal::service('ngt_general.methodGeneral')->load_resource($node->get('field_recursos')->getValue()) : null;
+            $video = isset($node->get('field_url_video')->getValue()[0]) ? $node->get('field_url_video')->getValue()[0]['uri'] : '';
+            $video = explode('/', $video);
+            $video = end($video);
+            $video = 'https://www.youtube.com/embed/' . $video;
             $lesson = [
                 'nid' => $nid,
                 'body' => isset($node->get('body')->getValue()[0]['value']) ? $node->get('body')->getValue()[0]['value'] : '',
@@ -104,7 +108,7 @@ class NodeRightLessonBlockClass {
                     'height' => $node->get('field_foto_portada')->getValue()[0]['height'],
                 ],
                 'urlCourse' =>\Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $courseId),
-                'video' => isset($node->get('field_url_video')->getValue()[0]) ? $node->get('field_url_video')->getValue()[0]['uri'] : null,
+                'video' => $video,
                 'nextLesson' => $navLesson['next'],
                 'prevLesson' => $navLesson['prev'],
             ];
