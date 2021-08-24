@@ -175,12 +175,11 @@
                                     color: #535353;
                                 }
                                 &.active{
-                                    color: #0a2152;
-                                    border-bottom: 3px solid #0a2152;
+                                    border-bottom: 3px solid $amarillo;
                                     padding-bottom: 5px;
                                     display: inline-block;
                                     a{
-                                        color: $turqui;
+                                        color: $amarillo;
                                     }
                                 }
                             }
