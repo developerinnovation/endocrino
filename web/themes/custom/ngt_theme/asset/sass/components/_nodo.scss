@@ -399,7 +399,6 @@
             }
             .main-content{
                 padding: 30px 0 50px;
-                border-bottom: 1px solid #c2c2c2;
                 margin: 0 0 50px;
                 .course-action{
                     margin: 0 0 30px;
@@ -668,7 +667,7 @@
 
                     .evaluation{
                         ul{
-                            padding: 0px;
+                            /*padding: 0px;*/
                             position: relative;
                             list-style: none;
                             li{
@@ -680,7 +679,9 @@
                                     color: #535353;
                                 }
                                 .icon{
-                                    display: none;
+                                    left: -30px;
+                                    background-position: -41px -13px;
+                                    margin: 0px;
                                 }
                             }
                         }
