@@ -28,7 +28,7 @@ body{
                             a{
                                color: #fff; 
                                text-transform: uppercase;
-                               font-family: "Montserrat",sans-serif;
+                               font-family: "Asap",sans-serif;
                             }
                             
 
@@ -52,7 +52,7 @@ body{
                 .login{
                     .link-sign-in{
                       margin-right: 20px;
-                      font-family: "Montserrat",sans-serif; 
+                      font-family: "Asap",sans-serif; 
                     }
                     
                 }
@@ -107,6 +107,7 @@ body{
                             left: 0;
                             width: 100%;
                             height: 100%;
+                            align-items: center;
                             padding: 30px;
                             background: rgba(0, 0, 0, 0.2);
                             display: flex;
@@ -128,12 +129,11 @@ body{
                                     size: 23px;
                                 }
                                 color: #fff;
-                                text-align: left;
+                                text-align: center;
                                 // text-transform: uppercase;
                                 margin: 0 0 30px;
                                 @media only screen and ($desktop){
                                 font-size: 38px;
-                                width: 50%;
                                 }
                             }
                             p{
@@ -143,30 +143,29 @@ body{
                                 line-height: 1.3em;
                                 color: #fff;
                                 letter-spacing: 0.5px;
-                                text-align: left;
+                                text-align: center;
                                 width: 100%;
                                 margin: 0 0 30px;
                                 font-weight: 100;
                                 @media only screen and ($desktop){
                                 font-size: 21px;
-                                width: 50%;
                                 }
                             }
                             .action{
                                 display: block;
-                                margin: 25px 0;
+                                margin: 0 auto;
                                 width: fit-content;
                                 padding: 0 25px;
                                 border: 0;
                                 border-radius: 30px;
                                 background: $aqua;
                                 font: {
-                                    family: "Montserrat",sans-serif; 
+                                    family: "Asap",sans-serif; 
                                     size: 14px;
                                     weight: 500;
                                 }
                                 line-height: 45px;
-                                color: #000839;
+                                color: white;
                             }
                         }
                     }
@@ -401,7 +400,7 @@ body{
                         li{
                                 padding: 0 10px;
                                 cursor: pointer;
-                                font-family: "Montserrat",sans-serif;
+                                font-family: "Asap",sans-serif;
                                 color: #535353;
 
                             &.active{
@@ -461,7 +460,7 @@ body{
                         font: {
                             size: 13px;
                         }
-                        color: #000839;
+                        color: white;
                     }
                 }
             }

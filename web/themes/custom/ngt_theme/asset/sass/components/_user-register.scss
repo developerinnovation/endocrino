@@ -91,11 +91,15 @@
                     }
                 }
                 .register-user-form__top{
+                    h3{
+                        color: $turqui;
+                        font-size: 25px;
+                    }
                     .input-form{
                         p{
                             font-size: 15px;
                             color: #535353;
-                            letter-spacing: 1px;
+                            font-weight: 300;
                             text-align: center;
                             margin: 0 25px 30px;
                         }

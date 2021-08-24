@@ -34,7 +34,7 @@
                     font-size: 14px;
                     font-weight: 600;
                     line-height: 45px;
-                    color: #000839;
+                    color: white;
                 }
             }
         }
@@ -64,10 +64,10 @@
         font: {
             size: 13px;
         }
-        color: #000839;
+        color: white;
         &:hover{
             transition: 0.4s;
-            box-shadow: 0 -60px 0 #00A8CC inset;
+            box-shadow: 0 -60px 0 $amarillo inset;
         }
         &.disabled{
             background: #bfbfbf;
@@ -323,9 +323,9 @@
                         color: #535353;
                         cursor: pointer;
                         &.active{
-                            color: #0a2152;
+                            color: $amarillo;
                             font-weight: bold;
-                            border-bottom: 3px solid #0a2152;
+                            border-bottom: 3px solid $amarillo;
                             padding-bottom: 5px;
                             display: inline-block;
                         }
@@ -1098,6 +1098,7 @@
                         letter-spacing: 1px;
                         @media only screen and ($desktop){
                             padding-top: 10px;
+                            padding-bottom: 10px;
                         }
                     }
 
@@ -1112,7 +1113,7 @@
                             
                             img{
                                 width: 100%;
-                                height: auto;
+                                height: inherit;
                                 border: 1px solid $turqui;
                                 border-radius: 30px;
                                 padding: 5px;
@@ -1364,7 +1365,7 @@
                     padding: 0;
                     border-radius: 20px;
                     font-size: 13px;
-                    color: $turqui;
+                    color: white;
                 }
                 .return{
                     background: $turqui;
@@ -1406,7 +1407,7 @@
             }
             h2{
                 font-size: 19px;
-                color: $turqui;
+                color: black;
                 font-weight: 500;
             }
             .nav{
@@ -1428,7 +1429,7 @@
                             margin: 2px;
                         }
                         &.active{
-                            background-color: $turqui;
+                            background-color: $amarillo;
                         }
                         &:first-child{
                             border-radius: 5px 0 0 5px;
@@ -1456,8 +1457,8 @@
                 margin: auto;
             }
             h3{
-                font-size: 19px;
-                color: $turqui;
+                font-size: 30px;
+                color: black;
                 font-weight: 500;
                 margin-top: 40px;
             }
@@ -1555,7 +1556,7 @@
                 .next{
                     margin: 15px 0;
                     border: 0;
-                    background: #15cdca;
+                    background: $amarillo;
                     height: 34px;
                     padding: 0 14px;
                     border-radius: 20px;
@@ -1563,7 +1564,7 @@
                     display: inline-block;
                     color: #fff;
                     &:disabled {
-                        background:#92dcdb!important;
+                        background:#FFB950!important;
                     }
                     
                 }
