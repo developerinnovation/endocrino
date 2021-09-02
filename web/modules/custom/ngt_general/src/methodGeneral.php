@@ -79,7 +79,7 @@ class methodGeneral{
      * @return array
      */
     public function loadTermByCategory($name, $parent = 0){
-        
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $term = [];
         
         $query = \Drupal::entityQuery('taxonomy_term');
@@ -108,6 +108,7 @@ class methodGeneral{
      * @return url
      */
     public function load_image($media_field, $style = NULL){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $file = File::load($media_field);
         $url = $file->getFileUri();
         if ($style != NULL){
@@ -123,6 +124,7 @@ class methodGeneral{
      * @return string url
      */
     public function load_url_file($media_field){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $file = File::load($media_field);
         $url = file_create_url($file->getFileUri());
         return $url;
@@ -136,6 +138,7 @@ class methodGeneral{
      * @return array
      */
     public function load_author($authors, $limit = NULL){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $expertos = [];
         $i = 1;
         foreach ($authors as $key => $author) {
@@ -167,6 +170,7 @@ class methodGeneral{
      * @return array
      */
     public function load_resource($resources){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $recursos = [];
         $resourcesArray = $resources;
         foreach ($resourcesArray as $key => $resource) {
@@ -198,6 +202,7 @@ class methodGeneral{
      * @return void
      */
     public function load_module_course($paragraph){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $modules = [];
         $i = 1;
         $paragraphArray = $paragraph;
@@ -227,6 +232,7 @@ class methodGeneral{
      * @return void
      */
     public function load_lesson_module($lessons){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $lessonByModule = [];
         $lessonsArray = $lessons;
         if($lessons != NULL){
@@ -251,6 +257,7 @@ class methodGeneral{
      * @return void
      */
     public function load_quiz($quiz, $idModule, $nidCourse){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $quizByModuleCourse = [];
         $quizArray = $quiz;
         if($quiz != NULL){
@@ -276,6 +283,7 @@ class methodGeneral{
      * @return void
      */
     public function get_module_by_lesson($idLesson){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $query = 'SELECT leccion.field_leccion_target_id, curso.parent_id FROM paragraph__field_leccion leccion
                 INNER JOIN paragraphs_item_field_data curso
                 ON leccion.entity_id = curso.id
@@ -301,6 +309,7 @@ class methodGeneral{
      * @return void
      */
     public function in_array_r($needle, $haystack, $strict = false) {
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $haystackArray = $haystack;
         foreach ($haystack as $item) {
             if (($strict ? $item === $needle : $item == $needle) || (is_array($item) && $this->in_array_r($needle, $item, $strict))) {
@@ -318,7 +327,7 @@ class methodGeneral{
      * @return array
      */
     public function get_last_prev_lesson($courseId, $lessonId){
-
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $query = 'SELECT leccion.field_leccion_target_id FROM paragraphs_item_field_data curso
             INNER JOIN paragraph__field_leccion leccion
             ON leccion.entity_id = curso.id
