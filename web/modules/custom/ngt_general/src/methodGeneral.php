@@ -328,7 +328,7 @@ class methodGeneral{
      */
     public function get_last_prev_lesson($courseId, $lessonId){
         \Drupal::service('page_cache_kill_switch')->trigger();
-        $query = 'SELECT leccion.field_leccion_target_id, leccion.langcode FROM paragraphs_item_field_data curso
+        $query = 'SELECT leccion.langcode, leccion.field_leccion_target_id FROM paragraphs_item_field_data curso
             INNER JOIN paragraph__field_leccion leccion
             ON leccion.entity_id = curso.id
             WHERE curso.parent_id = ' . $courseId;
