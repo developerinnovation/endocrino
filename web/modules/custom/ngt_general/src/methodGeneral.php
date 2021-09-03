@@ -328,7 +328,7 @@ class methodGeneral{
      */
     public function get_last_prev_lesson($courseId, $lessonId){
         \Drupal::service('page_cache_kill_switch')->trigger();
-        $query = 'SELECT leccion.field_leccion_target_id FROM paragraphs_item_field_data curso
+        $query = 'SELECT leccion.field_leccion_target_id, leccion.langcode FROM paragraphs_item_field_data curso
             INNER JOIN paragraph__field_leccion leccion
             ON leccion.entity_id = curso.id
             WHERE curso.parent_id = ' . $courseId;
@@ -342,14 +342,14 @@ class methodGeneral{
 
         $db = \Drupal::database();
         $select = $db->query($query);
-        $result = $select->fetchCol();
+        $result = $select->fetchAll();
 
         \Drupal::logger('ngt_general.get_last_prev_lesson')->debug('lecciones asociadas: </br>'.var_export($result, TRUE));
 
         if($result){
             $lessons = [];
             foreach ($result as $leccion) {
-                array_push($lessons, $leccion);
+                array_push($lessons, $leccion->field_leccion_target_id);
             }
 
             $position = array_search($lessonId, $lessons); 
