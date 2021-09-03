@@ -354,19 +354,12 @@ class methodGeneral{
         if(count($lessons) > 0){
           
             $position = array_search($lessonId, $lessons); 
-            if($position != 0) {
-                $path['prev'] =  NULL;
-                if($lessons[$position +1 ] != NULL) {
-                    $path['next'] = \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $lessons[$position+1]);
-                } 
-            }else {
-                if($lessons[$position - 1] != NULL) {
-                    $path['prev'] =  \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $lessons[$position-1]);
-                } 
-                if($lessons[$position +1 ] != NULL) {
-                    $path['next'] = \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $lessons[$position+1]);
-                } 
-            }
+            if($position != 0 && $lessons[$position - 1] != NULL) {
+                $path['prev'] =  \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $lessons[$position-1]);
+            } 
+            if($lessons[$position +1 ] != NULL) {
+                $path['next'] = \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $lessons[$position+1]);
+            } 
             \Drupal::logger('ngt_general.get_last_prev_lesson.path')->debug('last_prev_lesson: </br>'.var_export($path, TRUE));
 
         }
