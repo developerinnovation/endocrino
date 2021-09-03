@@ -349,8 +349,6 @@ class methodGeneral{
             }
         }
 
-        \Drupal::logger('ngt_general.get_last_prev_lesson')->debug('lecciones asociadas: </br>'.var_export($lessons, TRUE));
-
         if(count($lessons) > 0){
           
             $position = array_search($lessonId, $lessons); 
@@ -360,8 +358,6 @@ class methodGeneral{
             if($lessons[$position +1 ] != NULL) {
                 $path['next'] = \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $lessons[$position+1]);
             } 
-            \Drupal::logger('ngt_general.get_last_prev_lesson.path')->debug('last_prev_lesson: </br>'.var_export($path, TRUE));
-
         }
         return $path;
     }
