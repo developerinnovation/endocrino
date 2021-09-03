@@ -344,6 +344,8 @@ class methodGeneral{
         $select = $db->query($query);
         $result = $select->fetchAll();
 
+        \Drupal::logger('ngt_general.get_last_prev_lesson')->debug('lecciones asociadas: </br>'.var_export($result, TRUE));
+
         if($result){
             $lessons = [];
             foreach ($result as $leccion) {
@@ -358,7 +360,8 @@ class methodGeneral{
             if($lessons[$position +1 ] != NULL) {
                 $path['next'] = \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $lessons[$position+1]);
             } 
-               
+            \Drupal::logger('ngt_general.get_last_prev_lesson.path')->debug('last_prev_lesson: </br>'.var_export($path, TRUE));
+
         }
         return $path;
     }
