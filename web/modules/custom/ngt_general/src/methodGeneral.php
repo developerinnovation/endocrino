@@ -328,38 +328,45 @@ class methodGeneral{
      */
     public function get_last_prev_lesson($courseId, $lessonId){
         \Drupal::service('page_cache_kill_switch')->trigger();
-        $query = 'SELECT leccion.langcode, leccion.field_leccion_target_id FROM paragraphs_item_field_data curso
-            INNER JOIN paragraph__field_leccion leccion
-            ON leccion.entity_id = curso.id
-            WHERE curso.parent_id = ' . $courseId;
-
-        $result = NULL;
-
+        
+        $node  = \Drupal\node\Entity\Node::load($courseId);
+        $paragraph = $node->field_modulo->getValue();
+        
+        $lessons = [];
+        
         $path = [
             'next' => NULL,
             'prev' => NULL,
         ];
 
-        $db = \Drupal::database();
-        $select = $db->query($query);
-        $result = $select->fetchAll();
-
-        \Drupal::logger('ngt_general.get_last_prev_lesson')->debug('lecciones asociadas: </br>'.var_export($result, TRUE));
-
-        if($result){
-            $lessons = [];
-            foreach ($result as $leccion) {
-                array_push($lessons, $leccion->field_leccion_target_id);
+        foreach ( $paragraph as $element ) {
+            $p = \Drupal\paragraphs\Entity\Paragraph::load( $element['target_id'] );
+            $field_leccion = $p->field_leccion->getValue();
+            if ($field_leccion != NULL) {
+                foreach ($field_leccion as $leccion) {
+                    array_push($lessons, $leccion['target_id']);
+                }
             }
+        }
 
+        \Drupal::logger('ngt_general.get_last_prev_lesson')->debug('lecciones asociadas: </br>'.var_export($lessons, TRUE));
+
+        if(count($lessons) > 0){
+          
             $position = array_search($lessonId, $lessons); 
-            if($lessons[$position - 1] != NULL) {
-                $path['prev'] =  \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $lessons[$position-1]);
-            } 
-            
-            if($lessons[$position +1 ] != NULL) {
-                $path['next'] = \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $lessons[$position+1]);
-            } 
+            if($position != 0) {
+                $path['prev'] =  NULL;
+                if($lessons[$position +1 ] != NULL) {
+                    $path['next'] = \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $lessons[$position+1]);
+                } 
+            }else {
+                if($lessons[$position - 1] != NULL) {
+                    $path['prev'] =  \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $lessons[$position-1]);
+                } 
+                if($lessons[$position +1 ] != NULL) {
+                    $path['next'] = \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $lessons[$position+1]);
+                } 
+            }
             \Drupal::logger('ngt_general.get_last_prev_lesson.path')->debug('last_prev_lesson: </br>'.var_export($path, TRUE));
 
         }
