@@ -342,14 +342,14 @@ class methodGeneral{
 
         $db = \Drupal::database();
         $select = $db->query($query);
-        $result = $select->fetchAll();
+        $result = $select->fetchCol();
 
         \Drupal::logger('ngt_general.get_last_prev_lesson')->debug('lecciones asociadas: </br>'.var_export($result, TRUE));
 
         if($result){
             $lessons = [];
             foreach ($result as $leccion) {
-                array_push($lessons, $leccion->field_leccion_target_id);
+                array_push($lessons, $leccion);
             }
 
             $position = array_search($lessonId, $lessons); 
