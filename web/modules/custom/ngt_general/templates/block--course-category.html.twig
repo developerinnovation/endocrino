@@ -47,14 +47,14 @@
                 <h3 class="title">{[{ course.title }]}</h3>
                 <div class="author multiple">
                     <figure>
-                        <img src="{[{ picture.picture_uri }]}" alt="{[{ picture.name_author }]}" ng-repeat="picture in course.expertos">
+                        <img src="{[{ course.organizador.picture_uri }]}" alt="{[{ course.organizador.name_organizer }]}">
                     </figure>
                 </div>
                 <div class="info">
                     <div class="name author">
                         <ul>
                             <li ng-repeat="autor in course.expertos">
-                                <a href="{[{ autor.uri }]}" class="link author">{[{ autor.name_author }]}</a>
+                                <a href="{[{ course.organizador.uri }]}" class="link author">{[{ course.organizador.name_organizer }]}</a>
                             </li>
                         </ul>
                     </div>

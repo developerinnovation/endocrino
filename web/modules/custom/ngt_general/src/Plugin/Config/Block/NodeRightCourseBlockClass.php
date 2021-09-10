@@ -115,12 +115,14 @@ class NodeRightCourseBlockClass {
             $video = is_array($video) ? end($video) : null;
             $video = $video != null ? 'https://www.youtube.com/embed/' . $video : null;
             $course = [
+                'uid' => \Drupal::currentUser()->id(),
                 'nid' => $node->get('nid')->getValue()[0]['value'],
                 'body' => isset($node->get('body')->getValue()[0]['value']) ? $node->get('body')->getValue()[0]['value'] : '',
                 'resume' => isset($node->get('field_resumen')->getValue()[0]['value']) ? $node->get('field_resumen')->getValue()[0]['value'] : '',
                 'autor' => \Drupal::service('ngt_general.methodGeneral')->load_author($node->get('field_autor_principal')->getValue()),
                 'coordinadores' => \Drupal::service('ngt_general.methodGeneral')->load_author($node->get('field_coordinadores')->getValue()),
                 'expertos' => \Drupal::service('ngt_general.methodGeneral')->load_author($node->get('field_expertos')->getValue()),
+                'organizador' => \Drupal::service('ngt_general.methodGeneral')->load_organizer($node->get('field_organizador')->getValue()[0]['target_id']),
                 'foto_portada' => [
                     'uri' => \Drupal::service('ngt_general.methodGeneral')->load_image($node->get('field_foto_portada')->getValue()[0]['target_id']),
                     'uri_360x196' => \Drupal::service('ngt_general.methodGeneral')->load_image($node->get('field_foto_portada')->getValue()[0]['target_id'],'360x196'),

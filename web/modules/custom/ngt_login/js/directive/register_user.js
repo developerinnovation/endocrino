@@ -71,7 +71,7 @@ function RegisterUserController($scope, $http, $rootScope){
     $scope.actionNext = function (){
         var emailValid = true; 
 
-        if($scope.step > 6){
+        if($scope.step >= 6){
             window.location.href = '/user/login';
         }
 

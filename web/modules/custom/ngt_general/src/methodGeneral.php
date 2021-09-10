@@ -79,7 +79,7 @@ class methodGeneral{
      * @return array
      */
     public function loadTermByCategory($name, $parent = 0){
-        
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $term = [];
         
         $query = \Drupal::entityQuery('taxonomy_term');
@@ -108,6 +108,7 @@ class methodGeneral{
      * @return url
      */
     public function load_image($media_field, $style = NULL){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $file = File::load($media_field);
         $url = $file->getFileUri();
         if ($style != NULL){
@@ -123,6 +124,7 @@ class methodGeneral{
      * @return string url
      */
     public function load_url_file($media_field){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $file = File::load($media_field);
         $url = file_create_url($file->getFileUri());
         return $url;
@@ -136,6 +138,7 @@ class methodGeneral{
      * @return array
      */
     public function load_author($authors, $limit = NULL){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $expertos = [];
         $i = 1;
         foreach ($authors as $key => $author) {
@@ -167,6 +170,7 @@ class methodGeneral{
      * @return array
      */
     public function load_resource($resources){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $recursos = [];
         $resourcesArray = $resources;
         foreach ($resourcesArray as $key => $resource) {
@@ -198,12 +202,14 @@ class methodGeneral{
      * @return void
      */
     public function load_module_course($paragraph){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $modules = [];
         $i = 1;
         $paragraphArray = $paragraph;
         foreach ( $paragraphArray as $element ) {
             $module = \Drupal\paragraphs\Entity\Paragraph::load( $element['target_id'] );
-            $lessons = isset($module->get('field_leccion')->getValue()[0]['target_id']) ? $this->load_lesson_module($module->get('field_leccion')->getValue()) : NULL;
+            $blocked = isset($module->get('field_modulo_bloqueado')->getValue()[0]['value']) ? $module->get('field_modulo_bloqueado')->getValue()[0]['value'] : 'no';
+            $lessons = isset($module->get('field_leccion')->getValue()[0]['target_id']) ? $this->load_lesson_module($module->get('field_leccion')->getValue(), $blocked) : NULL;
             $nid = $module->get('parent_id')->getValue()[0]['value'];
             $quiz = isset($module->get('field_examen')->getValue()[0]['target_id']) ? $this->load_quiz($module->get('field_examen')->getValue(), $i, $nid) : NULL;
             array_push($modules, [
@@ -213,6 +219,8 @@ class methodGeneral{
                 'titleModule' => $module->get('field_titulo_del_modulo')->getValue()[0]['value'],
                 'lessons' => $lessons,
                 'quiz' => $quiz,
+                'icon' => $blocked == 'si' ? 'blocked' : 'play',
+                'blocked' => $blocked,
             ]);
             $i++;
         }
@@ -226,7 +234,8 @@ class methodGeneral{
      * @param  mixed $lesson
      * @return void
      */
-    public function load_lesson_module($lessons){
+    public function load_lesson_module($lessons, $blocked){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $lessonByModule = [];
         $lessonsArray = $lessons;
         if($lessons != NULL){
@@ -236,7 +245,7 @@ class methodGeneral{
                 array_push($lessonByModule, [
                     'title' => $node->get('title')->getValue()[0]['value'],
                     'body' => isset($node->get('body')->getValue()[0]['value']) ? $node->get('body')->getValue()[0]['value'] : '',
-                    'url' => $url,
+                    'url' => $blocked == 'no' ? $url : '#',
                     'nid' => $node->get('nid')->getValue()[0]['value'],
                 ]);
             }
@@ -251,6 +260,7 @@ class methodGeneral{
      * @return void
      */
     public function load_quiz($quiz, $idModule, $nidCourse){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $quizByModuleCourse = [];
         $quizArray = $quiz;
         if($quiz != NULL){
@@ -276,6 +286,7 @@ class methodGeneral{
      * @return void
      */
     public function get_module_by_lesson($idLesson){
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $query = 'SELECT leccion.field_leccion_target_id, curso.parent_id FROM paragraph__field_leccion leccion
                 INNER JOIN paragraphs_item_field_data curso
                 ON leccion.entity_id = curso.id
@@ -301,6 +312,7 @@ class methodGeneral{
      * @return void
      */
     public function in_array_r($needle, $haystack, $strict = false) {
+        \Drupal::service('page_cache_kill_switch')->trigger();
         $haystackArray = $haystack;
         foreach ($haystack as $item) {
             if (($strict ? $item === $needle : $item == $needle) || (is_array($item) && $this->in_array_r($needle, $item, $strict))) {
@@ -318,40 +330,64 @@ class methodGeneral{
      * @return array
      */
     public function get_last_prev_lesson($courseId, $lessonId){
-
-        $query = 'SELECT leccion.field_leccion_target_id FROM paragraphs_item_field_data curso
-            INNER JOIN paragraph__field_leccion leccion
-            ON leccion.entity_id = curso.id
-            WHERE curso.parent_id = ' . $courseId;
-
-        $result = NULL;
-
+        \Drupal::service('page_cache_kill_switch')->trigger();
+        
+        $node  = \Drupal\node\Entity\Node::load($courseId);
+        $paragraph = $node->field_modulo->getValue();
+        
+        $lessons = [];
+        
         $path = [
             'next' => NULL,
             'prev' => NULL,
         ];
 
-        $db = \Drupal::database();
-        $select = $db->query($query);
-        $result = $select->fetchAll();
-
-        if($result){
-            $lessons = [];
-            foreach ($result as $leccion) {
-                array_push($lessons, $leccion->field_leccion_target_id);
+        foreach ( $paragraph as $element ) {
+            $p = \Drupal\paragraphs\Entity\Paragraph::load( $element['target_id'] );
+            $blocked = isset($p->get('field_modulo_bloqueado')->getValue()[0]['value']) ? $p->get('field_modulo_bloqueado')->getValue()[0]['value'] : 'no';
+            if ($blocked != 'si'){
+                $field_leccion = $p->field_leccion->getValue();
+                if ($field_leccion != NULL) {
+                    foreach ($field_leccion as $leccion) {
+                        array_push($lessons, $leccion['target_id']);
+                    }
+                }
             }
+        }
 
+        if(count($lessons) > 0){
+          
             $position = array_search($lessonId, $lessons); 
-            if($lessons[$position - 1] != NULL) {
+            if($position != 0 && $lessons[$position - 1] != NULL) {
                 $path['prev'] =  \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $lessons[$position-1]);
             } 
-            
             if($lessons[$position +1 ] != NULL) {
                 $path['next'] = \Drupal::service('path.alias_manager')->getAliasByPath('/node/'. $lessons[$position+1]);
             } 
-               
         }
         return $path;
+    }
+
+    /**
+     * load_author
+     *
+     * @param  array $authors
+     * @param  int $limit
+     * @return array
+     */
+    public function load_organizer($target_id){
+        \Drupal::service('page_cache_kill_switch')->trigger();
+        $terms = \Drupal\taxonomy\Entity\Term::load($target_id);
+       
+        $organizers = [
+            'name_organizer' => ucfirst($terms->get('name')->getValue()[0]['value']),
+            'picture_uri' => $this->load_image($terms->get('field_foto_organizador')->getValue()[0]['target_id'],'200x200'),
+            'picture_uri_200x200' => $this->load_image($terms->get('field_foto_organizador')->getValue()[0]['target_id'],'medium'),
+            'uri' => '#',
+            'description' => isset($terms->get('field_descripcion')->getValue()[0]['value']) ? $terms->get('field_descripcion')->getValue()[0]['value'] : '',
+        ];
+        
+        return $organizers;
     }
 
 }
