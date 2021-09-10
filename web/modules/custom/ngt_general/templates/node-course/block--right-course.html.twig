@@ -39,6 +39,20 @@
                     </div>
                 </div>
             </div>
+            <h3>Coordinadores</h3>
+            <div class="list">
+                {% for key, item in data[0].coordinadores %}
+                    <div class="author">
+                        <figure>
+                            <img src="{{ item.picture_uri }}" alt="{{ item.name_author }}">
+                        </figure>
+                        <div class="info">
+                            <a href="{{ item.uri }}" class="name">{{ item.name_author }}</a>
+                            <p class="profile">{{ item.profile }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
             <h3>Profesores</h3>
             <div class="list">
                 {% for key, item in data[0].expertos %}
