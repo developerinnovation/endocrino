@@ -5,15 +5,15 @@
 <div class="details">
     <picture class="author">
         <figure>
-            {% for key, item in data[0].expertos %}
-                <img src="{{ item.picture_uri }}" alt="{{ item.name_author }}">
-            {% endfor %}
+            {% if data[0].organizador %}
+                <img src="{{  data[0].organizador.picture_uri }}" alt="{{  data[0].organizador.name_organizer }}">
+            {% endif %}
         </figure>
            
         <figcaption>
-            {% for key, item in data[0].expertos %}
-                <a href="{{ item.uri }}" class="link">{{ item.name_author }}</a>
-            {% endfor %}
+            {% if data[0].organizador %}
+                <a href="{{ data[0].organizador.uri }}" class="link">{{ data[0].organizador.name_organizer }}</a>
+            {% endif %}
         </figcaption>
     </picture>
     <div class="box-elements">

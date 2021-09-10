@@ -362,4 +362,26 @@ class methodGeneral{
         return $path;
     }
 
+    /**
+     * load_author
+     *
+     * @param  array $authors
+     * @param  int $limit
+     * @return array
+     */
+    public function load_organizer($target_id){
+        \Drupal::service('page_cache_kill_switch')->trigger();
+        $terms = \Drupal\taxonomy\Entity\Term::load($target_id);
+       
+        $organizers = [
+            'name_organizer' => ucfirst($terms->get('name')->getValue()[0]['value']),
+            'picture_uri' => $this->load_image($terms->get('field_foto_organizador')->getValue()[0]['target_id'],'200x200'),
+            'picture_uri_200x200' => $this->load_image($terms->get('field_foto_organizador')->getValue()[0]['target_id'],'medium'),
+            'uri' => '#',
+            'description' => isset($terms->get('field_descripcion')->getValue()[0]['value']) ? $terms->get('field_descripcion')->getValue()[0]['value'] : '',
+        ];
+        
+        return $organizers;
+    }
+
 }
