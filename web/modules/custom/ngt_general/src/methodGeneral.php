@@ -344,10 +344,13 @@ class methodGeneral{
 
         foreach ( $paragraph as $element ) {
             $p = \Drupal\paragraphs\Entity\Paragraph::load( $element['target_id'] );
-            $field_leccion = $p->field_leccion->getValue();
-            if ($field_leccion != NULL) {
-                foreach ($field_leccion as $leccion) {
-                    array_push($lessons, $leccion['target_id']);
+            $blocked = isset($p->get('field_modulo_bloqueado')->getValue()[0]['value']) ? $p->get('field_modulo_bloqueado')->getValue()[0]['value'] : 'no';
+            if ($blocked != 'si'){
+                $field_leccion = $p->field_leccion->getValue();
+                if ($field_leccion != NULL) {
+                    foreach ($field_leccion as $leccion) {
+                        array_push($lessons, $leccion['target_id']);
+                    }
                 }
             }
         }
