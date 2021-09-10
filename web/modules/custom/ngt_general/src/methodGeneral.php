@@ -208,7 +208,8 @@ class methodGeneral{
         $paragraphArray = $paragraph;
         foreach ( $paragraphArray as $element ) {
             $module = \Drupal\paragraphs\Entity\Paragraph::load( $element['target_id'] );
-            $lessons = isset($module->get('field_leccion')->getValue()[0]['target_id']) ? $this->load_lesson_module($module->get('field_leccion')->getValue()) : NULL;
+            $blocked = isset($module->get('field_modulo_bloqueado')->getValue()[0]['value']) ? $module->get('field_modulo_bloqueado')->getValue()[0]['value'] : 'no';
+            $lessons = isset($module->get('field_leccion')->getValue()[0]['target_id']) ? $this->load_lesson_module($module->get('field_leccion')->getValue(), $blocked) : NULL;
             $nid = $module->get('parent_id')->getValue()[0]['value'];
             $quiz = isset($module->get('field_examen')->getValue()[0]['target_id']) ? $this->load_quiz($module->get('field_examen')->getValue(), $i, $nid) : NULL;
             array_push($modules, [
@@ -218,6 +219,8 @@ class methodGeneral{
                 'titleModule' => $module->get('field_titulo_del_modulo')->getValue()[0]['value'],
                 'lessons' => $lessons,
                 'quiz' => $quiz,
+                'icon' => $blocked == 'si' ? 'blocked' : 'play',
+                'blocked' => $blocked,
             ]);
             $i++;
         }
@@ -231,7 +234,7 @@ class methodGeneral{
      * @param  mixed $lesson
      * @return void
      */
-    public function load_lesson_module($lessons){
+    public function load_lesson_module($lessons, $blocked){
         \Drupal::service('page_cache_kill_switch')->trigger();
         $lessonByModule = [];
         $lessonsArray = $lessons;
@@ -242,7 +245,7 @@ class methodGeneral{
                 array_push($lessonByModule, [
                     'title' => $node->get('title')->getValue()[0]['value'],
                     'body' => isset($node->get('body')->getValue()[0]['value']) ? $node->get('body')->getValue()[0]['value'] : '',
-                    'url' => $url,
+                    'url' => $blocked == 'no' ? $url : '#',
                     'nid' => $node->get('nid')->getValue()[0]['value'],
                 ]);
             }

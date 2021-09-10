@@ -645,6 +645,10 @@
                                     display: none;
                                 }
                             }
+                            &.no-dot{
+                                list-style: none;
+                            }
+
                         }
                     }
                     h3{

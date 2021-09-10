@@ -212,6 +212,15 @@ i.icon{
         background-size: 692px;
         left: -36px;
     }
+    &.blocked{
+        background-image: url(../img/sprite-icon-varios.svg);
+        background-position: -15px -90px;
+        margin: 0;
+        width: 25px;
+        height: 25px;
+        background-size: 692px;
+        left: -36px;
+    }
     &.no-login.play{
         background: none; 
     }

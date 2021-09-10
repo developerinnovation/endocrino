@@ -63,18 +63,30 @@
                             <span class="label">{{ module.moduleId }}</span>
                             <h3 class="title-module" id="module{{ module.numModule }}"> {{ module.titleModule }}</h3>
                             {% if module.lessons is not null %}
+                                {% set item_class = 'dot' %}
+                                {% if module.blocked == 'si' %} 
+                                    {% set item_class = 'no-dot' %}
+                                {% endif %}
                                 <ul>
                                     {% for key, lesson in module.lessons %}
-                                        <li class="item class">
-                                            <i class="{% if data[0].uid == 0 %} no-login {% else %} login {% endif %}icon play"></i>
-                                            <a href="{% if data[0].showUrl %}{{ lesson.url }}{% else %}{{ '#' }}{% endif %}" 
-                                                class="link" 
-                                                {% if not data[0].showUrl %} ng-click="showMessage()" {% endif %}
-                                                data-id-module="{{ module.nidModule }}" 
-                                                data-num-module="{{ module.numModule }}" 
-                                                data-id-lesson="{{ lesson.nid }}">
+                                        <li class="item class {{ item_class }}">
+                                            <i class="{% if data[0].uid == 0 %} no-login {% else %} login {% endif %}icon {{ module.icon }}"></i>
+                                            {% if data[0].showUrl %}
+                                                {% if module.blocked != 'si' %} 
+                                                    <a href="{{ lesson.url }}" 
+                                                        class="link" 
+                                                        {% if not data[0].showUrl %} ng-click="showMessage()" {% endif %}
+                                                        data-id-module="{{ module.nidModule }}" 
+                                                        data-num-module="{{ module.numModule }}" 
+                                                        data-id-lesson="{{ lesson.nid }}">
+                                                            <h4>{{ lesson.title }}</h4>
+                                                    </a>
+                                                {% else %}
                                                     <h4>{{ lesson.title }}</h4>
-                                            </a>
+                                                {% endif %}
+                                            {% else %}
+                                                <h4>{{ lesson.title }}</h4>
+                                            {% endif %}
                                         </li>
                                     {% endfor %}
                                 </ul>
@@ -83,10 +95,15 @@
                                 <div class="evaluation">
                                     <ul>
                                         <li class="item class">
-                                            <i class="no-login icon evaluation"></i>
-                                            <a href="{{ module.quiz[0].url }}" class="link">
+                                            <i class="{% if data[0].uid == 0 %} no-login {% else %} login {% endif %} icon evaluation"></i>
+                                            {% if module.blocked == 'si' %} 
                                                 <h4>Realizar evaluación</h4>
-                                            </a>
+                                            {% else %}
+                                                <a href="{{ module.quiz[0].url }}" class="link">
+                                                    <h4>Realizar evaluación</h4>
+                                                </a>
+                                            {% endif %}
+                                            
                                         </li>
                                     </ul>
                                 </div>
