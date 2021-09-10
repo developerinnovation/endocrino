@@ -115,6 +115,7 @@ class NodeRightCourseBlockClass {
             $video = is_array($video) ? end($video) : null;
             $video = $video != null ? 'https://www.youtube.com/embed/' . $video : null;
             $course = [
+                'uid' => \Drupal::currentUser()->id(),
                 'nid' => $node->get('nid')->getValue()[0]['value'],
                 'body' => isset($node->get('body')->getValue()[0]['value']) ? $node->get('body')->getValue()[0]['value'] : '',
                 'resume' => isset($node->get('field_resumen')->getValue()[0]['value']) ? $node->get('field_resumen')->getValue()[0]['value'] : '',
