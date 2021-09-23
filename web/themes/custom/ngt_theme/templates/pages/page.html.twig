@@ -17,21 +17,23 @@
 <div id="content-area">
     <div class="main-menu mobile">
         <div class="izq menu-live mobile">
-            <div class="top">
-                <div class="picture">
-                    <figure>  
-                    {{ drupal_field('user_picture', 'user', user.id) }}
-                    </figure>
-                </div>
-                <div class="info">
-                    <div class="text">
-                        <h3 class="title">{{ nombre|striptags|raw}} {{ apellidos|striptags|raw}}</h3>
-                        <!-- <div class="member_for">
-                        {# { content.member_for } #}
-                        </div> -->
+            {% if logged_in %}
+                <div class="top">
+                    <div class="picture">
+                        <figure>  
+                        {{ drupal_field('user_picture', 'user', user.id) }}
+                        </figure>
+                    </div>
+                    <div class="info">
+                        <div class="text">
+                            <h3 class="title">{{ nombre|striptags|raw}} {{ apellidos|striptags|raw}}</h3>
+                            <!-- <div class="member_for">
+                            {# { content.member_for } #}
+                            </div> -->
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
             <div class="menu">
                 <div>
                     {# Get menu items #}
