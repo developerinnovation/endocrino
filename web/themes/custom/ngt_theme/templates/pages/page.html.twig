@@ -38,11 +38,22 @@
                     {% set items = simplify_menu('menu-perfil-usuario') %}
                     {# Iterate menu tree #}
                     <nav class="navigation__items">
-                        {% for menu_item in items.menu_tree %}
-                        <li class="navigation__item">
-                            <a href="{{ menu_item.url }}">{{ menu_item.text }} <i class="row"></i></a>
-                        </li>
-                        {% endfor %}
+                        {% if logged_in %}
+                            {% for menu_item in items.menu_tree %}
+                            <li class="navigation__item">
+                                {% if menu_item.active %}
+                                    <a href="{{ menu_item.url }}">{{ menu_item.text }} <i class="row"></i></a>
+                                {% endif %}    
+                            </li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="navigation__item">
+                                <a href="/user">Iniciar sesión<i class="row"></i></a>
+                            </li>
+                            <li class="navigation__item">
+                                <a href="/user/register">Registrarse<i class="row"></i></a>
+                            </li>
+                        {% endif %}
                     </nav>
                 </div>
             </div>
@@ -61,13 +72,13 @@
                     </nav>
                 </div>
             </div>
-
-    <div class="buttom">
-      <div>
-        <a href="/user/logout">Cerrar sesión</a>
-      </div>
-    </div>
-
+            {% if logged_in %}
+                <div class="buttom">
+                    <div>
+                        <a href="/user/logout">Cerrar sesión</a>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
     {{ page.content }}
