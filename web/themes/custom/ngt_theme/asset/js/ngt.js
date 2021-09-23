@@ -62,13 +62,13 @@
                 items: 1.5,
             });
             $(".main.node-course .right .other-course .more").addClass('owl-carousel');
-
-            $('#menu-live').click(function() {
-                $(this).toggleClass('active');
-                $('.izq.menu-live').toggleClass('active');
-            });
-            
         }
+        
+        $('#menu-live').click(function() {
+            $(this).toggleClass('active');
+            $('.izq.menu-live.mobile').toggleClass('active');
+        });
+
         $('#ngtModal').removeClass('none');
 
         // slider sección cursos

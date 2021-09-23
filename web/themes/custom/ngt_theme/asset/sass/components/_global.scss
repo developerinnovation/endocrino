@@ -382,3 +382,152 @@ p.error-message-input {
         display: none!important;
     }
 }
+
+div.main-menu.mobile{
+    @media only screen and ($desktop){
+        display: none;
+    }
+    .menu-live.active{
+        display: block;
+        margin-left: 0px;
+        transition: .5s;
+        display: block;
+        position: fixed;
+        left: 0;
+        z-index: 20;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        outline: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    .izq{
+        display: none;
+        padding: 20px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        margin-right: 40px;
+        width: 100%;
+        position: fixed;
+        background-color: #fff;
+        margin-left: -420px;
+        transition: 0.5s;
+        z-index: 1;
+        overflow: hidden;
+        @media only screen and ($desktop){
+            display: block;
+            position: relative;
+            margin-left: 0px;
+            width: 370px;
+            box-shadow: 0 0 0.5rem rgba(0,0,0,.15);
+        }
+        .top{
+            display: flex;
+            align-items: center;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #cccccc8f;
+            .picture{
+                figure{
+                    img{
+                        border: 4px solid $amarillo_general;
+                        border-radius: 100%;
+                        margin-right: 0;
+                        width: 78px;
+                        height: auto;
+                        color: transparent;
+                    }
+                }
+            }
+            .info{
+                .text{
+                    margin-left: 17px;
+                    h3{
+                        color: $turqui;
+                        font-size: 16px;
+                    }
+                    .member_for{
+                        font-size: 11px;
+                        color: #535353;
+                        h4{
+                            margin-bottom: 0px;
+                            font-family: "Roboto",serif;
+                            font-weight: 400;
+                        }
+                    }
+                }
+            }
+        }
+        .menu{
+            nav{
+                list-style: none;
+                padding-bottom: 40px;
+                margin-bottom: 30px;
+                border-bottom: 1px solid #cccccc8f;
+                li{
+                    margin-bottom: 10px;
+                    position: relative;
+                    width: 100%;
+                    &:hover{
+                            margin-left: 23px;
+                            transition: 0.4s;
+                        }
+                    
+                    a{
+                        font-size: 15px;
+                        font-family: "Asap",sans-serif;
+                        color: #535353;
+                        width: 100%;
+                        padding: 10px;
+                        display: block;
+                        border-radius: 5px;
+                        &:hover{
+                            background-color: $amarillo_general;
+                            color: white;
+                            transition: 0.4s;
+                        }
+
+                        i.row{
+                        background-image: url(../img/sprite-icon-varios.svg);
+                        margin: 3px 0;
+                        width: 12px;
+                        height: 14px;
+                        position: absolute;
+                        right: 0;
+                        background-size: 300px;
+                        background-position: -415px -36px;
+                        }
+                    }
+                }
+            }
+        }
+        .menu-informative{
+                border-bottom: 1px solid #cccccc8f;
+            nav{
+                list-style: none;
+                li{
+                    margin-bottom: 15px;
+                    position: relative;
+                    
+                    a{
+                        font-size: 15px;
+                        color: #afafaf;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        .buttom{
+            text-align: center;
+            a{
+                color: #0a2152;
+                font-weight: bold;
+                font-size: 15px;
+                border-bottom: 3px solid #0a2152;
+                padding-bottom: 5px;
+                display: inline-block;
+            }
+        }
+    }
+}

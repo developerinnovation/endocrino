@@ -6,6 +6,69 @@
     <ul class="action-links">{{ action_links }}</ul>
 {% endif %}
 
+{% set nombre %}
+    {{ drupal_field('field_nombre', 'user', user.id) }}
+{% endset %}
+
+{% set apellidos %}
+    {{ drupal_field('field_apellidos', 'user', user.id) }}
+{% endset %}
+
 <div id="content-area">
+    <div class="main-menu mobile">
+        <div class="izq menu-live mobile">
+            <div class="top">
+                <div class="picture">
+                    <figure>  
+                    {{ drupal_field('user_picture', 'user', user.id) }}
+                    </figure>
+                </div>
+                <div class="info">
+                    <div class="text">
+                        <h3 class="title">{{ nombre|striptags|raw}} {{ apellidos|striptags|raw}}</h3>
+                        <!-- <div class="member_for">
+                        {# { content.member_for } #}
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="menu">
+                <div>
+                    {# Get menu items #}
+                    {% set items = simplify_menu('menu-perfil-usuario') %}
+                    {# Iterate menu tree #}
+                    <nav class="navigation__items">
+                        {% for menu_item in items.menu_tree %}
+                        <li class="navigation__item">
+                            <a href="{{ menu_item.url }}">{{ menu_item.text }} <i class="row"></i></a>
+                        </li>
+                        {% endfor %}
+                    </nav>
+                </div>
+            </div>
+
+            <div class="menu-informative">
+                <div>
+                    {# Get menu items #}
+                    {% set items = simplify_menu('menu-informativo') %}
+                    {# Iterate menu tree #}
+                    <nav class="navigation__items">
+                    {% for menu_item in items.menu_tree %}
+                        <li class="navigation__item">
+                        <a href="{{ menu_item.url }}">{{ menu_item.text }}</a>
+                        </li>
+                    {% endfor %}
+                    </nav>
+                </div>
+            </div>
+
+    <div class="buttom">
+      <div>
+        <a href="/user/logout">Cerrar sesión</a>
+      </div>
+    </div>
+
+        </div>
+    </div>
     {{ page.content }}
 </div>
