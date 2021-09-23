@@ -489,18 +489,14 @@
                     video, iframe{
                         display: block;
                         width: 100%;
-                        @media only screen and ($desktop){
-                            // height: fit-content;
-                        }
+                        height: inherit;
+                    }
                     iframe{
                         @media only screen and ($desktop){
-                            height: unset;
+                            height: 450px;
                         }
-
                     }
-
-                    }
-                    video{
+                    video{ 
                         @media only screen and ($desktop){
                             height: 455px;
                         }
