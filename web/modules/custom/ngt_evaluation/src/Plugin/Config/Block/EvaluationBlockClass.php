@@ -110,6 +110,7 @@ class EvaluationBlockClass {
             'average' => isset($node->get('field_porcentaje_aprobacion')->getValue()[0]['value']) ? $node->get('field_porcentaje_aprobacion')->getValue()[0]['value'] : '',
             'questions' => $questions,
             'count_question' => count($questions),
+            'activar_certificado' => isset($node->get('activar_certificado')->getValue()[0]['value']) ? $node->get('activar_certificado')->getValue()[0]['value'] : 'no',
         ];
 
         return $data;
