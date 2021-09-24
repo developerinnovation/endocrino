@@ -61,7 +61,7 @@ class EvaluationRestLogic {
         $fields = [
             'total_question_answered' => $total_question_answered,
             'total_corrrectly_answered' => $data['countCorrectly'],
-            'calification' => $data['averageObtained'],
+            'calification' => number_format($data['averageObtained'], 0),
             'approved' => $data['evaluation'] == 'god' ?  true : false,
             'token' => $data['evaluation'] == 'god' ?  $token : '',
         ];
