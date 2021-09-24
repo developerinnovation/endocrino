@@ -229,7 +229,7 @@ function EvaluationController($scope, $http, $rootScope){
                         $scope.textBtnFinal = 'Repetir evaluación';
                         $scope.status_evaluation = false;
                     }
-                    $scope.averageFinal = resp.data.averageObtained;
+                    $scope.averageFinal = Math.round(resp.data.averageObtained);
                     $scope.showMessageFinalResul = true;
                     $scope.urlCourse = resp.data.urlCourse;
                     $scope.result = true;
