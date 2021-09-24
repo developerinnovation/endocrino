@@ -127,9 +127,7 @@
 
             <div class="action evaluation result final" ng-show="result">
                 <button class="return" ng-click="returnToCourseLink()" >{[{ returnToCourse }]}</button>
-                {% if data.activar_certificado == 'si' %}
-                    <button class="next" ng-click="actionAfterResult()">{[{ textBtnFinal }]}</button>
-                {% endif %}
+                <button class="next" ng-click="actionAfterResult()">{[{ textBtnFinal }]}</button>
             </div>
         
         </div>

@@ -43,6 +43,7 @@ function ngEvaluation($http){
         scope.urlCourse = '';
         scope.isDisabledStart = false;
         scope.download_certificate = '';
+        scope.activar_certificado = config.activar_certificado;
 
         var isValidEvaluation = window.location.search.split('-');
         if(isValidEvaluation.length != 3){
@@ -59,7 +60,12 @@ function EvaluationController($scope, $http, $rootScope){
 
     $scope.actionAfterResult = function (){
         if($scope.status_evaluation){
-            $scope.downloadCertificate();
+            if ($scope.activar_certificado != 'no'){
+                $scope.downloadCertificate();
+            }else{
+                $scope.textBtnFinal = 'Repetir evaluación';
+                location.reload();
+            }
         }else{
             location.reload();
         }
