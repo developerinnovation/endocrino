@@ -11,10 +11,12 @@
                 {{ data.body|raw }}
             </div>
             <div class="detail">
-                <div class="time">
-                    <i>minute</i>
-                    <span>{{ data.minute }} minutos</span>
-                </div>
+                {% if data.minute != '' %}
+                    <div class="time">
+                        <i>minute</i>
+                        <span>{{ data.minute }} minutos</span>
+                    </div>
+                {% endif %}
                 <div class="questions">
                     <i>question</i>
                     <span>{{ data.count_question }} preguntas</span>
