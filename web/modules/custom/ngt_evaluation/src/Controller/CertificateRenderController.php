@@ -93,4 +93,12 @@ class CertificateRenderController extends ControllerBase{
         return file_create_url($logo_general_url);
     }
 
+    public function certificateList(){
+        $result_log = \Drupal::service('ngt_evaluation.method_general')->getAllCertificate();
+        return [
+            '#theme' => 'cartificate_list',
+            '#data' => $result_log,
+        ];
+    }
+
 }

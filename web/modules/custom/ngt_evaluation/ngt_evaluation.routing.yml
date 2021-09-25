@@ -22,3 +22,10 @@ evaluation.create_pdf_certificate:
   requirements:
     _permission: 'access content'
   methods: ['GET']
+evaluation.certificate_list:
+  path: 'my/certificate'
+  defaults:
+    _controller: '\Drupal\ngt_evaluation\Controller\CertificateRenderController::certificateList'
+    _title: 'Certificados'
+  requirements:
+    _permission: 'access content'

@@ -8,3 +8,6 @@ services:
   ngt_evaluation.evaluation_block:
     class: Drupal\ngt_evaluation\Plugin\Config\Block\EvaluationBlockClass
     arguments: []
+  ngt_evaluation.evaluation_get_pdf:
+    class: Drupal\ngt_evaluation\Controller\PdfGtController
+    arguments: []

@@ -69,6 +69,24 @@
             $('.izq.menu-live.mobile').toggleClass('active');
         });
 
+        $('#download_certificate.certificate.pdf').click(function(event) {
+            event.preventDefault();
+            var element = $(this);
+            $(this).text('Preparando');
+            $(this).addClass('disable');
+            var url = $(this).attr("data-url");
+            $.get(url, function( data ) {
+                $(element).removeClass('disable');
+                $(element).text('Descargar');
+                setTimeout(function(){ 
+                    window.open(data.certificate.browser_path);
+                }, 100);
+            });
+            
+            
+        });
+        
+
         $('#ngtModal').removeClass('none');
 
         // slider sección cursos

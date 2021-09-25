@@ -57,6 +57,13 @@ function ngt_evaluation_theme() {
       ],
       'template' => 'block--certificate-render',
     ],
+    'cartificate_list' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+      'template' => 'block--certificate-list',
+    ],
+    
   ];
 }
 

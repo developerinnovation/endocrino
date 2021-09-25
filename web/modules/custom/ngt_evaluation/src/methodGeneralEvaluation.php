@@ -7,6 +7,7 @@ use Drupal\rest\ResourceResponse;
 use Drupal\user\Entity\User;
 use Drupal\Core\Database\DatabaseExceptionWrapper;
 use Drupal\ngt_evaluation\Entity\EvaluationLogs;
+use GuzzleHttp\Client;
 
 class methodGeneralEvaluation{
 
@@ -127,6 +128,66 @@ class methodGeneralEvaluation{
         }
 
         return $countCorrectly;
+    }
+
+    public function getAllCertificate(){
+        \Drupal::service('page_cache_kill_switch')->trigger();
+        
+        $certificates = [];
+        $approved = 1;
+        
+        $uuid = \Drupal::currentUser()->Id();
+        $user = \Drupal\user\Entity\User::load($uuid);
+        $nombre = $user->get('field_nombre')->getValue()[0]['value'];
+        $apellidos = $user->get('field_apellidos')->getValue()[0]['value'];
+
+        $query = \Drupal::database()->select('ngt_evaluation_logs', 'n');
+        
+        $query->addField('n', 'id');
+        $query->addField('n', 'user_id');
+        $query->addField('n', 'node_id');
+        $query->addField('n', 'course_id');
+        $query->addField('n', 'module_id');
+        $query->addField('n', 'calification');
+        $query->addField('n', 'total_corrrectly_answered');
+        $query->addField('n', 'token');
+        $query->addField('n', 'changed');
+        
+        $query->condition('n.user_id', $uuid);
+        $query->condition('n.approved', $approved);
+        $results = $query->execute()->fetchAll();
+        
+        if ($results) {
+            foreach ($results as $value) {
+
+                $path_pdf = NULL;
+                $log_id = $value->id;
+                $course_id = $value->course_id;
+                $examen_id = $value->node_id;
+                $module_id = $value->module_id;
+                $certificate_token = $value->token;
+                $change = $value->changed;
+
+                $course = \Drupal::entityManager()->getStorage('node')->load($course_id);
+                $title_course = $course->get('title')->getValue()[0]['value'];
+
+                $host = \Drupal::request()->getSchemeAndHttpHost();
+                $path_consult_certificate = '/render/pdf/certificate/' . $course_id .'/'. $examen_id .'/'. $module_id .'/'. $uuid .'/'. $certificate_token .'/'. $log_id;
+                // $data_certificate = \Drupal::service('ngt_evaluation.evaluation_get_pdf')->generatePdfDirect($course_id, $examen_id, $module_id, $uuid, $certificate_token, $log_id);
+                // if($data_certificate){
+                //     $path_pdf =  $host . $data_certificate['certificate']['browser_path'];
+                // }
+                array_push ($certificates, [
+                    'title_course' => ucfirst($title_course),
+                    'id_certificate' => strtoupper($certificate_token),
+                    'url_download' => $host.$path_consult_certificate,
+                    'name_user' => ucfirst($nombre) .' '.ucfirst($apellidos),
+                    'date' => \Drupal::service('date.formatter')->format(intval($change), 'certificado', ''),
+                ]);
+            }
+        }
+
+        return $certificates;
     }
 
 }
