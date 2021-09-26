@@ -36,16 +36,14 @@
             {% endif %}
             <div class="menu">
                 <div>
-                    {# Get menu items #}
-                    {% set items = simplify_menu('menu-perfil-usuario') %}
-                    {# Iterate menu tree #}
                     <nav class="navigation__items">
                         {% if logged_in %}
+                            {# Get menu items #}
+                            {% set items = simplify_menu('menu-perfil-usuario') %}
+                            {# Iterate menu tree #}
                             {% for menu_item in items.menu_tree %}
                             <li class="navigation__item">
-                                {% if menu_item.active %}
-                                    <a href="{{ menu_item.url }}">{{ menu_item.text }} <i class="row"></i></a>
-                                {% endif %}    
+                                    <a href="{{ menu_item.url }}">{{ menu_item.text }}<i class="row"></i></a>    
                             </li>
                             {% endfor %}
                         {% else %}
