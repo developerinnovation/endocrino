@@ -1762,19 +1762,22 @@
             padding: 40px 20px;
             border-radius: 6px;
             margin-bottom: 20px;
-            width: 100%;
+            .profile {
+                width: 100%;
+            }
+            .progress {
+                width: 30%;
+            }
             @media only screen and ($desktop){
                 display: flex;
                 box-shadow: 0 0 0.5rem rgba(0,0,0,.15);
             }
-            div{
-                width: 100%;
-            }
             .left{
                 text-align: center;
                 margin-right: 40px;
-                @media only screen and ($desktop){
-                    border-right: 1px solid #cccccc8f;
+                
+                div{
+                    width: 100%;
                 }
                 .picture{
                     figure{
@@ -1839,6 +1842,10 @@
                 }
             }
             .rigth{
+
+                div{
+                    width: 100%;
+                }
                 font-size: 14px;
                 color: #535353;
                 font-weight: 300;
@@ -1863,6 +1870,66 @@
                     padding-bottom: 15px;
                     margin-bottom: 20px;
                     border-bottom: 1px solid #cccccc8f;
+                }
+            }
+        }
+        .der-right{
+            padding: 1px 0px 0px 30px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            width: 100%;
+            .rigth{
+                div{
+                    width: 100%;
+                }
+                font-size: 14px;
+                color: #535353;
+                font-weight: 300;
+                line-height: 22px;
+                margin-top: 40px;
+                @media only screen and ($desktop){
+                    margin-top: 0px;
+                }
+
+                .scroll{
+                    overflow: auto;
+                    scroll-behavior: smooth;
+                    height: 506px;
+                    position: inherit;
+                    .item-news {
+                        max-width: 268px;
+                        justify-content: space-between;
+                        margin: 10px;
+                        display: inline-block;
+                    }
+                }
+
+                h3{
+                    font-family: "Roboto",serif;
+                    font-weight: 400;
+                }
+                .name{
+                    padding-bottom: 15px;
+                    margin-bottom: 20px;
+                    border-bottom: 1px solid #cccccc8f;
+                }
+                .nav {
+                    text-align: center;
+                    ul {
+                        list-style-type: none;
+                        display: inline-flex;
+                        li {
+                            margin: 0px 10px;
+                            a {
+                                color: #878585;
+                                text-decoration: none;
+                                &.active {
+                                    color: #1552a6!important;
+                                    font-weight: bold;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

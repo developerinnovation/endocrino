@@ -97,7 +97,7 @@ class NodeRightCourseBlockClass {
         return $instance->getValue('build');
     }
 
-      /**
+    /**
      * preparerate
      *
      * @param  array $node

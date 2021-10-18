@@ -8,7 +8,7 @@ inscription.inscription_form:
   option:
     _admin_route: TRUE
 inscription.render_my_courses:
-  path: 'my/courses'
+  path: '/my/courses/inscribed'
   defaults:
       _controller: '\Drupal\ngt_inscription\Controller\RenderMyCoursesController::render_my_courses'
       _title: ''

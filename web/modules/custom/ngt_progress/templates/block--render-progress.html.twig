@@ -8,7 +8,7 @@
 
 <article{{ attributes }} data-ilar="">
 
-    <div class="der">
+    <div class="der progress">
 
         <div class="left">
             <div class="picture">
@@ -26,28 +26,85 @@
                 <h3><i class="location">ubicacion</i>{{ drupal_field('field_ubicacion_geografica', 'user', user.id) }}</h3>  
             </div>
             <div class="action">
-                <a href="/user/edit" class="edit-user">Editar mis datos</a>
+                <a href="/user" class="edit-user">Mi perfil</a>
             </div>
         </div>
 
+    </div>
+
+    <div class="der-right">
 
         <div class="rigth scroller">
             <div class="name title">
-                <h3>Cursos y lecciones vistos</h3>  
+                <h3>Tus cursos</h3>  
+                <div class="nav">
+                    <ul>
+                        <li>
+                            <a href="/my/courses/inscribed">Cursos inscritos</a>
+                        </li>
+                        <!--<li>
+                            <a href="/my/courses/favorites">Favoritos</a>
+                        </li>-->
+                        <li>
+                            <a href="/my/progress/courses/lessons" class="active">Cursos en progreso</a>
+                        </li>
+                    </ul>  
+                </div>
             </div>
+            
             {% if data != NULL %}
                 <div class="scroll">
                     {% for item in data %}
-                        <div class="name item">
-                            <span><a href="#">{{ drupal_field('title', 'node', item.node_id) }}</a></span>
-                            <h3>{% if item.type == 'curso' %} {{ 'Curso' }} {% else %} {{ 'Lección' }} {% endif %}</h3>
-                        </div>
+                        {% if item.type == 'curso' %}
+                            <div class="item-news">
+                                <div class="picture">
+                                    <figure>
+                                        <picture>
+                                            <source srcset="{{ item.foto_portada.uri | image_style('313x156') }}" 
+                                                media="(max-width: 767px)" 
+                                                alt="{{ item.foto_portada.alt }}" 
+                                                title="{{ item.foto_portada.title }}">
+                                            <img srcset="{{ item.foto_portada.uri | image_style('374x226') }}" 
+                                                alt="{{ item.foto_portada.alt }}" 
+                                                title="{{ item.foto_portada.title }}">
+                                        </picture>
+                                    </figure>
+                                </div>
+                                <div class="text">
+                                    <h3 class="title">{{ item.title }}</h3>
+                                    <div class="author multiple">
+                                        <figure>
+                                            <img src="{{ item.organizador.picture_uri_200x200 }}" alt="{{ item.organizador.name_organizer }}">
+                                        </figure>
+                                    </div>
+                                    <div class="info">
+                                        <div class="name author">
+                                            <ul>
+                                                <li>
+                                                    <a href="#" class="link author">{{ item.organizador.name_organizer }}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <time class="hour">{{ item.hours }}</time>
+                                        <time class="date">Inicio: {{ item.formatted_date }}</time>
+                                        <div class="rating">
+                                        
+                                        </div>
+                                    </div>
+                                    <div class="action">
+                                        <button class="show-course">
+                                            <a href="{{ path('entity.node.canonical', {'node': item.nid}) }}">Ver curso</a>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
             {% endif %}
         </div>
 
-  </div>
+    </div>
 
 
 </article>
