@@ -40,3 +40,5 @@ error_log
 web/themes/custom/ngt_theme/.sass-cache/*
 /web/themes/custom/ngt_theme/.sass-cache/*
 web/sites/default/settings.php
+web/sites/default/settings.local.php
+web/sites/default/default.settings.php
