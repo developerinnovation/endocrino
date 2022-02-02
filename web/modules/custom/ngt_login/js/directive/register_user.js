@@ -256,12 +256,12 @@ function RegisterUserController($scope, $http, $rootScope){
             jQuery('.criteriar-pass.criteriar-1').removeClass('validate');
         }
 
-        if(uppercaseContain.test(value)){
-            uppercaseContainCheck = true;
-            jQuery('.criteriar-pass.criteriar-2').addClass('validate');
-        }else{
-            jQuery('.criteriar-pass.criteriar-2').removeClass('validate');
-        }
+        // if(uppercaseContain.test(value)){
+        //     uppercaseContainCheck = true;
+        //     jQuery('.criteriar-pass.criteriar-2').addClass('validate');
+        // }else{
+        //     jQuery('.criteriar-pass.criteriar-2').removeClass('validate');
+        // }
 
         /*
         if(characterSpecialContain.test(value)){
@@ -272,7 +272,7 @@ function RegisterUserController($scope, $http, $rootScope){
         }
         */
 
-        if(longMinCheck && uppercaseContainCheck && numberContainCheck) {
+        if(longMinCheck && numberContainCheck) {
             $scope.passValidate = true;
         }else{
             $scope.passValidate = false;

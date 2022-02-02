@@ -276,21 +276,21 @@ function RecoveryPassController($scope, $http, $rootScope){
                 jQuery('.criteriar-pass.criteriar-1').removeClass('validate');
             }
 
-            if(uppercaseContain.test(value)){
-                uppercaseContainCheck = true;
-                jQuery('.criteriar-pass.criteriar-2').addClass('validate');
-            }else{
-                jQuery('.criteriar-pass.criteriar-2').removeClass('validate');
-            }
+            // if(uppercaseContain.test(value)){
+            //     uppercaseContainCheck = true;
+            //     jQuery('.criteriar-pass.criteriar-2').addClass('validate');
+            // }else{
+            //     jQuery('.criteriar-pass.criteriar-2').removeClass('validate');
+            // }
 
-            if(characterSpecialContain.test(value)){
-                characterSpecialContainCheck = true;
-                jQuery('.criteriar-pass.criteriar-3').addClass('validate');
-            }else{
-                jQuery('.criteriar-pass.criteriar-3').removeClass('validate');
-            }
+            // if(characterSpecialContain.test(value)){
+            //     characterSpecialContainCheck = true;
+            //     jQuery('.criteriar-pass.criteriar-3').addClass('validate');
+            // }else{
+            //     jQuery('.criteriar-pass.criteriar-3').removeClass('validate');
+            // }
 
-            if(longMinCheck && characterSpecialContainCheck && uppercaseContainCheck && numberContainCheck) {
+            if(longMinCheck && numberContainCheck) {
                 $scope.passValidate = true;
             }
 
