@@ -39,7 +39,7 @@ class EvaluationForm extends ConfigFormBase {
             '#title' => t('Configuraciones para los certificados'),   
             '#open' => false,  
         ]; 
-
+        /*
         $form['ngt_evaluation_certificate']['backgound'] = [  
             '#type' => 'managed_file',
             '#upload_location' => 's3://file-project',
@@ -54,12 +54,24 @@ class EvaluationForm extends ConfigFormBase {
         $form['ngt_evaluation_certificate']['signature_president'] = [  
             '#type' => 'managed_file',
             '#upload_location' => 's3://file-project',
-            '#title' => t('Firma del presidente'),
+            '#title' => t('Firma 1'),
             '#upload_validators' => [
                 'file_validate_extensions' => ['png svg']
             ],
             '#default_value' => $config->get('ngt_evaluation_certificate')['signature_president'],  
-            '#description' => t('firma del presidente'),
+            '#description' => t('firma 1'),
+            '#required' => true
+        ];
+
+        $form['ngt_evaluation_certificate']['signature_seconds'] = [  
+            '#type' => 'managed_file',
+            '#upload_location' => 's3://file-project',
+            '#title' => t('Firma 2'),
+            '#upload_validators' => [
+                'file_validate_extensions' => ['png svg']
+            ],
+            '#default_value' => $config->get('ngt_evaluation_certificate')['signature_seconds'],  
+            '#description' => t('firma 2'),
             '#required' => true
         ];
 
@@ -73,7 +85,7 @@ class EvaluationForm extends ConfigFormBase {
             '#default_value' => $config->get('ngt_evaluation_certificate')['img_logo_certificate'],  
             '#description' => t('Logo a insertar en el certificado'),
             '#required' => true
-        ];
+        ];*/
 
         $form['ngt_evaluation_certificate']['message'] = [  
             '#type' => 'textarea',
